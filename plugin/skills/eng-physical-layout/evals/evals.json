@@ -1,0 +1,47 @@
+{
+  "skill_name": "eng-physical-layout",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the hall layout for a 10MW traditional enterprise data center with mixed density racks (5-15 kW/rack). The hall is 20,000 sqft with 14ft ceiling height, raised floor at 24 inches. Cooling is underfloor via perforated tiles with CRAH units along the perimeter. Target rack count is 400 racks. Standard enterprise containment. Power via overhead busway.",
+      "expected_output": "A physical layout plan with 400 racks arranged in rows with BICSI 002-2024 compliant aisle widths (48\" cold, 36\"+ hot). Gross-to-net ratio around 55-65%. Raised floor cable routing for power and data. Perforated tile placement aligned with cold aisles. CRAH placement optimized for airflow. Hot aisle containment recommended. Cable pathway sizing per TIA-569.",
+      "assertions": [
+        "Rack count of 400 fits within 20,000 sqft with correct gross-to-net ratio",
+        "Cold aisle width meets BICSI 002-2024 minimum of 48 inches",
+        "Hot aisle width meets BICSI 002-2024 minimum of 36 inches",
+        "Raised floor cable management plan addresses 24-inch raised floor height",
+        "CRAH placement is optimized for underfloor airflow distribution",
+        "BICSI 002-2024 compliance checklist is included in output",
+        "Output includes both markdown report and JSON sidecar with artifact_type: physical-layout-plan"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design the layout for a 50MW AI training facility using NVIDIA GB200 NVL72 racks at 120kW per rack. The facility has two 25,000 sqft halls with 16ft ceiling height, slab-on-grade construction (no raised floor), reinforced floor rated for 500 lbs/sqft. Cooling is direct-to-chip liquid cooling with overhead manifolds. InfiniBand interconnect fabric in fat-tree topology.",
+      "expected_output": "A high-density layout plan with GB200 NVL72 racks at 120kW each. Approximately 416 racks total (50MW / 120kW). Slab-on-grade with overhead cable management. Liquid cooling manifold routing along rack rows. Wider aisles for liquid cooling maintenance access. Floor loading verification (3,000+ lbs per rack on 500 lbs/sqft floor). InfiniBand cable pathway sizing for fat-tree topology. GPU-REFERENCE.md data used for rack specifications.",
+      "assertions": [
+        "GB200 NVL72 rack density (120kW) is sourced from GPU-REFERENCE.md",
+        "Floor loading calculation verifies 500 lbs/sqft capacity is sufficient for 120kW racks",
+        "Liquid cooling manifold routing plan is included in the layout",
+        "InfiniBand cable pathway sizing accounts for fat-tree topology cable density",
+        "Slab-on-grade design is used (not raised floor) for ultra-high density",
+        "Aisle widths account for liquid cooling maintenance access requirements",
+        "Rack count calculation is correct for 50MW at 120kW/rack across two halls"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a multi-tenant colocation hall of 15,000 sqft to support 5MW across 4 tenant zones. Tenants range from 0.5MW to 2MW with densities of 8-25 kW/rack. The hall has 12ft ceiling height, raised floor at 18 inches. Cooling is a mix of underfloor air and in-row units for higher-density tenants. Each tenant zone needs physical cage separation with locking doors.",
+      "expected_output": "A multi-tenant layout with 4 partitioned zones using wire mesh cages with locking access. Zone sizing proportional to tenant capacity (0.5MW, 1MW, 1.5MW, 2MW). Mixed cooling approach with underfloor for standard density zones and in-row units for 25kW/rack zones. Per-tenant metering at zone entry. Common areas for cross-connects and meet-me room. BICSI compliance across all zones including cage door clearances.",
+      "assertions": [
+        "Four tenant zones are designed with proportional space allocation",
+        "Physical cage separation with locking doors is specified per zone",
+        "Mixed cooling approach handles different density levels across tenants",
+        "Per-tenant power metering is included in the design",
+        "Cross-connect and meet-me room areas are allocated in common space",
+        "BICSI 002-2024 aisle width compliance is maintained within cage partitions",
+        "18-inch raised floor constraints are addressed for cable management capacity"
+      ]
+    }
+  ]
+}

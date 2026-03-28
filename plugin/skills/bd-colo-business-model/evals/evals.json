@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-colo-business-model",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a colocation business model for a 20MW retail/wholesale hybrid facility in Ashburn, Virginia (Tier 1 carrier-dense market). Target tenant mix: 40% enterprise, 30% hyperscale wholesale anchor, 30% network/carrier tenants. The facility offers Tier III availability with optional Tier IV for financial sector tenants. 15 network carriers are on-net with an internet exchange presence. Utility rate is $0.065/kWh with a PUE target of 1.25. Model a 5-year ramp to 92% stabilized occupancy. Include interconnection revenue modeling at Ashburn market rates and reference SLA-BENCHMARKS.md for tier-based pricing differentiation.",
+      "expected_output": "A comprehensive colo business model with pricing tiers reflecting Ashburn Tier 1 market rates. Interconnection revenue modeled at 15-20% of total revenue given carrier density. Occupancy ramp uses Tier 1 metro assumptions (30-40% Year 1, stabilized 90-95% Year 5). Revenue waterfall shows wholesale base, retail premium, and interconnection components. SLA-BENCHMARKS.md referenced for availability-based pricing tiers.",
+      "assertions": [
+        "Pricing tiers reflect Ashburn Tier 1 market rates for wholesale and retail",
+        "Interconnection revenue modeled at 15-20% of total revenue",
+        "Occupancy ramp uses Tier 1 metro assumptions",
+        "SLA-BENCHMARKS.md is referenced for tier-based pricing",
+        "Revenue waterfall breaks out wholesale, retail, and interconnection components",
+        "Tenant mix percentages match the specified 40/30/30 split"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop a colocation business model for a 10MW retail-only facility in Nashville, Tennessee (Tier 2 secondary market). Target tenants are enterprise only -- no hyperscale wholesale and limited carrier presence (5 carriers on-net). Offer Tier III availability. Utility rate is $0.08/kWh with a PUE of 1.35. Model conservative occupancy ramp for a secondary market with no anchor tenant pre-commitment. Include operating cost model showing staffing, power, maintenance, and property tax (Tennessee has no state income tax but has property tax on DC equipment).",
+      "expected_output": "A secondary-market colo model with slower occupancy ramp (20-30% Year 1), retail-only pricing without wholesale, lower interconnection revenue (5-10% of total), and operating costs reflecting smaller-scale operations. Property tax treatment noted for Tennessee. No hyperscale wholesale pricing included.",
+      "assertions": [
+        "Occupancy ramp reflects secondary market pace, slower than Tier 1 assumptions",
+        "No hyperscale wholesale pricing is included in the model",
+        "Interconnection revenue is lower than primary market models at 5-10%",
+        "Operating costs reflect smaller-scale staffing and operations",
+        "Power cost modeled at the higher utility rate with PUE impact on margins",
+        "Key metrics include breakeven occupancy percentage"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a colocation business model for a 50MW wholesale-focused campus in Dallas, Texas (Tier 1 market). Strategy: secure 2 hyperscale anchor tenants for 30MW total (pre-leased) with remaining 20MW for enterprise retail and carrier tenants. Wholesale anchor contracts are 7-year terms at competitive Dallas market rates. Dallas has favorable property tax treatment for data center equipment and $0.055/kWh utility rates. PUE target 1.20 with direct liquid cooling capability. Model rapid occupancy ramp driven by pre-leased anchor capacity and show tenant mix weighted heavily to hyperscale with lower blended margin but faster stabilization.",
+      "expected_output": "A wholesale-dominant campus model with fast ramp (60%+ Year 1 from pre-leased anchors), wholesale pricing at $100-150/kW, tenant mix heavily weighted to hyperscale, lower blended margin but faster breakeven. Revenue waterfall shows wholesale as 55-65% of revenue. Dallas-specific property tax and power cost advantages reflected.",
+      "assertions": [
+        "Wholesale pricing is dominant at $100-150/kW monthly range",
+        "Occupancy ramp is accelerated by pre-leased anchor capacity showing 60%+ Year 1",
+        "Tenant mix is heavily weighted to hyperscale with corresponding margin impact",
+        "Lower blended margin acknowledged due to wholesale dominance",
+        "Revenue waterfall shows wholesale as the majority revenue component",
+        "Dallas-specific favorable property tax and low power costs are reflected"
+      ]
+    }
+  ]
+}

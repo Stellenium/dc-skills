@@ -1,0 +1,44 @@
+{
+  "skill_name": "predev-environmental",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Produce an environmental assessment for a 100MW hyperscale data center in Phoenix, Arizona. The site is in an extremely high water-stress region (WRI classification). Cooling is hybrid (air + evaporative for peak). Water source is municipal supply from Salt River Project allocation. The project has 15 x 3MW diesel generators for backup. The site is former agricultural land (no wetlands or endangered species). No sustainability certification targeted but the municipality requires WUE < 1.2. Prior appropriation water doctrine applies.",
+      "expected_output": "An environmental assessment with detailed water rights analysis under Arizona prior appropriation doctrine, drought contingency planning for Colorado River Compact allocation cuts, WUE < 1.2 requirement analysis driving hybrid cooling design, ZLD evaluation for cooling tower blowdown, air quality assessment for 45MW of diesel generation in Maricopa County AQMD non-attainment area, noise assessment for generators and cooling equipment near residential areas. Overall risk rating: high due to water stress and air quality constraints.",
+      "assertions": [
+        "Prior appropriation doctrine is correctly applied for Arizona water rights",
+        "Colorado River Compact allocation risk is explicitly addressed with drought scenarios",
+        "WUE < 1.2 municipal requirement is analyzed with design implications",
+        "Zero-liquid-discharge (ZLD) is evaluated with cost and energy trade-off analysis",
+        "Air quality assessment addresses Maricopa County non-attainment area restrictions",
+        "Drought contingency plan includes tiered water reduction scenarios"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create an environmental assessment for a 50MW campus data center in Ashburn, Virginia targeting LEED Gold certification. Cooling is evaporative (cooling towers). Water source is municipal supply from Loudoun Water. 10 x 2.5MW diesel generators for backup. The site is a greenfield parcel in an industrial zone with no wetlands, not in floodplain, no endangered species concerns. ASHRAE climate zone 4A. Low water stress region. Riparian rights apply.",
+      "expected_output": "An environmental assessment with riparian water rights analysis (eastern Virginia, reasonable use standard), LEED Gold certification path with credit-by-credit analysis using ASHRAE 90.4 baseline for energy credits, cooling tower water efficiency analysis (cycles of concentration optimization for LEED water credits), air quality assessment for 25MW diesel generation in Virginia DEQ jurisdiction, stormwater management for impervious surface increase. Certification path shows estimated 60-69 points achievable for Gold (60+ required).",
+      "assertions": [
+        "Riparian water rights doctrine is correctly applied for Virginia",
+        "LEED Gold credit analysis uses ASHRAE 90.4 baseline (not 90.1) for energy optimization",
+        "Cooling tower water efficiency credits are analyzed for LEED Water Efficiency category",
+        "LEED certification timeline (12-18 months) and cost estimate are provided",
+        "Air quality permit requirements for Virginia DEQ are identified",
+        "LEED credit-by-credit analysis shows path to 60+ points for Gold certification"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Develop an environmental assessment for a 200MW+ sovereign data center campus in a Nordic country (Sweden). Air-cooled facility using free cooling (climate zone 7, annual average temperature 5C). No water consumption for cooling. BREEAM Outstanding certification targeted. 20 x 3MW diesel generators for backup. Greenfield site on previously logged forest land. Strict EU environmental regulations apply including EU EIA Directive, EU Habitats Directive, and Swedish Environmental Code (Miljobalken). The site is near a protected river (salmon habitat).",
+      "expected_output": "An environmental assessment addressing EU EIA Directive requirements for greenfield development in Sweden, EU Habitats Directive for proximity to protected salmon habitat, Swedish Environmental Code (Miljobalken) compliance, minimal water impact (air-cooled, no cooling water), air quality assessment for 60MW diesel generation under Swedish EPA standards, noise assessment for cooling fans in low-ambient-noise environment. BREEAM Outstanding path with emphasis on energy credits (excellent PUE from free cooling) and ecological credits for habitat protection. Salmon habitat proximity flagged as key regulatory risk.",
+      "assertions": [
+        "EU EIA Directive requirement is identified for greenfield forest-to-industrial conversion",
+        "EU Habitats Directive compliance is assessed for proximity to protected salmon habitat",
+        "Swedish Environmental Code (Miljobalken) is referenced as governing environmental law",
+        "Minimal water impact is correctly noted for air-cooled facility with free cooling",
+        "BREEAM Outstanding path leverages excellent PUE from Nordic free cooling climate",
+        "Salmon habitat proximity is flagged as key environmental risk requiring mitigation"
+      ]
+    }
+  ]
+}

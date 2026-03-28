@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-national-compute",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Develop a national AI compute strategy for Malaysia (population 34M, GDP $430B, GDP per capita $12,600). Malaysia has an existing national AI strategy (MyDIGITAL/National AI Roadmap 2025), 5 hyperscaler cloud regions announced or operational (Azure, AWS, GCP, Oracle, Huawei), strong fiber backbone (national coverage 95%+), and 3 submarine cable landing stations. Malaysia has 8 public universities with active AI research programs producing ~3,000 STEM graduates annually. Current DC capacity estimated at 500MW (mostly hyperscaler-owned). The government wants to assess sovereign compute needs separate from commercial hyperscaler capacity. Model demand for research, enterprise, and government workloads. Recommend a distribution strategy (centralized vs distributed vs hybrid) and phased buildout plan.",
+      "expected_output": "National compute strategy referencing MyDIGITAL/National AI Roadmap. Demand modeling across research (university clusters), enterprise (growing adoption in financial services and manufacturing), and government (e-government, defense). Supply assessment noting 500MW commercial DC capacity but limited sovereign compute. Distribution strategy likely hybrid (primary in Kuala Lumpur/Cyberjaya, secondary in Penang or Johor). Phased buildout: Phase 1 sovereign research/government cluster, Phase 2 enterprise expansion, Phase 3 regional hub.",
+      "assertions": [
+        "Malaysian national AI strategy (MyDIGITAL or AI Roadmap) is referenced by name",
+        "Demand modeling covers research, enterprise, and government workloads separately",
+        "Sovereign compute gap is assessed separately from commercial hyperscaler capacity",
+        "Distribution strategy recommends centralized, distributed, or hybrid model with rationale",
+        "Phased buildout plan includes timelines, capacity targets, and investment estimates",
+        "Existing strong fiber backbone and submarine cable connectivity are factored into the strategy"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop a national AI compute strategy for Rwanda (population 14M, GDP $13B, GDP per capita $930). Rwanda has a national digital transformation strategy (Smart Rwanda 2024 and ICT Hub Strategy). Limited existing DC infrastructure (~5MW total domestic capacity). One submarine cable connection via terrestrial fiber to East African Submarine Cable System (EASSy) through Tanzania. 2 universities with emerging AI programs, ~500 STEM graduates annually. The government is seeking IFC and AfDB financing for sovereign AI infrastructure. The strategy should address: severe compute gap, limited local supply chain, workforce development needs, and regional connectivity requirements. Reference DFI-FUNDING.md for IFC and AfDB alignment.",
+      "expected_output": "National compute strategy adapted for low-income country with limited existing infrastructure. Demand modeling with significantly lower multipliers and conservative adoption assumptions. Supply assessment showing severe compute gap (~5MW domestic vs growing demand). Centralized distribution strategy (single facility near Kigali) given population size and limited fiber infrastructure. Funding strategy emphasizing DFI concessional debt (IFC, AfDB) with sovereign equity and grants. Workforce development plan. DFI-FUNDING.md referenced for institution alignment.",
+      "assertions": [
+        "Rwanda's digital transformation strategy is referenced by name",
+        "Demand modeling uses conservative assumptions appropriate for low-income economy",
+        "Severe compute gap between limited domestic capacity and growing demand is quantified",
+        "Centralized distribution strategy is recommended with rationale for country size and infrastructure",
+        "DFI funding strategy (IFC, AfDB) is detailed with concessional debt and grant components",
+        "Workforce development and technology transfer are prominent strategy components"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Develop a national AI compute strategy for the Kingdom of Saudi Arabia (population 36M, GDP $1.1T, GDP per capita $30,000). Saudi Arabia has Vision 2030, the National Strategy for Data and AI (NSDAI), and SDAIA (Saudi Data and AI Authority). Existing DC capacity ~300MW across Riyadh, Jeddah, and NEOM with aggressive expansion plans. Strong sovereign wealth fund (PIF) with $930B AUM. 15+ universities with AI programs, national fiber backbone at 98% coverage, multiple submarine cable landing stations. The government wants to become a regional AI compute hub serving the Middle East and North Africa. Model demand for domestic use AND regional export. Recommend a multi-site distribution strategy and phased buildout to 500MW+ sovereign capacity. Address: regional hub positioning, excess capacity for export, workforce localization (Saudization), and extreme climate cooling challenges.",
+      "expected_output": "National compute strategy for high-ambition Gulf state with regional hub positioning. Demand modeling for domestic AND regional export to MENA markets. Multi-site distribution strategy across Riyadh, Jeddah/Red Sea, and NEOM/northwest. Phased buildout to 500MW+ with PIF as primary sovereign equity source. Regional hub analysis: latency advantages for MENA markets, regulatory attractiveness, pricing competitiveness. Cooling strategy for extreme climate (>50C ambient). Saudization workforce requirements. No DFI funding needed -- PIF-funded sovereign investment.",
+      "assertions": [
+        "Vision 2030, NSDAI, and SDAIA are referenced in strategic alignment",
+        "Demand modeling includes both domestic and regional export compute demand",
+        "Multi-site distribution strategy covers multiple Saudi cities with rationale",
+        "Regional hub positioning for MENA markets is analyzed with latency and regulatory advantages",
+        "Extreme climate cooling challenges (>50C ambient) are addressed in the strategy",
+        "PIF-funded sovereign investment model is reflected rather than DFI concessional financing"
+      ]
+    }
+  ]
+}

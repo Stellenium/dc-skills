@@ -1,0 +1,8 @@
+{
+  "name": "stellenium-dc-skills",
+  "version": "1.0.1",
+  "description": "Domain-expert AI skills for AI/HPC data center development — 50 skills covering site feasibility, power modeling, cooling design, GPU cluster planning, compliance, procurement, finance, and business development from predevelopment through operations handoff.",
+  "author": {
+    "name": "Stellenium Corporation"
+  }
+}

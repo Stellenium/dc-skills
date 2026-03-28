@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-bms-dcim",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design BMS/DCIM architecture for a 200MW hyperscale data center campus with 4 buildings, 40 IT halls, and a requirement for full 3D digital twin with real-time data overlay. Over 10,000 sensor points expected. Tier IV redundancy. Open protocol preferred (BACnet/Modbus/SNMP). Integration with ServiceNow for ITSM. Physical OT/IT network segmentation required. The campus will deploy in 4 phases over 3 years.",
+      "expected_output": "A BMS/DCIM architecture with campus-level BACnet IP network for mechanical, Modbus TCP for electrical metering, SNMP for IT equipment. Sensor strategy per ASHRAE TC 9.9 with 10,000+ points estimated. 4-tier alarm hierarchy with auto-remediation at Tier 3-4. Physical OT/IT segmentation with dedicated BMS switches per building. DCIM with capacity management across 4 phases. Digital twin readiness assessment with BIM model requirements, data feed architecture, and vendor evaluation. ServiceNow integration for incident and change management.",
+      "assertions": [
+        "Sensor count estimate exceeds 10,000 with breakdown by type (temperature, humidity, power, pressure)",
+        "BACnet IP for mechanical and Modbus TCP for electrical are specified as primary protocols",
+        "Physical OT/IT network segmentation with dedicated BMS infrastructure is designed",
+        "Digital twin readiness assessment scores criteria and identifies requirements",
+        "4-tier alarm hierarchy includes auto-remediation triggers for Tier 3-4",
+        "ServiceNow integration architecture for ITSM/CMDB is specified"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design BMS/DCIM for a 20MW multi-tenant colocation facility with 50 tenants across 4 data halls. Tenants require a self-service portal showing real-time power consumption, temperature, and SLA metrics. Tenant billing is based on power consumption measured at PDU level. API access required for top-10 tenants. DCIM must support capacity reservation tracking (committed but not deployed). Tier III. Logical OT/IT segmentation. No digital twin.",
+      "expected_output": "A BMS/DCIM architecture with tenant-facing portal design showing real-time power (PDU-level metering), temperature (per-cage sensors), and SLA metrics. Tenant data isolation architecture (each tenant sees only their data). API gateway for top-10 tenant programmatic access. Capacity management with reservation tracking (power and space). Billing data pipeline from PDU meters to tenant invoicing. Logical OT/IT segmentation with VLAN architecture.",
+      "assertions": [
+        "Tenant portal architecture provides real-time power, temperature, and SLA data",
+        "Tenant data isolation ensures each tenant sees only their own monitoring data",
+        "API access for top-10 tenants is architectured with authentication and rate limiting",
+        "Capacity reservation tracking distinguishes committed vs deployed vs available",
+        "PDU-level power metering feeds tenant billing with revenue-grade accuracy",
+        "Logical OT/IT segmentation via VLANs and firewall rules is specified"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design BMS/DCIM for a fleet of 25 edge data center sites (1-2MW each) with centralized management from a regional NOC. Each site is unmanned with remote-only operations. WAN connectivity via dedicated circuits (100Mbps per site). Local BMS must operate independently if WAN is lost. Centralized DCIM aggregates all 25 sites. Alarm escalation to regional NOC with PagerDuty integration. Basic monitoring only -- no digital twin. Tier II.",
+      "expected_output": "A fleet BMS/DCIM architecture with local BMS controllers at each site operating autonomously (store-and-forward when WAN disconnected). Centralized DCIM dashboard aggregating all 25 sites with fleet-wide capacity and environmental views. Remote BMS access via secure jump host. Alarm aggregation with fleet-level deduplication and PagerDuty escalation. WAN bandwidth analysis (25 sites x 100Mbps). Edge-specific sensor strategy (simplified per site but consistent across fleet for comparison).",
+      "assertions": [
+        "Local BMS operates independently at each site when WAN connectivity is lost",
+        "Centralized DCIM aggregates 25 sites with fleet-wide dashboard view",
+        "Store-and-forward data buffering handles WAN outages without data loss",
+        "PagerDuty integration provides alarm escalation from all 25 sites to regional NOC",
+        "Remote access architecture uses secure jump host (no direct BMS access)",
+        "Standardized sensor strategy across fleet enables site-to-site comparison"
+      ]
+    }
+  ]
+}

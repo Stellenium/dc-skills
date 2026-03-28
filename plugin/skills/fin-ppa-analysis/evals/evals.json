@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-ppa-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analyze PPA options for a 30MW data center facility in ERCOT (Texas). Current grid tariff is $45/MWh. A solar PPA has been offered at $35/MWh with 2% annual escalator over 15 years, physical delivery. Self-generation solar option available with on-site land. ERCOT curtailment rates are 3-5% for solar. The operator has RE100 commitments requiring additionality.",
+      "expected_output": "A PPA analysis showing: PPA cheaper than grid on levelized basis, basis risk quantified for ERCOT market (typically $2-5/MWh), curtailment rate modeled at 3-5% reflecting Texas solar/wind market, levelized cost comparison table with grid vs PPA all-in (including basis risk and curtailment) vs self-gen LCOE, additionality assessment for RE100 compliance, and sensitivity to curtailment and grid escalation.",
+      "assertions": [
+        "PPA is cheaper than grid on levelized cost basis",
+        "Basis risk is quantified for ERCOT (node-to-hub spread)",
+        "Curtailment rate reflects Texas market (3-5%)",
+        "Levelized cost comparison table includes all three options",
+        "Additionality assessment addresses RE100 requirements",
+        "Sensitivity analysis varies curtailment, grid escalation, and basis risk",
+        "Both Financial Disclaimer and Tax Disclaimer are included",
+        "Self-gen LCOE includes ITC benefit"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Analyze PPA options for a 10MW data center in PJM (Virginia). Current grid tariff is $65/MWh. A virtual PPA (financial settlement) has been offered at $50/MWh with 1.5% escalator over 12 years. PJM is a congested market with high basis risk. No on-site self-generation option (urban site). The operator needs Scope 2 market-based accounting for ESG reporting.",
+      "expected_output": "A PPA analysis showing: basis risk is significant in congested PJM ($5-8/MWh), virtual PPA accounting treatment note (ASC 815 derivative), net PPA cost higher than headline $50/MWh price after basis risk, additionality assessment for Scope 2 market-based reporting, grid remains competitive when PPA all-in cost is calculated. Self-gen shows as not viable due to urban site constraints.",
+      "assertions": [
+        "Basis risk is significant for PJM ($5-8/MWh range)",
+        "Virtual PPA accounting treatment (ASC 815) is noted",
+        "Net PPA cost exceeds headline price after basis risk adder",
+        "Additionality assessment addresses Scope 2 market-based accounting",
+        "Self-gen viability is limited by urban site constraints",
+        "Levelized comparison shows PPA vs grid with basis risk included",
+        "Sensitivity analysis shows basis risk as critical variable",
+        "Financial and Tax disclaimers are included"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Analyze energy procurement for a 50MW hyperscale data center in Northern Europe. Grid tariff is $80/MWh (carbon-inclusive). A wind PPA is offered at $55/MWh with 1% escalator over 20 years. Self-generation wind option available with high 35% capacity factor. ITC is not applicable (non-US jurisdiction). CSRD additionality requirements apply. Nordic curtailment rates are low (1-2%).",
+      "expected_output": "A PPA analysis showing: international tariff handling (no US-specific tax credits), self-gen competitive at hyperscale with high capacity factor, ITC correctly excluded for non-US, CSRD additionality requirements noted for EU compliance, wind PPA competitive against high grid tariff, low curtailment reduces PPA risk, sensitivity to curtailment and grid carbon pricing changes.",
+      "assertions": [
+        "International tariff handling without US-specific assumptions",
+        "Self-gen is competitive at 50MW scale with 35% wind capacity factor",
+        "ITC is correctly excluded for non-US jurisdiction",
+        "CSRD additionality requirements are specifically addressed",
+        "Wind PPA is competitive against carbon-inclusive grid tariff",
+        "Low curtailment (1-2%) improves PPA economics",
+        "Sensitivity analysis includes curtailment variation",
+        "Financial Disclaimer is included"
+      ]
+    }
+  ]
+}

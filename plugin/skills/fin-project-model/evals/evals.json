@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-project-model",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a 10-year financial model for a 50MW hyperscale data center with 70% senior debt at 6% interest and 30% equity. Total CapEx is $500M. Revenue is contracted at $140/kW/month with 100% occupancy from Year 1 (take-or-pay). OpEx is 50% of revenue. Model MACRS 5-year accelerated depreciation plus 30% ITC on $50M of qualifying solar CapEx. Equity hurdle rate is 10%. Discount rate 8%.",
+      "expected_output": "A financial model showing: $350M senior debt with amortization schedule, $150M equity, contracted revenue stream with no occupancy risk, EBITDA margins around 50%, levered equity IRR in the 10-15% range, MOIC around 1.5-2.0x over 10 years, DSCR above 1.25x in all years, MACRS depreciation benefit, ITC of $15M (30% of $50M), equity waterfall with preferred return and carried interest distribution, and sensitivity analysis.",
+      "assertions": [
+        "IRR is calculated for both project (unlevered) and equity (levered)",
+        "NPV is calculated at 8% discount rate",
+        "MOIC is computed as total distributions divided by equity invested",
+        "Multi-tranche waterfall includes preferred return at 10% hurdle",
+        "MACRS 5-year depreciation schedule is applied to qualifying equipment",
+        "ITC of 30% on $50M qualifying solar CapEx produces $15M credit",
+        "DSCR is calculated and maintained above covenant minimum",
+        "Financial and Tax disclaimers are included in output"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a 15-year financial model for a 20MW colocation facility with 3-year occupancy ramp (30% Year 1, 60% Year 2, 85% Year 3, 95% stabilized). Revenue at $150/kW/month retail pricing. Capital structure: $120M total CapEx, 65% senior debt at 5.5%, 10% mezzanine at 13% coupon, 25% equity. Mezzanine has 2-year interest-only period. Equity hurdle 12%, 80/20 LP/GP split with catch-up. Include 100% bonus depreciation post-OBBBA.",
+      "expected_output": "A 15-year financial model with: 3-tranche capital stack ($78M senior, $12M mezz, $30M equity), occupancy ramp impacting early-year revenue, mezzanine IO period modeled, EBITDA growing with occupancy, levered equity IRR reflecting occupancy ramp risk, MOIC target of 2.0-2.5x, equity waterfall with preferred return, GP catch-up, and carried interest split, bonus depreciation tax benefit in Year 1.",
+      "assertions": [
+        "Occupancy ramp is modeled: 30%, 60%, 85%, then 95% stabilized",
+        "Mezzanine debt is modeled with 2-year interest-only period",
+        "Equity waterfall has preferred return, catch-up, and carried interest",
+        "Bonus depreciation at 100% is applied in Year 1 post-OBBBA",
+        "MOIC is calculated reflecting multi-year investment horizon",
+        "Sensitivity analysis includes occupancy rate as a key variable",
+        "Financial and Tax disclaimers are included with 'not investment advice' text",
+        "Revenue escalation is applied after stabilization"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Model a 100MW sovereign data center with government cost-plus contract. Total CapEx $1.5B at $15M/MW (sovereign premium). Revenue is cost-plus-10% margin guaranteed by government appropriation. Capital structure: 20% government debt at 3% (subsidized) and 80% government equity (no external equity). Projection period 20 years. No ITC or PTC. MACRS applies to qualifying equipment. Discount rate 5% (government WACC). No equity waterfall needed (single government entity).",
+      "expected_output": "A 20-year financial model showing: minimal leverage, cost-plus revenue with guaranteed margin, stable EBITDA at 10% of costs, very low levered returns (5-8% matching government cost of capital), high NPV due to low discount rate, no equity waterfall complexity, MACRS depreciation on qualifying equipment, and sensitivity analysis showing construction cost as primary variable.",
+      "assertions": [
+        "Cost-plus revenue model produces stable 10% margin above OpEx",
+        "Low leverage (20% debt) reflects government financing structure",
+        "20-year projection captures full asset lifecycle",
+        "IRR reflects low-risk government-backed structure",
+        "NPV is calculated at 5% government WACC discount rate",
+        "MACRS depreciation is applied despite government ownership",
+        "Financial disclaimer is included noting estimates only",
+        "Sensitivity analysis identifies construction cost as top driver"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "dc-skills",
+  "owner": {
+    "name": "Stellenium Corporation"
+  },
+  "metadata": {
+    "description": "Domain-expert AI skills for AI/HPC data center development"
+  },
+  "plugins": [
+    {
+      "name": "stellenium-dc-skills",
+      "source": "./plugin",
+      "description": "50 skills covering site feasibility, power modeling, cooling design, GPU cluster planning, compliance, procurement, finance, and business development from predevelopment through operations handoff.",
+      "version": "1.0.1",
+      "author": {
+        "name": "Stellenium Corporation"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "skill_name": "eng-modular-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a 20MW phased hyperscale data center using containerized pods. The facility will deploy in 4 phases of 5MW each over 3 years. Standard 40ft ISO containers with liquid cooling. Site is in Central Texas with good highway access. Power model provides 2N utility redundancy. Target first-phase operational within 9 months.",
+      "expected_output": "A modular design report specifying containerized pod dimensions (40ft x 12ft), per-module IT capacity (500kW with liquid cooling), module count per phase, factory vs field analysis showing 16-20 week factory lead time, transport plan using standard flatbed (within weight/dimension limits), phased rollout schedule hitting 9-month target for Phase 1, and cost comparison showing modular advantage in time-to-revenue.",
+      "assertions": [
+        "Module specs use 40ft ISO container dimensions with liquid cooling capacity (500kW+)",
+        "Phased rollout plan shows 4 phases of 5MW each with deployment dates",
+        "Factory vs field analysis compares lead time, cost, and quality trade-offs",
+        "Transport logistics address Texas highway weight limits (80,000 lbs)",
+        "Module width designed for permit-free delivery (12ft or under)",
+        "Cost comparison quantifies modular vs traditional $/MW including time-to-revenue benefit",
+        "Output includes both markdown report and JSON sidecar with artifact_type: modular-design-report"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design a 2MW edge data center for deployment in a remote mining location in northern Canada. The site has a gravel access road with 60,000 lb weight limit, no crane available on-site, extreme cold climate (ASHRAE A4, winter temperatures to -40C). Self-contained modules with integrated power and cooling required. Unmanned operation.",
+      "expected_output": "A modular design recommending self-contained edge modules (50-100kW each, 20ft containers) with integrated cooling rated for extreme cold. Module weight under 60,000 lbs for gravel road. Deployment without crane (roll-off or forklift placement). Cold-climate considerations: freeze protection, enclosure insulation, reduced cooling load in winter but condensation management. Remote monitoring for unmanned operation.",
+      "assertions": [
+        "Module weight stays under 60,000 lb road limit",
+        "Self-contained cooling rated for ASHRAE A4 / -40C operation",
+        "Deployment plan accounts for no crane availability (alternative placement method)",
+        "Cold climate considerations include freeze protection and condensation management",
+        "Remote monitoring and unmanned operation requirements are addressed",
+        "Module count and sizing achieve 2MW total capacity",
+        "Transport logistics address gravel road constraints"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Plan a 50MW modular expansion to an existing brownfield data center campus in Northern Virginia. The existing facility is a 30MW traditional build. The expansion must integrate with existing central cooling plant and power distribution. Purpose-built modular pods preferred. Site has limited staging area (0.5 acres) adjacent to the existing building. Crane access available.",
+      "expected_output": "A brownfield modular expansion plan using purpose-built pods that integrate with the existing central cooling plant and power distribution. Module sizing constrained by 0.5-acre staging area. Phased deployment to minimize disruption to existing operations. Interface design between new modules and existing infrastructure (cooling piping, power bus, fiber). Cost comparison showing modular expansion advantage over building a second traditional facility.",
+      "assertions": [
+        "Brownfield integration with existing cooling plant and power distribution is designed",
+        "Module sizing accounts for 0.5-acre staging area constraint",
+        "Phased deployment minimizes disruption to existing 30MW operations",
+        "Interface design covers cooling, power, and network connections to existing facility",
+        "Purpose-built modular approach is detailed (not containerized)",
+        "Cost comparison includes modular expansion vs traditional second building",
+        "Factory lead time for purpose-built pods is realistic (16-24 weeks, not 4-6)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "skill_name": "comp-sovereignty",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess sovereignty and regulatory compliance for a hyperscale commercial data center in Frankfurt, Germany serving EU citizens. The facility is owned by a US-headquartered cloud provider and will host AI inference workloads including a customer-facing chatbot and an automated hiring screening tool. Data subjects are EU/EEA citizens. Cross-border data flows to US parent company are required for operational monitoring.",
+      "expected_output": "A sovereignty assessment addressing GDPR compliance (processor obligations under Art. 28, cross-border transfer to US parent via EU-US Data Privacy Framework or SCCs with supplementary measures), EU AI Act classification (hiring screening tool is HIGH-RISK under Annex III Employment domain; chatbot is LIMITED-RISK requiring transparency), and Schrems II implications for US parent access to EU data. Assessment should flag the CLOUD Act risk for a US-headquartered entity and recommend transfer impact assessment. Overall status should be CONDITIONALLY COMPLIANT with specific mitigations for the high-risk AI system and US data access.",
+      "assertions": [
+        "GDPR is identified as applicable with Art. 28 processor obligations",
+        "EU AI Act classification correctly identifies hiring tool as HIGH-RISK",
+        "EU AI Act classification identifies chatbot as LIMITED-RISK (transparency obligation)",
+        "Cross-border transfer mechanism is assessed (DPF or SCCs + supplementary measures)",
+        "CLOUD Act risk is flagged for US-headquartered entity",
+        "Output includes both markdown report and JSON sidecar schema",
+        "Disclaimer includes 'verify with local counsel' language",
+        "REGULATORY-MATRIX.md is referenced for EU/Germany requirements",
+        "Regulatory disclaimer notes that absence of jurisdiction-specific caveats does not imply regulatory simplicity"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate sovereignty compliance for a 30MW sovereign AI facility in Riyadh, Saudi Arabia. The facility will be 60% owned by a Saudi government-affiliated entity and 40% by a European technology company. It will host classified government AI training workloads and commercial cloud services. Data localization is required for government data. The AI training workloads exceed 10^25 FLOP.",
+      "expected_output": "A sovereignty assessment covering Saudi PDPL data localization requirements, CITC cloud framework compliance, foreign ownership implications (40% European ownership may need MISA approval), Saudi Vision 2030 sovereign AI alignment, and EU AI Act systemic risk classification for the >10^25 FLOP training workload (if EU deployment is planned). Government classified data must remain in-Kingdom. Assessment should address the split between government sovereign tier (strict localization, Saudi entity control) and commercial tier (more flexible). Overall status should be CONDITIONALLY COMPLIANT with mitigations for ownership structure and compute reporting.",
+      "assertions": [
+        "Saudi PDPL data localization requirement is identified for government data",
+        "CITC cloud framework licensing requirements are addressed",
+        "Foreign ownership structure (60/40 split) is assessed against Saudi requirements",
+        "Saudi Vision 2030 sovereign AI initiative requirements are referenced",
+        "10^25 FLOP compute threshold is flagged for EU AI Act systemic risk (if EU deployment)",
+        "Tiered compliance (government sovereign vs commercial) is recommended",
+        "Disclaimer includes 'verify with local counsel' language",
+        "Output includes statement that regulatory analysis reflects the regulatory landscape as of publication date"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Assess regulatory compliance for a US government data center requiring FISMA High authorization and CMMC Level 3 certification. The facility will host AI training workloads for defense applications using classified datasets. Located in Virginia, domestically owned, no foreign data flows. Workloads include computer vision for satellite imagery analysis and natural language processing for intelligence report summarization.",
+      "expected_output": "A sovereignty assessment covering FISMA High requirements (FedRAMP High authorization, dedicated infrastructure, continuous monitoring), CMMC Level 3 certification (110+ NIST SP 800-171 controls plus 24 additional), DoD Cloud SRG Impact Level assessment (IL5 or IL6 depending on classification level), ITAR/EAR considerations for defense AI applications, and the absence of federal AI regulation burden (EO 14110 rescinded, no federal compute reporting). Assessment should note that Virginia location is advantageous for cleared workforce and proximity to government agencies. US-only ownership removes foreign investment screening concerns. Overall status should be COMPLIANT if all FISMA/CMMC/SRG requirements are met, or CONDITIONALLY COMPLIANT if gaps exist.",
+      "assertions": [
+        "FISMA High requirements are correctly detailed (FedRAMP High, dedicated infrastructure)",
+        "CMMC Level 3 requirements are specified (110+ controls, C3PAO assessment)",
+        "DoD Cloud SRG Impact Level is assessed (IL5 or IL6)",
+        "ITAR/EAR applicability is evaluated for defense AI workloads",
+        "No federal AI regulation burden is correctly noted (EO 14110 rescinded)",
+        "Domestic ownership eliminates CFIUS/foreign investment concerns",
+        "Disclaimer includes 'verify with local counsel' language",
+        "No EU AI Act obligations since no EU deployment or data subjects",
+        "Disclaimer states this output does not constitute legal advice"
+      ]
+    }
+  ]
+}

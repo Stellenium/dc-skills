@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-rfp-generator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a full construction RFP for a 10MW Tier III data center in Dallas, Texas using design-build delivery. The project has upstream power and cooling artifacts: power-capacity-model shows dual 13.8kV utility feeds with N+1 UPS at 12MW total facility load (PUE 1.35), and cooling-design-report specifies adiabatic cooling with dry coolers at 11,500kW total capacity. Target budget is $100-120M. Expect 5-7 respondents. Use AIA contract form.",
+      "expected_output": "A complete, issuable RFP document with all 7 sections: Introduction referencing Dallas TX location, Scope of Work for full DC construction via design-build, Technical Requirements populated from the provided power and cooling artifacts, Evaluation Criteria with weighted scoring matrix, Submission Requirements with timeline, Commercial Terms using AIA contract form with LDs and bonding, and Appendices. JSON sidecar with artifact_type rfp-document.",
+      "assertions": [
+        "Output contains all 7 RFP sections (Introduction, Scope, Technical, Evaluation, Submission, Commercial, Appendices)",
+        "Technical requirements reference specific upstream data: dual 13.8kV feeds, N+1 UPS, 12MW facility load, adiabatic cooling, 11,500kW cooling capacity",
+        "Evaluation criteria weights sum to exactly 100%",
+        "AIA contract form is specified in Commercial Terms section",
+        "Liquidated damages are described as genuine pre-estimate of loss",
+        "JSON sidecar includes artifact_type: rfp-document and evaluation_criteria array"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create an M&E equipment RFP for a cooling system upgrade at an existing 5MW colocation facility in Chicago. The upgrade replaces aging CRAHs with in-row cooling units and adds rear-door heat exchangers for high-density racks. Budget is $8-12M. Three pre-qualified vendors will be invited. Use FIDIC contract form. No upstream artifacts available.",
+      "expected_output": "An equipment procurement RFP focused on cooling system upgrade with FIDIC contract terms, technical requirements generated from discovery questions (marked [TO BE CONFIRMED] where upstream data is missing), evaluation criteria weighted for equipment RFP (higher technical weight), and 3-vendor shortlist submission format.",
+      "assertions": [
+        "Brownfield/upgrade context is reflected in scope of work",
+        "Technical requirements include [TO BE CONFIRMED] placeholders for missing upstream data",
+        "FIDIC contract form is specified with appropriate provisions for equipment procurement",
+        "Evaluation criteria are weighted appropriately for equipment (higher technical weight vs construction)",
+        "Equipment categories explicitly listed: in-row cooling units and rear-door heat exchangers",
+        "Vendor qualification requirements address OEM/reseller status"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a managed services RFP for operations of a 50MW hyperscale data center facility. The contract is for a 5-year term with SLA-based KPIs including 99.999% availability, 15-minute critical response time, and PUE maintenance below 1.30. Expect 8-10 respondents from major DC operators. Staffing model is dedicated on-site with 24x7 coverage. No contract form preference.",
+      "expected_output": "A managed services RFP with SLA requirements, KPI framework, staffing model specifications, transition plan requirements, 5-year term structure, and a recommended contract form. Evaluation criteria weighted for managed services (heavy qualifications and technical weighting). JSON sidecar with rfp_type managed-services.",
+      "assertions": [
+        "SLA requirements include 99.999% availability and 15-minute critical response time",
+        "KPI framework covers availability, PUE maintenance, incident response, and customer satisfaction",
+        "Staffing model specifies dedicated on-site 24x7 coverage",
+        "5-year contract term is reflected in commercial terms",
+        "Transition plan requirements are included for incumbent-to-new-provider handoff",
+        "Contract form recommendation is provided since no preference was stated"
+      ]
+    }
+  ]
+}

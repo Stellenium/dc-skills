@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-power-model",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the electrical distribution for a 10MW Tier III data center in Northern Virginia with N+1 UPS redundancy and dual utility feeds at 13.8kV.",
+      "expected_output": "A power capacity model showing utility feed through ATS, switchgear, UPS, PDU to rack-level distribution with N+1 redundancy analysis, PUE estimate as a range, component-level efficiency losses, and capital cost estimate referencing COST-BENCHMARKS.md Northern Virginia data.",
+      "assertions": [
+        "Output includes complete utility-to-rack power chain with efficiency at each stage",
+        "Tier III redundancy (N+1, concurrently maintainable) is correctly modeled",
+        "PUE estimate is provided as a range (e.g., 1.25-1.35), not a point value",
+        "Dual utility feed configuration is addressed in the utility service section",
+        "Capital cost estimate references Northern Virginia regional benchmarks",
+        "JSON sidecar output includes artifact_type: power-capacity-model"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Model the power infrastructure for a 100MW hyperscale campus with phased build-out: 50MW Phase 1 and 50MW Phase 2. The facility will use modular UPS blocks of 4MW each and targets a PUE of 1.2 or below. Dual utility feeds from separate substations.",
+      "expected_output": "A phased power capacity model with 50MW initial deployment scaling to 100MW, modular UPS sizing (4MW blocks), campus-level distribution strategy, PUE target analysis showing liquid cooling likely required for sub-1.2, and utility feed sizing for full 100MW even in Phase 1.",
+      "assertions": [
+        "Phased build-out is modeled with separate Phase 1 and Phase 2 sections",
+        "UPS modules are sized at 4MW blocks with correct N+1 count per phase",
+        "PUE target of 1.2 is flagged as requiring liquid cooling or advanced cooling",
+        "Utility feed is sized for full 100MW capacity even in Phase 1 (per gotcha about lead times)",
+        "Generator sizing includes motor starting current overhead",
+        "Sensitivity analysis shows PUE impact of load utilization variation"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate the electrical infrastructure for converting a warehouse to a 5MW edge-adjacent data center. The existing building has a 2MW electrical service at 480V, a 500kW diesel generator, and no UPS. The target is Tier II redundancy.",
+      "expected_output": "A brownfield power analysis identifying the gap between existing 2MW service and target 5MW, upgrade path for utility service entrance, new UPS and generator requirements for Tier II (N+1), reuse assessment of existing 500kW generator, and code compliance considerations.",
+      "assertions": [
+        "Brownfield path is activated with existing infrastructure assessment",
+        "Gap analysis between existing 2MW and required 5MW is clearly quantified",
+        "Existing 500kW generator is evaluated for reuse (likely too small for N+1 at 5MW)",
+        "Tier II (N+1) redundancy is correctly modeled with single distribution path",
+        "Utility service upgrade requirements are specified (voltage, capacity)",
+        "PUE estimate accounts for edge facility overhead (typically higher, 1.4-1.8)"
+      ]
+    }
+  ]
+}

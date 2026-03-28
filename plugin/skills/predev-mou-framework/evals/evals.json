@@ -1,0 +1,44 @@
+{
+  "skill_name": "predev-mou-framework",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a government MOU for a sovereign data center project in a US state. The state economic development authority is offering a 15-year property tax PILOT, sales tax exemption on equipment, and infrastructure improvements (road and water). In exchange, the developer commits to 200 permanent jobs, $800M capital investment over 3 phases, and a workforce training program. The MOU must include clawback provisions tied to job creation milestones. Jurisdiction: Virginia. Timeline to definitive agreement: 90 days.",
+      "expected_output": "A government MOU document with sovereign DC framing, detailed tax incentive terms (PILOT structure, sales tax exemption scope), infrastructure commitment specifics, job creation milestones with clawback triggers, community benefit commitments including workforce training, confidentiality as binding provision, and timeline to definitive agreement with legislative approval as condition precedent.",
+      "assertions": [
+        "MOU includes property tax PILOT with 15-year term and specific abatement schedule",
+        "Clawback provisions are tied to specific job creation milestones (not generic language)",
+        "Sales tax exemption scope is defined (equipment types, construction materials)",
+        "Infrastructure commitments specify government obligations (road, water improvements)",
+        "Confidentiality provisions are explicitly identified as binding",
+        "Condition precedent includes required legislative/commission approval"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Draft a landowner LOI for a 50-acre site purchase option. The developer wants a 24-month exclusive due diligence period with the right to conduct environmental assessments, soil testing, and utility surveys. Purchase option price is $15M, exercisable within the due diligence period. Environmental liability remains with the current landowner for pre-existing contamination. The LOI is non-binding except for exclusivity, confidentiality, and access rights. Include a $500K breakup fee if the developer exercises the option then fails to close. Jurisdiction: Texas.",
+      "expected_output": "A landowner LOI with purchase option at $15M, 24-month exclusive due diligence period, detailed access rights for environmental and geotechnical investigation, environmental liability allocation clearly placing pre-existing contamination on landowner, binding provisions (exclusivity, confidentiality, access) explicitly identified, non-binding provisions (purchase, price) explicitly identified, and $500K breakup fee structure.",
+      "assertions": [
+        "Purchase option price ($15M) and exercise period (24 months) are clearly stated",
+        "Environmental liability for pre-existing contamination is allocated to landowner",
+        "Exclusivity, confidentiality, and access rights are identified as binding provisions",
+        "Due diligence access rights specify permitted activities (environmental, soil, utility)",
+        "Breakup fee of $500K is structured as liquidated damages, not penalty",
+        "LOI explicitly distinguishes binding from non-binding provisions by section"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a utility MOU for a 100MW+ power commitment for a hyperscale data center campus with phased delivery. Phase 1 requires 30MW within 18 months, Phase 2 adds 40MW at month 30, Phase 3 adds 30MW+ at month 42. The utility will build a dedicated substation with cost sharing (developer pays 60%, utility reimbursed through rate base over 15 years). Dual-feed diverse path required from separate substations. The developer seeks an economic development tariff below standard commercial rates. Non-binding except for confidentiality and cost-sharing for feasibility study. Jurisdiction: Georgia.",
+      "expected_output": "A utility MOU with phased power delivery schedule (30/40/30+ MW), dedicated substation cost-sharing arrangement (60/40 with 15-year rate base recovery), dual-feed diverse path requirement from separate substations, economic development tariff request framework, feasibility study cost allocation as binding provision, interconnection timeline expectations per phase, and clear statement that MOU does not constitute interconnection agreement.",
+      "assertions": [
+        "Phased power delivery schedule specifies MW and timeline for each phase",
+        "Substation cost-sharing terms define developer contribution (60%) and utility recovery mechanism",
+        "Dual-feed requirement from separate substations is explicitly stated",
+        "Economic development tariff request includes reference to comparable rate structures",
+        "MOU explicitly states it does not constitute or replace a formal interconnection agreement",
+        "Feasibility study cost allocation is identified as a binding provision"
+      ]
+    }
+  ]
+}

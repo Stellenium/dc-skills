@@ -1,0 +1,44 @@
+{
+  "skill_name": "predev-permitting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a permitting roadmap for a 100MW hyperscale data center campus in Loudoun County, Virginia (data center alley). The site is in a pre-zoned data center industrial park with by-right development rights. Three phases: 30MW, 35MW, 35MW over 4 years. Diesel generators (20 x 3MW) require air quality permits. Dual utility feed from Dominion Energy. Building height under 45ft. Air-cooled facility, no water permits for cooling needed. No wetlands, not in floodplain.",
+      "expected_output": "A permitting roadmap identifying by-right zoning (no CUP needed, saving 8-26 weeks), building permit as primary gate (4-6 weeks in Virginia DC corridor), air quality permit for 60MW of diesel generation (Virginia DEQ), electrical and fire permits running parallel to building permit, utility interconnection filed immediately (not dependent on other permits). Critical path: building permit + air quality permit parallel track. Total estimated timeline compressed due to by-right zoning.",
+      "assertions": [
+        "By-right zoning status is recognized (no CUP or public hearing required)",
+        "Air quality permit for diesel generators is identified with Virginia DEQ as authority",
+        "Utility interconnection is recommended to file immediately on day one",
+        "Critical path analysis shows compressed timeline due to pre-zoned industrial park",
+        "Parallel permit tracks are identified (building, air quality, utility run simultaneously)",
+        "REGULATORY-MATRIX.md is not needed (US domestic jurisdiction)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop a permitting roadmap for a 50MW sovereign data center in an EU member state (Ireland). The facility will process government data with data residency requirements. The site is greenfield on agricultural land requiring change of use. Environmental Impact Assessment is mandatory under EU EIA Directive. Water cooling using municipal supply (estimated 500,000 gallons/day). Generator backup: 10 x 2.5MW diesel. Foreign investment review may apply. Timeline target: operational in 30 months.",
+      "expected_output": "A permitting roadmap with EU EIA as the critical path item (26-52 weeks for greenfield agricultural conversion in Ireland). Planning permission (An Bord Pleanala) with public consultation. Data residency requirements from REGULATORY-MATRIX.md addressed. Water abstraction license from EPA Ireland. Industrial emissions license for generators. Foreign investment screening under EU FDI Regulation. Warning that 30-month timeline is aggressive given mandatory EIA and Irish planning process.",
+      "assertions": [
+        "EU EIA Directive requirement is identified as mandatory for agricultural-to-industrial conversion",
+        "Irish planning authority (An Bord Pleanala) is referenced for planning permission",
+        "REGULATORY-MATRIX.md is loaded for data residency and foreign investment requirements",
+        "Water abstraction license is identified given 500K gal/day municipal consumption",
+        "Timeline assessment warns that 30-month target is aggressive given EIA requirements",
+        "Critical path shows EIA as longest-duration item gating construction start"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a permitting roadmap for a 25MW modular data center in rural Texas with behind-the-meter natural gas generation. The facility includes 8 x 2MW natural gas reciprocating engines for BTM power and 4 x 2MW diesel generators for backup. The site requires a conditional use permit (currently zoned agricultural). Air quality permits from TCEQ are required for both gas engines and diesel generators. The site is in ERCOT territory. Water source is an on-site well for evaporative cooling. Building height 30ft. No wetlands.",
+      "expected_output": "A permitting roadmap with conditional use permit as first gate (requiring public hearing in rural Texas county, 8-16 weeks). TCEQ air quality permits for both natural gas engines (continuous operation) and diesel generators (emergency backup). TCEQ may require New Source Review for gas engines as a major source. Water well permit from Texas Water Development Board. ERCOT interconnection for grid backup/export. Critical path: CUP -> building permit -> TCEQ air quality (longest parallel track).",
+      "assertions": [
+        "Conditional use permit is identified as requiring public hearing for agricultural rezoning",
+        "TCEQ air quality permits distinguish between continuous gas engines and emergency diesel",
+        "New Source Review potential is flagged for natural gas engines as continuous emission source",
+        "Water well permit from Texas Water Development Board is identified",
+        "ERCOT interconnection is included for grid backup/export configuration",
+        "Critical path correctly identifies CUP as the gating permit before construction"
+      ]
+    }
+  ]
+}

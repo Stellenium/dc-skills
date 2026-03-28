@@ -1,0 +1,28 @@
+name: Validate Skills
+
+on:
+  push:
+    paths:
+      - 'plugin/skills/**'
+      - 'plugin/references/**'
+      - 'plugin/SKILL-TEMPLATE.md'
+      - 'plugin/scripts/validate-all.sh'
+  pull_request:
+    paths:
+      - 'plugin/skills/**'
+      - 'plugin/references/**'
+      - 'plugin/SKILL-TEMPLATE.md'
+      - 'plugin/scripts/validate-all.sh'
+
+jobs:
+  validate:
+    name: Validate all skills
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lightweight validation
+        run: |
+          chmod +x plugin/scripts/validate-all.sh
+          cd plugin && ./scripts/validate-all.sh

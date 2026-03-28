@@ -1,0 +1,47 @@
+{
+  "skill_name": "predev-site-feasibility",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Evaluate a 20MW hyperscale data center site in Ashburn, Northern Virginia (Loudoun County) for a cloud provider. Greenfield site on industrially zoned land adjacent to a Dominion Energy substation with 50MW available capacity. Three diverse fiber routes within 1 mile. Primary workload is AI training. Top priorities: power, connectivity, tax incentives.",
+      "expected_output": "A site feasibility report with GO recommendation. Northern Virginia should score highly on power (Dominion Energy capacity, 6-7c/kWh), connectivity (Ashburn is the densest fiber market in the US), and tax incentives (Virginia sales tax exemption for $150M+ investment). Climate, labor, and cost scores should reflect the NoVA market realities (high labor index ~110, construction costs $10.5-12M/MW). OZ eligibility should be checked. Factor scoring matrix with all 9 factors, weighted scores, and overall recommendation.",
+      "assertions": [
+        "Recommendation is GO with weighted score >= 3.5",
+        "Power factor scores 4 or 5 given 50MW available capacity",
+        "Connectivity factor scores 5 given Ashburn fiber density",
+        "Tax incentive scoring references Virginia sales tax exemption program",
+        "Output includes both markdown report structure and JSON sidecar schema",
+        "OZ eligibility is assessed using FEDERAL-TAX-GUIDE.md reference",
+        "Labor factor accounts for Northern Virginia's high labor index"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Compare three candidate sites for a 10MW enterprise data center: (1) Phoenix, AZ - greenfield industrial park near APS substation, (2) Dallas/Fort Worth, TX - brownfield warehouse conversion near ERCOT node, (3) Chicago, IL - greenfield site in Cook County industrial corridor. Commercial workload, no sovereignty constraints. Top priorities: cost, power, labor.",
+      "expected_output": "A multi-site comparison report with factor scoring matrix for all three sites. Dallas should score well on cost (low construction, competitive ERCOT power, no state income tax) and labor (low labor index ~80). Phoenix should score well on climate (solar PPA potential) but flag water scarcity. Chicago should score well on connectivity but flag higher labor costs (union requirements, index ~120). Each site gets an independent GO/CONDITIONAL/NO-GO recommendation. Comparison table ranks sites by weighted score.",
+      "assertions": [
+        "All three sites are independently scored with the same 9-factor methodology",
+        "Site comparison table is included with side-by-side factor scores",
+        "Dallas labor index advantage over Chicago is reflected in scoring",
+        "Phoenix water scarcity risk is flagged in the water factor assessment",
+        "Tax incentive scoring references state-specific programs for AZ, TX, and IL",
+        "Power cost scoring reflects regional differences from POWER-TARIFFS.md data",
+        "Each site receives an independent recommendation (GO/CONDITIONAL/NO-GO)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate a 50MW sovereign AI facility site in a rural area of New Mexico. The facility requires government security clearance, data sovereignty compliance, and will run classified AI training workloads. The candidate site is 15 miles from the nearest town, has single fiber route access, limited municipal water, and is near a small rural substation with 20MW current capacity. Greenfield on federal land lease.",
+      "expected_output": "A site feasibility report with CONDITIONAL or NO-GO recommendation. The site should score poorly on connectivity (single fiber route, remote location), power (20MW substation insufficient for 50MW facility without major upgrade), and water (limited supply in arid New Mexico). Sovereignty should score well given federal land and government alignment. The 50MW requirement vs 20MW available should trigger a critical power gap flag. Mitigations should include utility capacity expansion timeline, fiber route development plan, and water alternatives (dry cooling, reclaimed water).",
+      "assertions": [
+        "Recommendation is CONDITIONAL or NO-GO due to infrastructure gaps",
+        "Power factor scores 1 or 2 given 20MW available vs 50MW required",
+        "Connectivity factor scores low due to single fiber route",
+        "Water factor accounts for New Mexico arid climate and limited supply",
+        "Sovereignty factor scores highly given government/federal alignment",
+        "Specific mitigations are provided for each low-scoring factor",
+        "Override rule is applied if any factor scores 1 (automatic CONDITIONAL)"
+      ]
+    }
+  ]
+}

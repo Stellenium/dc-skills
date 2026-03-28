@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-gpu-cluster",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a 10,000 H100 SXM5 GPU training cluster for a hyperscale facility. The cluster will train large language models up to 1 trillion parameters. Use InfiniBand NDR fabric with fat-tree topology. Target completion in 6 months.",
+      "expected_output": "A GPU cluster facility design with 10,000 H100 GPUs across approximately 300+ racks at 25-35kW each, InfiniBand NDR fat-tree topology, NVLink 8-GPU domains per node, rack layout with cooling zones, storage architecture for checkpoint data, and phased deployment plan.",
+      "assertions": [
+        "H100 SXM5 at 700W TDP is used for per-rack power calculation",
+        "NVLink domain size is correctly identified as 8 GPUs per node",
+        "InfiniBand NDR 400G fat-tree topology is designed with leaf/spine counts",
+        "Per-rack power budget includes GPU + networking + storage overhead",
+        "Training cluster utilization factor of 75-85% is applied (not 100%)",
+        "JSON sidecar output includes artifact_type: gpu-cluster-design"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design a GPU cluster for a sovereign AI facility using 1000 NVIDIA GB200 NVL72 systems for inference workloads. The facility requires Tier IV fault tolerance and liquid cooling. Latency SLA is 50ms time-to-first-token.",
+      "expected_output": "A sovereign-focused cluster design with 72,000 total GPUs (1000 NVL72 racks), mandatory liquid cooling at 120kW per rack, 2N cooling redundancy, CDU placement plan, inference optimization with latency SLA analysis, and sovereign operational security considerations.",
+      "assertions": [
+        "GB200 NVL72 is correctly modeled as a rack-scale system (72 GPUs per rack, 120kW)",
+        "Liquid cooling is mandatory with 25C max inlet temperature",
+        "Total power calculated at approximately 120MW for 1000 racks",
+        "NVLink domain of 72 GPUs per rack is identified as advantage for large model inference",
+        "Floor loading requirements identified (2000kg+ per rack)",
+        "Sovereign-specific considerations addressed (supply chain, operational independence)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Plan a brownfield GPU deployment: adding 500 NVIDIA B200 GPUs to an existing facility that currently runs 2000 H100 GPUs. The existing facility has air-cooled racks at 30kW, 10MW total power capacity with 3MW available, and InfiniBand NDR fabric.",
+      "expected_output": "A mixed-generation brownfield deployment plan with B200 GPUs requiring higher density racks (40-70kW), cooling zone separation between air-cooled H100 and liquid-cooled B200 sections, power budget analysis showing 500 B200s consume approximately 625kW (GPU only), network integration strategy for mixed NVLink generations, and structural assessment for higher-density racks.",
+      "assertions": [
+        "Brownfield path activated with existing infrastructure assessment",
+        "B200 at 1000W TDP requires different cooling than existing H100 at 700W",
+        "Cooling zone separation recommended between H100 (air) and B200 (liquid or RDHx) areas",
+        "Available 3MW power budget is validated against B200 deployment requirements",
+        "Network segmentation or integration strategy addresses different NVLink generations",
+        "Floor loading assessment flags potential reinforcement needs for higher-density B200 racks"
+      ]
+    }
+  ]
+}

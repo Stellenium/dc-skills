@@ -1,0 +1,44 @@
+{
+  "skill_name": "fin-investor-memo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a VC investor memo for a Series B raise ($50-100M) for a 50MW data center campus in Phoenix, Arizona. The company controls 200 acres with 500MW of utility capacity secured, has LOIs for 30MW from two hyperscale tenants, and is led by a founding team with prior exits in infrastructure technology. The first 10MW phase is under construction. Competitive moat is site control (200 acres) and power access (500MW secured with 2-year head start on competitors). TAM is the $300B+ US data center market. Target exit via trade sale to REIT or infrastructure fund within 5-7 years.",
+      "expected_output": "A VC-structured memo leading with TAM ($300B+ market), growth trajectory (500MW buildable from 50MW start), and competitive moat (200-acre site control, 500MW utility capacity). Executive summary emphasizes first-mover advantage and hyperscale LOIs. Use of proceeds: Series B funds Phase 1 completion and Phase 2 pre-development, transitioning to project finance for subsequent phases. Team section highlights prior exits and domain expertise. Financial highlights: $/MW development cost advantage, customer pipeline, months to first revenue. Path to exit: trade sale to DC REIT at stabilized cap rates, with secondary sale and IPO as alternatives. Capital intensity paradox addressed: VC capital for platform and site control, project finance for construction.",
+      "assertions": [
+        "Memo structure follows VC format with TAM, competitive moat, and exit path",
+        "Growth metrics (revenue CAGR, MW pipeline) are emphasized over yield metrics",
+        "Capital intensity paradox is addressed (why VC not project finance)",
+        "Team credentials and prior exits are prominently featured",
+        "Path to exit includes trade sale to REIT with timeline",
+        "Financial disclaimer includes 'not investment advice' language"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a PE/infrastructure investor memo for a stabilized 200MW hyperscale data center with 95% occupancy, contracted revenue from three hyperscale tenants on 10-15 year take-or-pay leases, and a DSCR of 1.45x. Total insured value $2B. Current NOI of $180M annually with 3% annual escalators. The facility has 100MW of expansion capacity on adjacent land. Capital structure: 60% senior debt at 5.5%, 40% equity. Reference FEDERAL-TAX-GUIDE.md for ITC on $50M qualifying solar CapEx and MACRS depreciation benefits. Target levered equity IRR of 12-15%.",
+      "expected_output": "A PE/infrastructure-structured memo leading with asset quality and stabilized yield. Asset overview: 200MW, 95% occupied, contracted revenue with 10-15 year tenors and 3% escalators. Stabilized NOI of $180M, cap rate context against comparable DC transactions. DSCR of 1.45x demonstrating strong debt service coverage. Downside protection: take-or-pay leases, creditworthy hyperscale tenants, long-term PPAs. Value creation: 100MW expansion potential on adjacent land. Tax benefits from FEDERAL-TAX-GUIDE.md: 30% ITC on $50M solar ($15M credit), MACRS depreciation enhancing levered returns. Key metrics: stabilized NOI, cap rate, levered IRR 12-15%, MOIC, debt yield.",
+      "assertions": [
+        "Memo structure follows PE/infra format with yield, NOI, and cap rate emphasis",
+        "DSCR of 1.45x is prominently featured as debt service indicator",
+        "Contracted take-or-pay revenue provides downside protection narrative",
+        "FEDERAL-TAX-GUIDE.md is referenced for ITC and MACRS tax benefits",
+        "Expansion potential (100MW) is positioned as value creation opportunity",
+        "Financial disclaimer with 'not investment advice' and sensitivity caveat"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Draft a DFI investor memo for a 30MW sovereign AI facility in Nairobi, Kenya targeting IFC co-investment alongside private capital. The project creates 150 permanent jobs and 1,500 construction jobs, includes a technology transfer program with University of Nairobi and JKUAT, provides sovereign data hosting for Kenyan government agencies, and enables digital economy growth aligned with Kenya's Digital Economy Blueprint. Total investment $400M with DFI providing $100M concessional debt. Reference DFI-FUNDING.md for IFC Performance Standards alignment and AfDB strategic priorities.",
+      "expected_output": "A DFI-structured memo leading with DEVELOPMENT IMPACT before financial returns. Impact thesis: 150 permanent jobs, 1,500 construction jobs, technology transfer to Kenyan universities, sovereign data hosting enabling government digital services, digital economy growth for 50M+ Kenyans. ESG alignment: Scope 1/2 emissions commitment, water efficiency, community benefit fund. DFI-FUNDING.md referenced for IFC Performance Standards (PS1-PS8 compliance), AfDB Strategy 2024-2033 alignment (digital infrastructure pillar). Concessional structure: $100M DFI debt de-risks $300M private investment, blended finance approach. Kenya Digital Economy Blueprint alignment explicitly mapped. Financial summary comes AFTER impact thesis.",
+      "assertions": [
+        "Development impact thesis appears BEFORE financial returns in memo structure",
+        "Job creation (permanent and construction) is quantified prominently",
+        "DFI-FUNDING.md is referenced for IFC Performance Standards alignment",
+        "Technology transfer program with specific universities is featured",
+        "Concessional financing structure explains DFI capital de-risking private investment",
+        "Kenya Digital Economy Blueprint is referenced by name"
+      ]
+    }
+  ]
+}

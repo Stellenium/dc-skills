@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-economic-impact",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Produce an economic impact analysis for a 200MW hyperscale data center campus in Loudoun County, Virginia. Project details: $2 billion total CapEx over 3 phases, $150M annual OpEx at full build-out, 2,500 peak construction jobs over 30 months, 120 permanent operations jobs with $95K average salary. The developer is requesting a 20-year sales and use tax exemption on equipment (estimated at $80M in tax savings). Use Virginia-specific data from US-STATE-INCENTIVES.md. Northern Virginia has a mature DC supply chain -- use default or slightly above-default multipliers. Calculate direct, indirect, and induced impacts for both construction and operations phases. Show tax revenue WITH and WITHOUT incentives.",
+      "expected_output": "Economic impact report with construction and operations phase impact tables showing direct, indirect, and induced jobs, output, and tax revenue. Tax analysis showing WITH and WITHOUT incentive scenarios for property tax, sales tax, income tax, and utility tax. Jobs per incentive dollar calculated. Multipliers appropriate for mature DC market (default or slightly above). GDP contribution calculated. US-STATE-INCENTIVES.md referenced for Virginia exemption details.",
+      "assertions": [
+        "Direct, indirect, and induced impacts are calculated separately for construction and operations phases",
+        "Tax revenue analysis shows both WITH incentives and WITHOUT incentives scenarios",
+        "Jobs per incentive dollar metric is calculated as a politically effective measure",
+        "Multipliers used are appropriate for a mature DC ecosystem like Northern Virginia",
+        "US-STATE-INCENTIVES.md is referenced for Virginia-specific sales tax exemption details",
+        "Construction jobs are clearly labeled as temporary with duration specified"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Produce an economic impact analysis for a 50MW sovereign data center in a rural county in Mississippi. Project details: $500M total CapEx, $35M annual OpEx, 800 peak construction jobs over 24 months, 45 permanent operations jobs with $65K average salary. The developer is requesting a 10-year property tax abatement (PILOT at 25% of full rate) and a state sales tax exemption on equipment. The location has limited data center supply chain -- local contractors will handle 30% of construction spend, with 70% imported from out-of-state. Adjust multipliers downward for the rural location with shallow supply chain. Calculate the incentive breakeven point where cumulative tax revenue exceeds incentive cost.",
+      "expected_output": "Economic impact report with reduced multipliers reflecting limited local supply chain (30% local capture). Construction and operations impact tables with conservative indirect/induced figures. Tax analysis with PILOT abatement and sales tax exemption scenarios. Incentive breakeven analysis showing cumulative tax revenue timeline. Community benefits emphasized to compensate for lower job multipliers. Clear distinction between temporary construction and permanent operations employment.",
+      "assertions": [
+        "Multipliers are adjusted downward from defaults to reflect limited rural supply chain",
+        "Construction and operations phase impacts use separate reduced multiplier sets",
+        "Incentive breakeven point is calculated showing when cumulative tax revenue exceeds incentive cost",
+        "PILOT abatement and sales tax exemption are modeled in the WITH incentives scenario",
+        "Community benefits section addresses workforce development and local hiring commitments",
+        "70% out-of-state construction spend is factored into reduced indirect and induced impacts"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Produce an economic impact analysis for a 100MW campus data center in Lagos, Nigeria, seeking IFC and AfDB co-financing. Project details: $800M total CapEx, $60M annual OpEx, 1,500 peak construction jobs (70% local hire), 80 permanent operations jobs with average salary 3x local median. The project is applying for a 10-year tax holiday under the Nigerian Investment Promotion Commission. Nigeria has a shallow DC supply chain -- most equipment is imported. Use significantly reduced multipliers (30-50% below defaults). The report will accompany a DFI funding application. Calculate impacts in both USD and local currency (NGN). Emphasize development impact metrics that resonate with DFIs: local job creation, technology transfer, digital infrastructure access, and import substitution.",
+      "expected_output": "Economic impact report adapted for DFI application with development impact framing. Significantly reduced multipliers for emerging market with limited supply chain. Impacts calculated in both USD and NGN. Development impact metrics emphasized: local employment, technology transfer, digital infrastructure. Tax holiday modeled in WITH/WITHOUT scenarios. DFI-relevant metrics (import substitution, infrastructure gap reduction) highlighted alongside traditional economic impact figures.",
+      "assertions": [
+        "Multipliers are reduced 30-50% below defaults for emerging market with limited supply chain",
+        "Impacts are presented in both USD and local currency (NGN) with exchange rate noted",
+        "Development impact metrics (technology transfer, digital infrastructure) are prominently featured",
+        "Local hire commitment (70% construction) is quantified and highlighted for DFI audience",
+        "Tax holiday is modeled in WITH and WITHOUT scenarios with government revenue impact",
+        "Import substitution and infrastructure gap reduction metrics are included for DFI alignment"
+      ]
+    }
+  ]
+}

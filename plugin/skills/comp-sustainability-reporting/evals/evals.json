@@ -1,0 +1,44 @@
+{
+  "skill_name": "comp-sustainability-reporting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a sustainability report for a 50MW hyperscale data center in Houston, Texas (US-TX) with PUE 1.35, 5MW natural gas turbines running 8,760 hours/year (baseload), 120 million gallons/year water consumption from cooling towers, no RECs purchased. The facility targets SEC Climate Disclosure compliance (effective 2026) and CDP reporting. Calculate Scope 1 and Scope 2 emissions, PUE, WUE, and CUE. Identify compliance gaps for SEC and CDP frameworks.",
+      "expected_output": "A sustainability report showing: Scope 1 emissions from 5MW gas generation (~36,000+ tCO2e from continuous operation), Scope 2 location-based emissions using US-TX grid intensity (380 kg/MWh) for 50MW * 1.35 PUE * 8760 hours, WUE in the evaporative range (120M gallons for cooling towers), CUE reflecting on-site gas emissions. SEC compliance gap: Scope 1+2 covered but financial impact assessment needed. CDP gap: Scope 3 not calculated. Sustainability-calculator.py script output with carbon and efficiency sections.",
+      "assertions": [
+        "Scope 1 emissions are calculated from 5MW gas generation at 8,760 hours",
+        "Scope 2 uses US-TX grid carbon intensity of 380 kg CO2/MWh",
+        "WUE is calculated from 120M gallons water consumption",
+        "PUE of 1.35 is applied to calculate total facility power",
+        "SEC Climate Disclosure compliance gaps are identified",
+        "Bundled sustainability-calculator.py script is referenced with usage example"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a sustainability report for a 100MW data center in Stavanger, Norway (EU-NO) with PUE 1.12, no on-site generation (grid-only), 5 million gallons/year water consumption from direct liquid cooling, and no RECs purchased. The facility targets EU CSRD compliance and SBTi target-setting with 2025 as baseline year. Demonstrate the difference between location-based and market-based Scope 2 accounting. The Norway grid is nearly 100% hydroelectric (15 gCO2/kWh) but the European residual mix is ~450 gCO2/kWh.",
+      "expected_output": "A sustainability report highlighting the dramatic Scope 2 divergence: location-based showing very low emissions (15 kg/MWh * 100MW * 1.12 PUE * 8760 / 1000 = ~14,700 tCO2e), but market-based WITHOUT RECs showing European residual mix (~450 kg/MWh producing ~441,000+ tCO2e). This demonstrates why RECs or PPAs are essential for market-based reporting even in clean-grid locations. CSRD compliance requires all three scopes. SBTi baseline year 2025 with sector-specific pathway (ICT).",
+      "assertions": [
+        "Location-based Scope 2 uses Norway grid intensity (15 kg CO2/MWh)",
+        "Market-based vs location-based divergence is explicitly demonstrated",
+        "EU CSRD requires Scope 1+2+3 reporting (Scope 3 gap identified)",
+        "SBTi target-setting with 2025 baseline is addressed",
+        "WUE reflects low water consumption from liquid cooling",
+        "Regulatory and Financial disclaimers reference DISCLAIMER-FRAMEWORK.md"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Prepare a full carbon accounting exercise for a 30MW data center in Singapore (SG) targeting SBTi with Scope 3 inclusion. PUE 1.25, no on-site generation, 80 million gallons/year water from cooling towers, 50,000 MWh of RECs purchased annually. The facility has 15,000 NVIDIA H100 GPUs with estimated embodied carbon of 1.2 tCO2e per GPU (Scope 3 Category 1). Target: 42% absolute reduction in Scope 1+2 by 2030 from 2025 baseline, net-zero by 2050. Calculate all metrics and assess SBTi alignment.",
+      "expected_output": "A comprehensive carbon report: Scope 1 = 0 (no on-site generation), Scope 2 location-based using SG intensity (400 kg/MWh * 30MW * 1.25 * 8760), Scope 2 market-based reduced by 50,000 MWh RECs, Scope 3 Category 1 = 15,000 * 1.2 = 18,000 tCO2e for GPU embodied carbon alone. SBTi assessment: 42% absolute reduction target aligns with 1.5C pathway for ICT sector. Net-zero by 2050 requires FLAG/SBTi net-zero standard. Scope 3 exceeds 40% of total -- SBTi requires Scope 3 target. RECs reduce market-based Scope 2 but 50,000 MWh may not cover full facility consumption.",
+      "assertions": [
+        "Scope 1 is zero with no on-site generation",
+        "Scope 2 uses Singapore grid intensity (400 kg CO2/MWh)",
+        "Market-based Scope 2 is reduced by 50,000 MWh of RECs",
+        "Scope 3 Category 1 calculates GPU embodied carbon (15,000 * 1.2 tCO2e)",
+        "SBTi 42% reduction target assessed against 1.5C pathway",
+        "Scope 3 percentage of total triggers mandatory SBTi Scope 3 target"
+      ]
+    }
+  ]
+}

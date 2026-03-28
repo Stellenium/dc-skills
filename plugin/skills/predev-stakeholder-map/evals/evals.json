@@ -1,0 +1,44 @@
+{
+  "skill_name": "predev-stakeholder-map",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a stakeholder map for a 200MW hyperscale data center campus on 150 acres of former agricultural land in a rural Virginia county. The project will consume 2 million gallons of water per day from the local aquifer. The county has no prior DC development. Adjacent properties are single-family homes (0.5 miles) and active farmland. The county board of supervisors is cautiously supportive but faces re-election. No known tribal lands nearby.",
+      "expected_output": "A stakeholder map identifying county government (supervisors, planning commission), utility (Dominion Energy), adjacent homeowners, agricultural community, environmental groups (water advocacy), media, and business community. Water consumption from local aquifer flagged as critical opposition risk. Adjacent homeowners identified as high-interest with standing to challenge zoning. Agricultural conversion concerns documented. Engagement strategy includes pre-announcement briefings for supervisors and proactive water efficiency messaging.",
+      "assertions": [
+        "Water consumption (2M gal/day from aquifer) is identified as critical opposition risk",
+        "Adjacent homeowners within 1 mile are scored as high-interest stakeholders",
+        "Agricultural land conversion is flagged as a community concern",
+        "County board of supervisors scored as key players (high influence, high interest)",
+        "Engagement strategy includes pre-announcement engagement before public hearings",
+        "Mitigation for water risk includes specific measures (WUE target, alternative sources)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Map stakeholders for a 15MW colocation facility in a brownfield conversion of a former warehouse in an urban neighborhood in Chicago. The neighborhood has an active community organization concerned about gentrification and industrial noise. Adjacent uses include residential (100 meters), a school (300 meters), and retail. Existing building requires generator installation (6 diesel generators for N+1 backup). The alderman is supportive but the community organization has blocked prior industrial projects.",
+      "expected_output": "A stakeholder map with the community organization as key player (high influence via alderman pressure, high interest), school administration as context setter, residential neighbors as active stakeholders, alderman as key player. Noise from 6 diesel generators flagged as high-severity risk given residential and school proximity. Traffic during construction and ongoing deliveries addressed. Generator testing schedule restrictions recommended. Community benefits agreement (CBA) proposed as primary mitigation.",
+      "assertions": [
+        "Community organization is scored as key player with demonstrated ability to block projects",
+        "Noise from diesel generators is identified as high-severity risk given school proximity",
+        "School administration is identified as a stakeholder with specific concerns",
+        "Community benefits agreement (CBA) is recommended as primary engagement tool",
+        "Generator testing schedule restrictions are proposed as noise mitigation",
+        "Gentrification and displacement concerns are addressed in engagement strategy"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Develop a stakeholder map for a 100MW sovereign AI data center being developed for a national government. The facility is classified as critical national infrastructure. Stakeholders include the national security council, defense ministry, intelligence agencies, the national AI strategy office, the host municipality, local environmental authority, and media (both supportive tech press and critical environmental media). The project has interagency coordination requirements between defense and civilian agencies. Location is outside the national capital in a greenfield site.",
+      "expected_output": "A stakeholder map with national security council and defense ministry as top key players. Interagency coordination between defense and civilian agencies mapped with potential friction points. Municipal government as key player for permits and local impact. Environmental authority as context setter with regulatory authority. Media segmented into tech-supportive and environmental-critical. Engagement strategy differentiates between classified (restricted engagement) and unclassified (public engagement) tracks. Opposition risk assessment includes environmental media and municipality concerns about security perimeter impact.",
+      "assertions": [
+        "National security stakeholders are scored as highest-influence key players",
+        "Interagency coordination friction points are identified between defense and civilian agencies",
+        "Classified engagement track is separated from public engagement track",
+        "Municipal government is identified as key player for local permits despite national priority",
+        "Media strategy differentiates between tech-supportive and environmental-critical outlets",
+        "Security perimeter impact on surrounding community is assessed as opposition risk"
+      ]
+    }
+  ]
+}

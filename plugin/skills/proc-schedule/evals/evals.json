@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-schedule",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a construction schedule for a single 50MW data hall greenfield hyperscale data center in Loudoun County, Virginia. Construction start date: June 1, 2026. Target substantial completion: December 2027 (18 months). Transformers have not been ordered yet (60-week lead time). Include CPM analysis showing the critical path, float analysis for non-critical tasks, and resource loading by trade. Run the bundled cpm-scheduler.py script to generate the baseline schedule.",
+      "expected_output": "A construction schedule with CPM analysis showing transformer procurement as a critical path item due to 60-week lead time. Task graph from site prep through fit-out with ES/EF/LS/LF and float for each task. Critical path likely runs through electrical infrastructure (transformer-dependent). Resource histogram showing trade loading peaks. Flag that 18-month target is tight given transformer lead times.",
+      "assertions": [
+        "Transformer procurement is identified on or near the critical path due to 60-week lead time",
+        "Forward and backward pass results show ES, EF, LS, LF for all tasks",
+        "Float analysis identifies tasks with schedule flexibility vs zero-float critical tasks",
+        "Resource loading shows trade headcounts by construction phase",
+        "Critical path is explicitly identified as a sequence of tasks from start to finish",
+        "18-month target feasibility is assessed against the calculated total duration"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Generate a construction schedule for a 200MW hyperscale campus with 4 data halls (50MW each) in Prineville, Oregon. Phased delivery: Hall 1 substantial completion in 20 months, Hall 2 in 24 months, Hall 3 in 28 months, Hall 4 in 32 months. Shared campus infrastructure (utility feeds, central cooling plant, site roads) must be completed before individual hall construction begins. Transformers for all 4 halls ordered at project kickoff. Analyze parallel construction resource conflicts and identify schedule acceleration opportunities. Run cpm-scheduler.py with --phases 4.",
+      "expected_output": "Multi-phase campus schedule with shared infrastructure as predecessor for all halls. Parallel hall construction with staggered starts. Critical path analysis showing which hall drives the overall schedule. Resource histogram showing peak labor periods and trade stacking across parallel halls. Schedule acceleration opportunities identified (e.g., parallel commissioning teams, prefabrication).",
+      "assertions": [
+        "Shared infrastructure tasks are predecessors for all 4 data halls",
+        "Multi-phase critical path analysis identifies the schedule-driving hall sequence",
+        "Parallel construction of multiple halls is modeled with staggered or overlapping timelines",
+        "Resource conflicts between parallel halls are identified in the resource histogram",
+        "Total campus duration accounts for parallel construction compression (30-40% shorter than sequential)",
+        "Long-lead procurement for all 4 halls starting at project kickoff is reflected in the schedule"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a construction schedule for a brownfield conversion of a former 200,000 sqft warehouse in Atlanta, Georgia into a 20MW enterprise data center. The building requires demolition of interior partitions, asbestos abatement in the roof deck, and structural reinforcement for generator pad loading. Construction start: September 2026. Target completion: March 2028 (18 months). Existing utility service (13.8kV) can be upgraded in place. Include brownfield-specific tasks (demolition, abatement) and assess impact on critical path. Run cpm-scheduler.py with --brownfield true.",
+      "expected_output": "Brownfield schedule with demolition and abatement tasks prepended to the standard construction sequence. Critical path analysis showing whether brownfield tasks or electrical infrastructure drives the schedule. Abatement duration and regulatory approval timeline factored in. Existing utility service reuse reflected in potentially shorter electrical infrastructure duration. Total duration validated against 18-month target.",
+      "assertions": [
+        "Demolition and hazmat abatement tasks are included at the start of the schedule",
+        "Brownfield tasks are on the dependency chain preceding standard construction tasks",
+        "Critical path analysis accounts for the additional brownfield pre-work duration",
+        "Enterprise facility type scaling is applied to standard task durations",
+        "Total duration is assessed against the 18-month target completion",
+        "Resource loading reflects abatement-specific crews in addition to standard construction trades"
+      ]
+    }
+  ]
+}

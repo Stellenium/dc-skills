@@ -1,0 +1,47 @@
+{
+  "skill_name": "predev-market-study",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Conduct a data center market study for Northern Virginia (Loudoun County / Prince William County). We are evaluating a 50MW hyperscale greenfield development. Primary workload is AI training. No anchor tenant yet. We know the market is the largest in the US but need a formal supply-demand analysis. Our site feasibility report shows excellent power availability (Dominion Energy territory, 6-7c/kWh) and fiber connectivity.",
+      "expected_output": "A comprehensive market study for Northern Virginia showing the market as the world's largest DC cluster (~3-4 GW operational). Should identify the market as competitive but still undersupplied for AI-ready capacity due to the density and liquid cooling requirements. Absorption analysis should show 200-400MW+ quarterly take-up. Pricing analysis for wholesale should be in the $130-170/kW/month range. Gap analysis should highlight that traditional colo supply is balanced but AI-ready supply remains undersupplied. Risk factors should include Dominion Energy interconnection queue delays, rising construction costs, and competitive pressure from adjacent markets (Richmond, Fredericksburg).",
+      "assertions": [
+        "Market inventory includes operational, under construction, and planned capacity in MW",
+        "Absorption rate is calculated with trailing 12-month data",
+        "Pricing analysis distinguishes wholesale from retail with $/kW/month rates",
+        "Gap analysis projects supply vs demand over 3-5 year horizon",
+        "AI training demand is identified as a distinct demand driver from general cloud",
+        "Dominion Energy interconnection queue is flagged as a supply constraint",
+        "Output includes both markdown report and JSON sidecar with artifact_type market-study"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Analyze the data center market in Lagos, Nigeria and Nairobi, Kenya for a 5MW colocation facility targeting enterprise and cloud tenants. This is an emerging market entry -- we have no existing presence. The facility will serve both local enterprises and international cloud operators seeking African points of presence. Budget for a multi-market comparison to determine which metro offers better entry economics.",
+      "expected_output": "A comparative market study for Lagos and Nairobi. Both are emerging DC markets with limited existing supply (typically under 50MW operational each). Nairobi should score higher on grid reliability and fiber connectivity (multiple subsea cable landings on East African coast). Lagos should score higher on addressable market size (Nigeria is Africa's largest economy) but flag power reliability as a major constraint requiring captive generation. Demand drivers should include mobile data growth, cloud provider PoP expansion (AWS, Azure, Google), digital banking/fintech, and government digitization. Pricing should reflect premium over developed markets due to supply scarcity. DFI funding opportunities (IFC, AfDB, Power Africa) should be highlighted.",
+      "assertions": [
+        "Both Lagos and Nairobi markets are analyzed with comparable methodology",
+        "Supply inventory reflects the small but growing nature of African DC markets",
+        "Power reliability is flagged as a critical differentiator between the two markets",
+        "DFI funding sources are referenced for emerging market DC development",
+        "Demand drivers include both local enterprise and international cloud operator expansion",
+        "Pricing analysis reflects emerging market premium over mature markets",
+        "Risk factors include power infrastructure, regulatory uncertainty, and currency risk"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Conduct a market study for a 10MW enterprise colocation facility in Salt Lake City, Utah. This is a secondary US market play -- we believe there is unmet enterprise demand from local financial services, healthcare, and government tenants. We have a pre-committed anchor tenant for 3MW. The site feasibility report shows competitive power rates (Rocky Mountain Power, 5-6c/kWh), good seismic profile, and available fiber infrastructure.",
+      "expected_output": "A market study for Salt Lake City as a secondary/emerging DC market. Should identify limited existing supply (compared to primary markets like NoVA or Dallas) with a few regional operators. Demand drivers should focus on local enterprise needs (financial services compliance, healthcare HIPAA requirements), Utah state government IT consolidation, and proximity to silicon slopes tech corridor. Gap analysis should show a modest but real supply gap for enterprise-grade colocation. The 3MW anchor tenant pre-commitment should be factored into the viability assessment, significantly de-risking the project. Pricing should be lower than primary markets but with less competitive pressure. Municipal/cooperative utility advantages should be noted.",
+      "assertions": [
+        "Market is characterized as secondary/emerging with limited existing supply",
+        "Enterprise demand drivers are specific to the Salt Lake City metro economy",
+        "The 3MW anchor tenant pre-commitment is factored into the viability analysis",
+        "Pricing comparison to primary US markets shows the secondary market discount",
+        "Power cost advantage from Rocky Mountain Power is reflected in market attractiveness",
+        "Gap analysis distinguishes enterprise colo demand from hyperscale demand",
+        "Risk factors include market size limitations and competition from primary market alternatives"
+      ]
+    }
+  ]
+}

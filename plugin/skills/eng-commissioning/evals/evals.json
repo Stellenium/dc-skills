@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-commissioning",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a commissioning plan for a Tier IV hyperscale data center with 2N power redundancy. The facility has 4 utility feeds from 2 independent substations, 8 x 3MW diesel generators (4 per power train), 8 UPS modules (4 per path), and 4 cooling plants. The IST must include actual utility disconnection to verify full transfer sequence. Independent third-party CxA is engaged. Target: IT load deployment in 6 months.",
+      "expected_output": "A Level 1-5 commissioning plan with factory witness testing for UPS, generators, and MV switchgear. Level 2 installation verification with NETA acceptance testing. Level 3 functional tests for each system independently at 25/50/75/100% load. Level 4 IST with actual utility disconnection scenarios including complete utility loss, generator failure during outage, redundant path transfer, and cascade failure. Tier IV fault tolerance verified through simultaneous A and B path testing. Level 5 seasonal commissioning schedule. Timeline fitted to 6-month deployment target.",
+      "assertions": [
+        "Level 1-5 structure is complete with checklists per level",
+        "IST includes actual utility disconnection (not ATS test button simulation)",
+        "Tier IV fault tolerance is verified through 2N path independence testing",
+        "IST scenarios include cascade failure and concurrent failure modes",
+        "48-72 hour utility coordination for IST disconnection is noted",
+        "Timeline maps L1-L5 progression to 6-month IT deployment target"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop a commissioning plan for a modular data center with factory-integrated power and cooling. 10 modular units each 1MW IT capacity. Factory commissioning covers Level 1 (FWT) and partial Level 3 (system-level functional tests). On-site commissioning covers Level 2 (installation and interconnection), remaining Level 3 (inter-module integration), Level 4 (IST), and Level 5 (seasonal). Tier III, N+1 redundancy. CxA is owner's team with DC experience.",
+      "expected_output": "A commissioning plan adapted for modular delivery with factory Level 1 scope expanded beyond traditional FWT to include system integration testing. On-site Level 2 focused on inter-module connections, utility tie-in, and site infrastructure. Level 3 verifies integration between factory-tested modules. Level 4 IST with N+1 failure scenarios (module failure, utility loss, cooling failure). Factory commissioning protocol reviewed by on-site CxA before factory dispatch.",
+      "assertions": [
+        "Factory Level 1 scope is expanded to include system integration testing",
+        "On-site Level 2 focuses on inter-module connections and utility tie-in",
+        "Level 3 distinguishes factory-tested functions from site integration functions",
+        "Level 4 IST scenarios address modular-specific failures (module isolation, bus connection)",
+        "Factory commissioning protocol review by CxA before dispatch is required",
+        "N+1 redundancy verification demonstrates module failure without IT load impact"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a commissioning plan for a brownfield data center conversion of a former manufacturing facility. Existing building has 480V electrical service (needs upgrade to 13.8kV), existing fire suppression (wet pipe, needs conversion to pre-action/clean agent), and partial BMS (needs upgrade). New equipment: 4 x 2MW UPS, 4 x 2MW generators, 3 cooling plants. Tier III. Unknown condition of existing grounding grid. CxA is independent third party.",
+      "expected_output": "A commissioning plan with Level 0 assessment of existing systems (electrical, fire, BMS, grounding) before Levels 2-5. Level 0 includes existing grounding grid testing, electrical system survey, fire suppression assessment. Level 1 FWT for all new equipment. Level 2 includes both new equipment installation verification and existing system remediation verification. Level 3 functional tests for new and upgraded systems. Level 4 IST with scenarios specific to brownfield risks (existing system interaction, legacy wiring). Level 5 with enhanced monitoring for first year.",
+      "assertions": [
+        "Level 0 existing systems assessment is included before commissioning scope is finalized",
+        "Existing grounding grid testing is specified as a Level 0 priority item",
+        "Level 2 covers both new equipment installation and existing system remediation",
+        "Brownfield-specific risks (existing wiring, legacy systems interaction) are addressed in IST",
+        "Fire suppression conversion from wet pipe to pre-action/clean agent is commissioning scope",
+        "Enhanced Year 1 monitoring is specified for Level 5 given brownfield unknowns"
+      ]
+    }
+  ]
+}

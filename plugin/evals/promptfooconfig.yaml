@@ -1,0 +1,3230 @@
+description: Stellenium DC Skills evaluation suite
+prompts:
+- file://prompt.json
+providers:
+- id: anthropic:messages:claude-sonnet-4-20250514
+  config:
+    temperature: 0.0
+    max_tokens: 8192
+defaultTest:
+  options:
+    provider: anthropic:messages:claude-sonnet-4-20250514
+tests:
+- description: bd-colo-business-model eval 1
+  vars:
+    skill_content: file://../skills/bd-colo-business-model/SKILL.md
+    prompt: 'Build a colocation business model for a 20MW retail/wholesale hybrid facility in Ashburn, Virginia (Tier 1 carrier-dense
+      market). Target tenant mix: 40% enterprise, 30% hyperscale wholesale anchor, 30% network/carrier tenants. The facility
+      offers Tier III availability with optional Tier IV for financial sector tenants. 15 network carriers are on-net with
+      an internet exchange presence. Utility rate is $0.065/kWh with a PUE target of 1.25. Model a 5-year ramp to 92% stabilized
+      occupancy. Include interconnection revenue modeling at Ashburn market rates and reference SLA-BENCHMARKS.md for tier-based
+      pricing differentiation.'
+  assert:
+  - type: llm-rubric
+    value: Pricing tiers reflect Ashburn Tier 1 market rates for wholesale and retail
+  - type: llm-rubric
+    value: Interconnection revenue modeled at 15-20% of total revenue
+  - type: llm-rubric
+    value: Occupancy ramp uses Tier 1 metro assumptions
+  - type: llm-rubric
+    value: SLA-BENCHMARKS.md is referenced for tier-based pricing
+  - type: llm-rubric
+    value: Revenue waterfall breaks out wholesale, retail, and interconnection components
+  - type: llm-rubric
+    value: Tenant mix percentages match the specified 40/30/30 split
+- description: bd-colo-business-model eval 2
+  vars:
+    skill_content: file://../skills/bd-colo-business-model/SKILL.md
+    prompt: Develop a colocation business model for a 10MW retail-only facility in Nashville, Tennessee (Tier 2 secondary
+      market). Target tenants are enterprise only -- no hyperscale wholesale and limited carrier presence (5 carriers on-net).
+      Offer Tier III availability. Utility rate is $0.08/kWh with a PUE of 1.35. Model conservative occupancy ramp for a secondary
+      market with no anchor tenant pre-commitment. Include operating cost model showing staffing, power, maintenance, and
+      property tax (Tennessee has no state income tax but has property tax on DC equipment).
+  assert:
+  - type: llm-rubric
+    value: Occupancy ramp reflects secondary market pace, slower than Tier 1 assumptions
+  - type: llm-rubric
+    value: No hyperscale wholesale pricing is included in the model
+  - type: llm-rubric
+    value: Interconnection revenue is lower than primary market models at 5-10%
+  - type: llm-rubric
+    value: Operating costs reflect smaller-scale staffing and operations
+  - type: llm-rubric
+    value: Power cost modeled at the higher utility rate with PUE impact on margins
+  - type: llm-rubric
+    value: Key metrics include breakeven occupancy percentage
+- description: bd-colo-business-model eval 3
+  vars:
+    skill_content: file://../skills/bd-colo-business-model/SKILL.md
+    prompt: 'Create a colocation business model for a 50MW wholesale-focused campus in Dallas, Texas (Tier 1 market). Strategy:
+      secure 2 hyperscale anchor tenants for 30MW total (pre-leased) with remaining 20MW for enterprise retail and carrier
+      tenants. Wholesale anchor contracts are 7-year terms at competitive Dallas market rates. Dallas has favorable property
+      tax treatment for data center equipment and $0.055/kWh utility rates. PUE target 1.20 with direct liquid cooling capability.
+      Model rapid occupancy ramp driven by pre-leased anchor capacity and show tenant mix weighted heavily to hyperscale with
+      lower blended margin but faster stabilization.'
+  assert:
+  - type: llm-rubric
+    value: Wholesale pricing is dominant at $100-150/kW monthly range
+  - type: llm-rubric
+    value: Occupancy ramp is accelerated by pre-leased anchor capacity showing 60%+ Year 1
+  - type: llm-rubric
+    value: Tenant mix is heavily weighted to hyperscale with corresponding margin impact
+  - type: llm-rubric
+    value: Lower blended margin acknowledged due to wholesale dominance
+  - type: llm-rubric
+    value: Revenue waterfall shows wholesale as the majority revenue component
+  - type: llm-rubric
+    value: Dallas-specific favorable property tax and low power costs are reflected
+- description: bd-economic-impact eval 1
+  vars:
+    skill_content: file://../skills/bd-economic-impact/SKILL.md
+    prompt: 'Produce an economic impact analysis for a 200MW hyperscale data center campus in Loudoun County, Virginia. Project
+      details: $2 billion total CapEx over 3 phases, $150M annual OpEx at full build-out, 2,500 peak construction jobs over
+      30 months, 120 permanent operations jobs with $95K average salary. The developer is requesting a 20-year sales and use
+      tax exemption on equipment (estimated at $80M in tax savings). Use Virginia-specific data from US-STATE-INCENTIVES.md.
+      Northern Virginia has a mature DC supply chain -- use default or slightly above-default multipliers. Calculate direct,
+      indirect, and induced impacts for both construction and operations phases. Show tax revenue WITH and WITHOUT incentives.'
+  assert:
+  - type: llm-rubric
+    value: Direct, indirect, and induced impacts are calculated separately for construction and operations phases
+  - type: llm-rubric
+    value: Tax revenue analysis shows both WITH incentives and WITHOUT incentives scenarios
+  - type: llm-rubric
+    value: Jobs per incentive dollar metric is calculated as a politically effective measure
+  - type: llm-rubric
+    value: Multipliers used are appropriate for a mature DC ecosystem like Northern Virginia
+  - type: llm-rubric
+    value: US-STATE-INCENTIVES.md is referenced for Virginia-specific sales tax exemption details
+  - type: llm-rubric
+    value: Construction jobs are clearly labeled as temporary with duration specified
+- description: bd-economic-impact eval 2
+  vars:
+    skill_content: file://../skills/bd-economic-impact/SKILL.md
+    prompt: 'Produce an economic impact analysis for a 50MW sovereign data center in a rural county in Mississippi. Project
+      details: $500M total CapEx, $35M annual OpEx, 800 peak construction jobs over 24 months, 45 permanent operations jobs
+      with $65K average salary. The developer is requesting a 10-year property tax abatement (PILOT at 25% of full rate) and
+      a state sales tax exemption on equipment. The location has limited data center supply chain -- local contractors will
+      handle 30% of construction spend, with 70% imported from out-of-state. Adjust multipliers downward for the rural location
+      with shallow supply chain. Calculate the incentive breakeven point where cumulative tax revenue exceeds incentive cost.'
+  assert:
+  - type: llm-rubric
+    value: Multipliers are adjusted downward from defaults to reflect limited rural supply chain
+  - type: llm-rubric
+    value: Construction and operations phase impacts use separate reduced multiplier sets
+  - type: llm-rubric
+    value: Incentive breakeven point is calculated showing when cumulative tax revenue exceeds incentive cost
+  - type: llm-rubric
+    value: PILOT abatement and sales tax exemption are modeled in the WITH incentives scenario
+  - type: llm-rubric
+    value: Community benefits section addresses workforce development and local hiring commitments
+  - type: llm-rubric
+    value: 70% out-of-state construction spend is factored into reduced indirect and induced impacts
+- description: bd-economic-impact eval 3
+  vars:
+    skill_content: file://../skills/bd-economic-impact/SKILL.md
+    prompt: 'Produce an economic impact analysis for a 100MW campus data center in Lagos, Nigeria, seeking IFC and AfDB co-financing.
+      Project details: $800M total CapEx, $60M annual OpEx, 1,500 peak construction jobs (70% local hire), 80 permanent operations
+      jobs with average salary 3x local median. The project is applying for a 10-year tax holiday under the Nigerian Investment
+      Promotion Commission. Nigeria has a shallow DC supply chain -- most equipment is imported. Use significantly reduced
+      multipliers (30-50% below defaults). The report will accompany a DFI funding application. Calculate impacts in both
+      USD and local currency (NGN). Emphasize development impact metrics that resonate with DFIs: local job creation, technology
+      transfer, digital infrastructure access, and import substitution.'
+  assert:
+  - type: llm-rubric
+    value: Multipliers are reduced 30-50% below defaults for emerging market with limited supply chain
+  - type: llm-rubric
+    value: Impacts are presented in both USD and local currency (NGN) with exchange rate noted
+  - type: llm-rubric
+    value: Development impact metrics (technology transfer, digital infrastructure) are prominently featured
+  - type: llm-rubric
+    value: Local hire commitment (70% construction) is quantified and highlighted for DFI audience
+  - type: llm-rubric
+    value: Tax holiday is modeled in WITH and WITHOUT scenarios with government revenue impact
+  - type: llm-rubric
+    value: Import substitution and infrastructure gap reduction metrics are included for DFI alignment
+- description: bd-government-proposal eval 1
+  vars:
+    skill_content: file://../skills/bd-government-proposal/SKILL.md
+    prompt: 'Generate a state-level government proposal for a 100MW hyperscale data center campus in Columbus, Ohio. The developer
+      is requesting a 15-year sales tax exemption on equipment and a 10-year property tax abatement through a PILOT agreement.
+      In return, the developer offers: 45 permanent operations jobs, 2,000 peak construction jobs, $1.2 billion capital investment
+      over 3 phases, and a $5M community workforce training fund. Ohio''s JobsOhio program is the target incentive vehicle.
+      The site is in an Opportunity Zone census tract. Two competing developers are also pitching Ohio sites.'
+  assert:
+  - type: llm-rubric
+    value: Proposal uses state-level framing focused on jobs, tax revenue, and economic development
+  - type: llm-rubric
+    value: Strategic alignment references Ohio-specific programs or economic development goals
+  - type: llm-rubric
+    value: Economic impact section quantifies permanent jobs, construction jobs, capital investment, and tax revenue
+  - type: llm-rubric
+    value: Ask/offer matrix demonstrates government receives more value than it gives
+  - type: llm-rubric
+    value: Opportunity Zone eligibility is mentioned as additional federal benefit
+  - type: llm-rubric
+    value: Competitive positioning against other developers is addressed
+- description: bd-government-proposal eval 2
+  vars:
+    skill_content: file://../skills/bd-government-proposal/SKILL.md
+    prompt: Create a federal government proposal for a 50MW sovereign AI compute facility near a military installation in
+      Virginia. The facility will support classified and unclassified AI workloads for the Department of Defense. The developer
+      is requesting a long-term land lease from DoD, expedited security clearance processing for construction workers, and
+      a 10-year anchor tenancy commitment. The facility will be SCIF-capable and FedRAMP High authorized. Frame around national
+      security and compute sovereignty, referencing the CHIPS and Science Act and the National AI Initiative.
+  assert:
+  - type: llm-rubric
+    value: Proposal uses federal framing focused on national security and compute sovereignty
+  - type: llm-rubric
+    value: CHIPS and Science Act is referenced in strategic alignment
+  - type: llm-rubric
+    value: National AI Initiative or equivalent federal strategy is cited
+  - type: llm-rubric
+    value: SCIF capability and security clearance requirements are addressed
+  - type: llm-rubric
+    value: Tone is formal and mission-focused, not commercially oriented
+  - type: llm-rubric
+    value: Ask/offer matrix leads with national security benefit, not private returns
+- description: bd-government-proposal eval 3
+  vars:
+    skill_content: file://../skills/bd-government-proposal/SKILL.md
+    prompt: 'Generate a foreign government proposal for a 30MW data center in Nairobi, Kenya to support the Kenyan government''s
+      Digital Economy Blueprint and Africa''s Growing AI ecosystem. The developer is requesting: government land allocation
+      near Konza Technopolis, expedited permitting, and a 15-year tax holiday under Kenya''s Special Economic Zone program.
+      The developer offers: 120 permanent jobs, technology transfer program with local universities, $400M investment, and
+      sovereign data hosting capability. The project is eligible for IFC and AfDB financing. Reference REGULATORY-MATRIX.md
+      for Kenya''s data protection framework and DFI-FUNDING.md for development finance alignment.'
+  assert:
+  - type: llm-rubric
+    value: Kenya's Digital Economy Blueprint is referenced by name in strategic alignment
+  - type: llm-rubric
+    value: Sovereign AI capability and data residency are framed as national priorities
+  - type: llm-rubric
+    value: DFI funding eligibility (IFC and AfDB) is highlighted with specific program references
+  - type: llm-rubric
+    value: Technology transfer and university partnerships are prominently featured
+  - type: llm-rubric
+    value: Proposal references REGULATORY-MATRIX.md for data protection framework
+  - type: llm-rubric
+    value: Tone adapts to foreign government context with sovereignty and capacity-building emphasis
+- description: bd-national-compute eval 1
+  vars:
+    skill_content: file://../skills/bd-national-compute/SKILL.md
+    prompt: Develop a national AI compute strategy for Malaysia (population 34M, GDP $430B, GDP per capita $12,600). Malaysia
+      has an existing national AI strategy (MyDIGITAL/National AI Roadmap 2025), 5 hyperscaler cloud regions announced or
+      operational (Azure, AWS, GCP, Oracle, Huawei), strong fiber backbone (national coverage 95%+), and 3 submarine cable
+      landing stations. Malaysia has 8 public universities with active AI research programs producing ~3,000 STEM graduates
+      annually. Current DC capacity estimated at 500MW (mostly hyperscaler-owned). The government wants to assess sovereign
+      compute needs separate from commercial hyperscaler capacity. Model demand for research, enterprise, and government workloads.
+      Recommend a distribution strategy (centralized vs distributed vs hybrid) and phased buildout plan.
+  assert:
+  - type: llm-rubric
+    value: Malaysian national AI strategy (MyDIGITAL or AI Roadmap) is referenced by name
+  - type: llm-rubric
+    value: Demand modeling covers research, enterprise, and government workloads separately
+  - type: llm-rubric
+    value: Sovereign compute gap is assessed separately from commercial hyperscaler capacity
+  - type: llm-rubric
+    value: Distribution strategy recommends centralized, distributed, or hybrid model with rationale
+  - type: llm-rubric
+    value: Phased buildout plan includes timelines, capacity targets, and investment estimates
+  - type: llm-rubric
+    value: Existing strong fiber backbone and submarine cable connectivity are factored into the strategy
+- description: bd-national-compute eval 2
+  vars:
+    skill_content: file://../skills/bd-national-compute/SKILL.md
+    prompt: 'Develop a national AI compute strategy for Rwanda (population 14M, GDP $13B, GDP per capita $930). Rwanda has
+      a national digital transformation strategy (Smart Rwanda 2024 and ICT Hub Strategy). Limited existing DC infrastructure
+      (~5MW total domestic capacity). One submarine cable connection via terrestrial fiber to East African Submarine Cable
+      System (EASSy) through Tanzania. 2 universities with emerging AI programs, ~500 STEM graduates annually. The government
+      is seeking IFC and AfDB financing for sovereign AI infrastructure. The strategy should address: severe compute gap,
+      limited local supply chain, workforce development needs, and regional connectivity requirements. Reference DFI-FUNDING.md
+      for IFC and AfDB alignment.'
+  assert:
+  - type: llm-rubric
+    value: Rwanda's digital transformation strategy is referenced by name
+  - type: llm-rubric
+    value: Demand modeling uses conservative assumptions appropriate for low-income economy
+  - type: llm-rubric
+    value: Severe compute gap between limited domestic capacity and growing demand is quantified
+  - type: llm-rubric
+    value: Centralized distribution strategy is recommended with rationale for country size and infrastructure
+  - type: llm-rubric
+    value: DFI funding strategy (IFC, AfDB) is detailed with concessional debt and grant components
+  - type: llm-rubric
+    value: Workforce development and technology transfer are prominent strategy components
+- description: bd-national-compute eval 3
+  vars:
+    skill_content: file://../skills/bd-national-compute/SKILL.md
+    prompt: 'Develop a national AI compute strategy for the Kingdom of Saudi Arabia (population 36M, GDP $1.1T, GDP per capita
+      $30,000). Saudi Arabia has Vision 2030, the National Strategy for Data and AI (NSDAI), and SDAIA (Saudi Data and AI
+      Authority). Existing DC capacity ~300MW across Riyadh, Jeddah, and NEOM with aggressive expansion plans. Strong sovereign
+      wealth fund (PIF) with $930B AUM. 15+ universities with AI programs, national fiber backbone at 98% coverage, multiple
+      submarine cable landing stations. The government wants to become a regional AI compute hub serving the Middle East and
+      North Africa. Model demand for domestic use AND regional export. Recommend a multi-site distribution strategy and phased
+      buildout to 500MW+ sovereign capacity. Address: regional hub positioning, excess capacity for export, workforce localization
+      (Saudization), and extreme climate cooling challenges.'
+  assert:
+  - type: llm-rubric
+    value: Vision 2030, NSDAI, and SDAIA are referenced in strategic alignment
+  - type: llm-rubric
+    value: Demand modeling includes both domestic and regional export compute demand
+  - type: llm-rubric
+    value: Multi-site distribution strategy covers multiple Saudi cities with rationale
+  - type: llm-rubric
+    value: Regional hub positioning for MENA markets is analyzed with latency and regulatory advantages
+  - type: llm-rubric
+    value: Extreme climate cooling challenges (>50C ambient) are addressed in the strategy
+  - type: llm-rubric
+    value: PIF-funded sovereign investment model is reflected rather than DFI concessional financing
+- description: bd-partnership-proposal eval 1
+  vars:
+    skill_content: file://../skills/bd-partnership-proposal/SKILL.md
+    prompt: 'Generate a partnership proposal for a technology JV with a major cloud hyperscaler for a 100MW data center campus
+      in Dallas, Texas. The hyperscaler will serve as the anchor tenant committing to 60MW over 10 years at a pre-negotiated
+      rate, with options for the remaining 40MW. The developer contributes the site (entitled, 50 acres), development expertise,
+      and operations capability. The hyperscaler contributes a 10-year compute commitment, technology design requirements,
+      and customer demand certainty. Proposed structure: 60/40 JV (developer majority) with the hyperscaler''s compute commitment
+      valued as equity contribution. Include term sheet with governance, economics, technology refresh obligations, and exclusivity
+      terms.'
+  assert:
+  - type: llm-rubric
+    value: Technology partner framing with compute commitment as core value proposition
+  - type: llm-rubric
+    value: Contribution framework includes developer site/expertise and hyperscaler compute commitment
+  - type: llm-rubric
+    value: Technology refresh CapEx obligations are explicitly addressed in governance or economics
+  - type: llm-rubric
+    value: Term sheet includes structured commercial terms with equity split, governance, and exit provisions
+  - type: llm-rubric
+    value: Exclusivity terms are defined with geographic specificity
+  - type: llm-rubric
+    value: Document is a polished narrative proposal, not a raw data table or checklist
+- description: bd-partnership-proposal eval 2
+  vars:
+    skill_content: file://../skills/bd-partnership-proposal/SKILL.md
+    prompt: 'Create a partnership proposal for an infrastructure JV with a regional electric utility for a 50MW data center
+      in upstate New York. The utility owns 100 acres adjacent to a 115kV substation with 80MW of available capacity. The
+      utility will contribute the land and dedicated power feed (valued at $30M via independent appraisal) as equity. The
+      developer contributes $120M in cash equity plus development and operational expertise. Proposed structure: JV with equity
+      based on capital contribution proportions. The utility wants board representation, protective provisions on major decisions,
+      and a right of first refusal on future phases. Address land valuation methodology and operating responsibility allocation.'
+  assert:
+  - type: llm-rubric
+    value: Infrastructure partner framing with land and power as equity contribution
+  - type: llm-rubric
+    value: Land valuation methodology is discussed with approach to valuing utility infrastructure
+  - type: llm-rubric
+    value: Operating responsibilities are allocated between utility and developer roles
+  - type: llm-rubric
+    value: Governance framework provides utility board representation proportional to equity stake
+  - type: llm-rubric
+    value: Right of first refusal on future phases is included in term sheet
+  - type: llm-rubric
+    value: Contribution framework distinguishes cash equity from in-kind equity contributions
+- description: bd-partnership-proposal eval 3
+  vars:
+    skill_content: file://../skills/bd-partnership-proposal/SKILL.md
+    prompt: 'Generate a partnership proposal for a sovereign wealth fund co-investment in a 200MW data center campus in Johannesburg,
+      South Africa. The SWF (from a Gulf state) is investing $400M for a 40% stake; the developer retains 60%. The project
+      qualifies for IFC and AfDB co-lending. The SWF requires: 2 of 5 board seats, protective provisions on asset sales and
+      additional debt above $500M, preferred return of 10% with standard infrastructure waterfall, and an exit path via IPO
+      or secondary sale after year 5. The project must address South African POPIA compliance, BBBEE requirements, local hiring
+      commitments, and load shedding resilience through on-site generation. Reference DFI-FUNDING.md for IFC/AfDB alignment.'
+  assert:
+  - type: llm-rubric
+    value: Financial partner framing with sovereign wealth fund governance protections
+  - type: llm-rubric
+    value: Preferred return and distribution waterfall structure are detailed in economics section
+  - type: llm-rubric
+    value: Board composition gives SWF 2 of 5 seats with protective provisions on major decisions
+  - type: llm-rubric
+    value: DFI co-lending (IFC and AfDB) is highlighted as risk mitigation and funding diversification
+  - type: llm-rubric
+    value: South African regulatory requirements (POPIA, BBBEE) and load shedding resilience are addressed
+  - type: llm-rubric
+    value: Exit mechanisms include both IPO path and secondary sale with timeline
+- description: bd-rfp-response eval 1
+  vars:
+    skill_content: file://../skills/bd-rfp-response/SKILL.md
+    prompt: 'Prepare an RFP response for a government agency (US General Services Administration) RFP for a 10MW sovereign
+      data center build-to-suit. The RFP contains 50 requirements covering physical security (SCIF-capable spaces), availability
+      (Tier III minimum with 99.982% uptime), data residency (all data must remain within US borders), local content (30%
+      local workforce during construction), and FedRAMP High authorization. Our company has 15 years of experience, 8 operational
+      facilities, and SOC 2 Type II and ISO 27001 certifications. Key differentiators: fastest modular deployment in the industry
+      (16-week lead time), 99.995% historical uptime across portfolio, and existing FedRAMP Moderate authorization (upgrading
+      to High). We have a compliance gap on the SCIF requirement -- we plan to subcontract to a cleared facility contractor.'
+  assert:
+  - type: llm-rubric
+    value: Compliance matrix covers all stated requirements with Compliant, Partial, or Exception status
+  - type: llm-rubric
+    value: Security requirements including SCIF capability are addressed with specific plans
+  - type: llm-rubric
+    value: Win themes are present in both the executive summary and technical approach sections
+  - type: llm-rubric
+    value: Tone is formal and appropriate for government procurement
+  - type: llm-rubric
+    value: SCIF gap is addressed as Partial with subcontracting alternative, not ignored
+  - type: llm-rubric
+    value: FedRAMP High upgrade path is explained in the technical approach
+- description: bd-rfp-response eval 2
+  vars:
+    skill_content: file://../skills/bd-rfp-response/SKILL.md
+    prompt: 'Create an RFP response for a Fortune 500 enterprise seeking 5MW of colocation space in an existing facility.
+      The RFP contains 30 requirements covering SLA (99.99% availability with financial credits), connectivity (minimum 3
+      diverse fiber providers), pricing (per-kW/month with 3-year term), and expansion options (right of first refusal on
+      adjacent space up to 10MW). Our company operates the target facility with current availability of 99.997% over the past
+      24 months. Differentiators: existing facility with immediate availability (no construction risk), carrier-dense with
+      12 network providers on-net, and dedicated customer success manager. We are the incumbent provider for the customer''s
+      secondary site. Compliance gap: the RFP requires 72-hour UPS runtime but our facility has 48-hour battery backup plus
+      N+1 generators with 72-hour fuel supply.'
+  assert:
+  - type: llm-rubric
+    value: Compliance matrix is present with status for all 30 requirements
+  - type: llm-rubric
+    value: SLA commitments reference specific availability percentages and credit structures
+  - type: llm-rubric
+    value: Partial and Exception items include alternative explanations, not blank entries
+  - type: llm-rubric
+    value: Case studies are relevant to enterprise colocation use cases
+  - type: llm-rubric
+    value: UPS runtime gap addressed with generator backup as functionally equivalent alternative
+  - type: llm-rubric
+    value: Pricing section uses per-kW/month format as specified in the RFP
+- description: bd-rfp-response eval 3
+  vars:
+    skill_content: file://../skills/bd-rfp-response/SKILL.md
+    prompt: 'Prepare an RFP response for a hyperscale cloud provider issuing an RFP for 50MW wholesale lease with expansion
+      to 200MW across a campus. The RFP contains 80+ requirements covering power density (minimum 30kW per rack with liquid
+      cooling readiness), cooling (PUE target under 1.25), sustainability (100% renewable energy matching within 3 years,
+      Scope 1+2+3 reporting), and contractual terms (10-year initial term with 5-year renewal options). Our company is developing
+      a greenfield campus with 100MW Phase 1 capacity. Differentiators: purpose-built for AI/HPC density (designed for 50kW+
+      per rack), on-site 60MW solar PPA in place, and direct liquid cooling infrastructure from day one. Win themes: AI-ready
+      infrastructure, sustainability leadership, and campus scale. No compliance gaps identified but the sustainability Scope
+      3 reporting requirement needs clarification on boundary definition.'
+  assert:
+  - type: llm-rubric
+    value: Compliance matrix maps the full 80+ requirement set
+  - type: llm-rubric
+    value: Sustainability requirements addressed with specific renewable energy plans and timeline
+  - type: llm-rubric
+    value: Technical approach covers high-density AI/HPC infrastructure with liquid cooling
+  - type: llm-rubric
+    value: Pricing structure uses wholesale per-MW format appropriate for hyperscale
+  - type: llm-rubric
+    value: Scope 3 reporting addressed with proposed boundary definition pending clarification
+  - type: llm-rubric
+    value: Win themes of AI-ready infrastructure and sustainability appear across multiple sections
+- description: bd-tenant-spec eval 1
+  vars:
+    skill_content: file://../skills/bd-tenant-spec/SKILL.md
+    prompt: Run the tenant requirements questionnaire for an AI training company requesting 500 racks at 50kW per rack in
+      a Tier III facility. They want direct-to-chip liquid cooling, 400Gbps InfiniBand interconnect between racks, carrier-neutral
+      connectivity with 100Gbps internet, SOC 2 Type II compliance, and a private cage. They plan to grow 75% in 12 months
+      and 150% in 24 months. They want a 3-year contract with deployment within 6 months. They initially asked for air cooling
+      but their density requirements are 50kW/rack.
+  assert:
+  - type: llm-rubric
+    value: 'Conflict flagged: 50kW/rack density is incompatible with air cooling, liquid cooling required'
+  - type: llm-rubric
+    value: Initial power correctly calculated at approximately 25MW (500 racks x 50kW)
+  - type: llm-rubric
+    value: Growth projection identifies that 150% growth in 24 months requires significant expansion capacity
+  - type: llm-rubric
+    value: InfiniBand interconnect requirements noted as affecting physical layout and rack placement
+  - type: llm-rubric
+    value: Questionnaire mode is evident -- requirements gathered FROM the tenant
+  - type: llm-rubric
+    value: Resource estimate includes PUE-adjusted total power and floor space calculation
+- description: bd-tenant-spec eval 2
+  vars:
+    skill_content: file://../skills/bd-tenant-spec/SKILL.md
+    prompt: 'Conduct tenant requirements discovery for an enterprise tenant requesting 50 racks at mixed density: 30 racks
+      at 8kW (enterprise apps and databases) and 20 racks at 15kW (virtualization and containers). They require SOC 2 Type
+      II and HIPAA compliance for healthcare data, a private suite with escorted visitor policy, Tier III availability with
+      99.99% power SLA, hybrid cloud connectivity (AWS Direct Connect and Azure ExpressRoute), and 10ms latency to New York
+      City. Contract term preference is 5 years with 20% annual growth. Deployment needed within 4 months.'
+  assert:
+  - type: llm-rubric
+    value: 'Mixed density is correctly captured: 30 racks at 8kW and 20 racks at 15kW'
+  - type: llm-rubric
+    value: Total IT load calculated as approximately 540kW
+  - type: llm-rubric
+    value: HIPAA compliance requirement validated against private suite security model
+  - type: llm-rubric
+    value: Gap between 99.99% SLA request and Tier III design availability is flagged
+  - type: llm-rubric
+    value: Hybrid cloud cross-connect requirements (AWS Direct Connect, Azure ExpressRoute) are documented
+  - type: llm-rubric
+    value: Compliance cost stacking for SOC 2 + HIPAA is noted
+- description: bd-tenant-spec eval 3
+  vars:
+    skill_content: file://../skills/bd-tenant-spec/SKILL.md
+    prompt: Discover requirements for a hyperscale cloud provider pre-leasing 20MW initial capacity with plans to scale to
+      60MW within 24 months. They require carrier-neutral connectivity with minimum 3 diverse fiber paths, Tier III with custom
+      99.995% availability SLA, air cooling for initial deployment (rack density 8kW/rack), and a 10-year lease. They want
+      expansion rights to an additional 40MW beyond the 60MW plan. Geographic requirement is within 50 miles of a major IX
+      (Internet Exchange) with less than 5ms latency to Chicago. No specific compliance requirements beyond SOC 2.
+  assert:
+  - type: llm-rubric
+    value: 'Growth trajectory captured: 20MW initial, 60MW at 24 months, 100MW total with expansion rights'
+  - type: llm-rubric
+    value: Custom SLA target (99.995%) flagged as exceeding Tier III design availability
+  - type: llm-rubric
+    value: 10-year lease term with expansion provisions documented
+  - type: llm-rubric
+    value: Air cooling validated as feasible at 8kW/rack density
+  - type: llm-rubric
+    value: Long-term density upgrade risk flagged for 10-year planning horizon
+  - type: llm-rubric
+    value: Carrier diversity requirement (3+ diverse fiber paths) and IX proximity documented
+- description: comp-certification eval 1
+  vars:
+    skill_content: file://../skills/comp-certification/SKILL.md
+    prompt: Create a certification roadmap for a greenfield 200MW hyperscale data center targeting ISO 27001, SOC 2 Type II,
+      and Uptime Tier III certification simultaneously. The facility is in Northern Virginia, no existing certifications,
+      and must achieve all three within 18 months to meet a hyperscale anchor tenant's SLA requirements. The tenant requires
+      SOC 2 Type II before signing a 10-year lease.
+  assert:
+  - type: llm-rubric
+    value: ISO 27001 implementation timeline is 9-18 months with Stage 1 and Stage 2 audits
+  - type: llm-rubric
+    value: SOC 2 Type II minimum 6-month observation period is explicitly stated
+  - type: llm-rubric
+    value: Uptime Tier III and ISO 27001 zero control overlap is identified
+  - type: llm-rubric
+    value: Recommended sequence starts with ISO 27001 to provide framework for SOC 2
+  - type: llm-rubric
+    value: Overlap matrix shows shared controls between ISO 27001 and SOC 2
+  - type: llm-rubric
+    value: Cost estimation includes consulting, audit fees, and remediation per certification
+- description: comp-certification eval 2
+  vars:
+    skill_content: file://../skills/comp-certification/SKILL.md
+    prompt: Develop a certification upgrade plan for an operational colocation facility that currently holds SOC 2 Type I
+      certification. The facility needs to upgrade to SOC 2 Type II and add PCI DSS v4.0 compliance to serve financial services
+      tenants. The facility has 200+ tenants, mixed workloads, and has been operational for 3 years. Budget is constrained
+      -- prioritize certifications by revenue impact.
+  assert:
+  - type: llm-rubric
+    value: SOC 2 Type II upgrade is prioritized based on broader tenant applicability
+  - type: llm-rubric
+    value: 6-month observation period for Type II is identified as timeline constraint
+  - type: llm-rubric
+    value: PCI DSS v4.0 new requirements are referenced (64 new requirements vs v3.2.1)
+  - type: llm-rubric
+    value: Multi-tenant scoping and network segmentation for PCI DSS is addressed
+  - type: llm-rubric
+    value: Overlap between SOC 2 and PCI DSS controls is mapped
+  - type: llm-rubric
+    value: Budget-constrained sequencing recommendation is provided
+- description: comp-certification eval 3
+  vars:
+    skill_content: file://../skills/comp-certification/SKILL.md
+    prompt: Design a certification program for a sovereign data center in Berlin, Germany that must serve EU government contracts.
+      The facility requires EN 50600 and ISO 27001 certifications. It is a brownfield conversion of an industrial building.
+      The German federal government requires EN 50600 Availability Class 3 and ISO 27001 for all data center contracts. Additionally,
+      assess whether Uptime Tier certification adds value for the European market.
+  assert:
+  - type: llm-rubric
+    value: EN 50600 classification includes Availability, Protection, and Energy Efficiency levels
+  - type: llm-rubric
+    value: ISO 27001 and EN 50600 are assessed for overlap and complementarity
+  - type: llm-rubric
+    value: Brownfield conversion gaps are identified against EN 50600-2 series
+  - type: llm-rubric
+    value: EN 50600 is recommended over Uptime Tier for EU government market
+  - type: llm-rubric
+    value: Regulatory disclaimer is included with 'does not constitute legal advice' language
+  - type: llm-rubric
+    value: DISCLAIMER-FRAMEWORK.md is referenced for full disclaimer terms
+- description: comp-data-classification eval 1
+  vars:
+    skill_content: file://../skills/comp-data-classification/SKILL.md
+    prompt: 'Design a data classification framework for a sovereign data center in Virginia that will host both TS/SCI government
+      workloads and commercial enterprise tenants in the same campus. The facility has two buildings: Building A for classified
+      government work (Secret and TS/SCI) and Building B for commercial tenants (Confidential and below). The government tenant
+      requires CNSS Instruction 1253 compliance, TEMPEST shielding, and air-gapped networks. Assess the mixed-sensitivity
+      architecture requirements and physical separation needed between buildings.'
+  assert:
+  - type: llm-rubric
+    value: Five classification levels are defined from Public through TS/SCI
+  - type: llm-rubric
+    value: TEMPEST shielding requirement and 40-60% cost impact are stated
+  - type: llm-rubric
+    value: Separate infrastructure (power, cooling, network) required between buildings
+  - type: llm-rubric
+    value: Air-gapped network requirement for TS/SCI is specified
+  - type: llm-rubric
+    value: CNSA 2.0 Suite / quantum-resistant encryption mandate is referenced
+  - type: llm-rubric
+    value: Cross-domain solution NSA approval requirement and timeline are noted
+- description: comp-data-classification eval 2
+  vars:
+    skill_content: file://../skills/comp-data-classification/SKILL.md
+    prompt: Create a data classification framework for a 500-tenant colocation facility in Chicago that serves both HIPAA-covered
+      healthcare organizations and PCI DSS-compliant financial services companies. The facility uses shared power and cooling
+      infrastructure but has logically segmented networks. Some tenants handle both PHI and cardholder data. Design classification
+      levels, encryption requirements, handling procedures, and assess whether the current shared infrastructure model meets
+      both HIPAA and PCI DSS requirements.
+  assert:
+  - type: llm-rubric
+    value: HIPAA and PCI DSS classification levels are defined with handling requirements
+  - type: llm-rubric
+    value: Shared power/cooling is assessed as acceptable for both frameworks
+  - type: llm-rubric
+    value: PCI DSS network segmentation requirement is specified
+  - type: llm-rubric
+    value: AES-256 encryption at rest is required for both PHI and cardholder data
+  - type: llm-rubric
+    value: Overlapping controls between HIPAA and PCI DSS are identified
+  - type: llm-rubric
+    value: SSD disposal requires physical destruction per NIST SP 800-88 guidance
+- description: comp-data-classification eval 3
+  vars:
+    skill_content: file://../skills/comp-data-classification/SKILL.md
+    prompt: 'Design a data classification framework for a hyperscale cloud region in Frankfurt, Germany handling EU personal
+      data under GDPR with mixed classification levels. The region serves: (a) standard commercial customers (Internal/Confidential),
+      (b) EU government customers requiring data sovereignty (Restricted), and (c) financial services customers under DORA
+      regulation. All data must remain within EU jurisdiction. Assess encryption standards, quantum-resistant considerations,
+      and the physical-to-logical classification mapping. The facility currently uses logical separation only.'
+  assert:
+  - type: llm-rubric
+    value: GDPR Article 32 encryption and pseudonymization requirements are referenced
+  - type: llm-rubric
+    value: DORA regulation requirements for financial services are addressed
+  - type: llm-rubric
+    value: EU government sovereignty tier requires physical separation beyond logical only
+  - type: llm-rubric
+    value: Encryption key management must remain within EU jurisdiction
+  - type: llm-rubric
+    value: Quantum-resistant encryption planning is recommended for government tier
+  - type: llm-rubric
+    value: Regulatory disclaimer references DISCLAIMER-FRAMEWORK.md
+- description: comp-export-controls eval 1
+  vars:
+    skill_content: file://../skills/comp-export-controls/SKILL.md
+    prompt: 'Assess export control compliance for a US hyperscale data center in Texas deploying 10,000 NVIDIA H100 GPUs (each
+      rated at 3,958 TOPS). The facility has 15 foreign national engineers on-site: 8 from India, 4 from China, and 3 from
+      South Korea. The Chinese engineers have hands-on access to GPU cluster configurations. All engineers are US-based employees
+      with work visas. Evaluate EAR classification, deemed export implications for each nationality group, and recommend a
+      Technology Control Plan.'
+  assert:
+  - type: llm-rubric
+    value: H100 GPUs are classified with ECCN referencing advanced computing thresholds
+  - type: llm-rubric
+    value: Deemed export analysis differentiates by nationality and country group
+  - type: llm-rubric
+    value: Chinese national access to GPU configurations is flagged as requiring EAR license
+  - type: llm-rubric
+    value: India and South Korea are assessed as lower-risk country groups
+  - type: llm-rubric
+    value: Technology Control Plan is recommended with specific access restrictions
+  - type: llm-rubric
+    value: REGULATORY-MATRIX.md is referenced for country-specific regulatory data
+- description: comp-export-controls eval 2
+  vars:
+    skill_content: file://../skills/comp-export-controls/SKILL.md
+    prompt: Evaluate export compliance for a European cloud company (headquartered in Netherlands) importing 5,000 US-origin
+      NVIDIA H200 GPUs for a sovereign AI project in Abu Dhabi, UAE. The GPUs will ship from the US to Netherlands, then be
+      re-exported to UAE. The UAE facility will serve government AI training workloads. Assess EAR re-export rules, UAE country
+      group classification, government end-use implications, and any license requirements. The project is partially funded
+      by the UAE sovereign wealth fund.
+  assert:
+  - type: llm-rubric
+    value: EAR re-export jurisdiction for US-origin items is correctly explained
+  - type: llm-rubric
+    value: UAE is classified in appropriate country group with restrictions noted
+  - type: llm-rubric
+    value: Government end-use triggers additional BIS scrutiny
+  - type: llm-rubric
+    value: H200 performance exceeds advanced computing thresholds
+  - type: llm-rubric
+    value: Re-export from Netherlands to UAE requires separate EAR analysis
+  - type: llm-rubric
+    value: Disclaimer includes 'does not constitute legal advice' language
+- description: comp-export-controls eval 3
+  vars:
+    skill_content: file://../skills/comp-export-controls/SKILL.md
+    prompt: 'Design a deemed export compliance program for a colocation facility in Northern Virginia with 500+ tenants from
+      40 countries. Tenants include US defense contractors, European banks, Asian technology companies, and Middle Eastern
+      government entities. Foreign national employees of tenants regularly access the facility for equipment installation,
+      maintenance, and decommissioning. The facility hosts NVIDIA A100 and H100 GPUs owned by various tenants. Address: deemed
+      export risk assessment, access control architecture, tenant screening procedures, and ongoing compliance monitoring.'
+  assert:
+  - type: llm-rubric
+    value: Deemed export risk is assessed per tenant nationality and equipment type
+  - type: llm-rubric
+    value: Tiered physical access control architecture is designed for multi-tenant facility
+  - type: llm-rubric
+    value: Entity List and OFAC SDN screening is required for all tenants and foreign nationals
+  - type: llm-rubric
+    value: ITAR segregation requirements for defense contractor tenants are addressed
+  - type: llm-rubric
+    value: Ongoing monitoring includes periodic re-screening and BIS rule change tracking
+  - type: llm-rubric
+    value: Record retention of 5 years minimum is specified per EAR requirements
+- description: comp-sovereignty eval 1
+  vars:
+    skill_content: file://../skills/comp-sovereignty/SKILL.md
+    prompt: Assess sovereignty and regulatory compliance for a hyperscale commercial data center in Frankfurt, Germany serving
+      EU citizens. The facility is owned by a US-headquartered cloud provider and will host AI inference workloads including
+      a customer-facing chatbot and an automated hiring screening tool. Data subjects are EU/EEA citizens. Cross-border data
+      flows to US parent company are required for operational monitoring.
+  assert:
+  - type: llm-rubric
+    value: GDPR is identified as applicable with Art. 28 processor obligations
+  - type: llm-rubric
+    value: EU AI Act classification correctly identifies hiring tool as HIGH-RISK
+  - type: llm-rubric
+    value: EU AI Act classification identifies chatbot as LIMITED-RISK (transparency obligation)
+  - type: llm-rubric
+    value: Cross-border transfer mechanism is assessed (DPF or SCCs + supplementary measures)
+  - type: llm-rubric
+    value: CLOUD Act risk is flagged for US-headquartered entity
+  - type: llm-rubric
+    value: Output includes both markdown report and JSON sidecar schema
+  - type: llm-rubric
+    value: Disclaimer includes 'verify with local counsel' language
+  - type: llm-rubric
+    value: REGULATORY-MATRIX.md is referenced for EU/Germany requirements
+  - type: llm-rubric
+    value: Regulatory disclaimer notes that absence of jurisdiction-specific caveats does not imply regulatory simplicity
+- description: comp-sovereignty eval 2
+  vars:
+    skill_content: file://../skills/comp-sovereignty/SKILL.md
+    prompt: Evaluate sovereignty compliance for a 30MW sovereign AI facility in Riyadh, Saudi Arabia. The facility will be
+      60% owned by a Saudi government-affiliated entity and 40% by a European technology company. It will host classified
+      government AI training workloads and commercial cloud services. Data localization is required for government data. The
+      AI training workloads exceed 10^25 FLOP.
+  assert:
+  - type: llm-rubric
+    value: Saudi PDPL data localization requirement is identified for government data
+  - type: llm-rubric
+    value: CITC cloud framework licensing requirements are addressed
+  - type: llm-rubric
+    value: Foreign ownership structure (60/40 split) is assessed against Saudi requirements
+  - type: llm-rubric
+    value: Saudi Vision 2030 sovereign AI initiative requirements are referenced
+  - type: llm-rubric
+    value: 10^25 FLOP compute threshold is flagged for EU AI Act systemic risk (if EU deployment)
+  - type: llm-rubric
+    value: Tiered compliance (government sovereign vs commercial) is recommended
+  - type: llm-rubric
+    value: Disclaimer includes 'verify with local counsel' language
+  - type: llm-rubric
+    value: Output includes statement that regulatory analysis reflects the regulatory landscape as of publication date
+- description: comp-sovereignty eval 3
+  vars:
+    skill_content: file://../skills/comp-sovereignty/SKILL.md
+    prompt: Assess regulatory compliance for a US government data center requiring FISMA High authorization and CMMC Level
+      3 certification. The facility will host AI training workloads for defense applications using classified datasets. Located
+      in Virginia, domestically owned, no foreign data flows. Workloads include computer vision for satellite imagery analysis
+      and natural language processing for intelligence report summarization.
+  assert:
+  - type: llm-rubric
+    value: FISMA High requirements are correctly detailed (FedRAMP High, dedicated infrastructure)
+  - type: llm-rubric
+    value: CMMC Level 3 requirements are specified (110+ controls, C3PAO assessment)
+  - type: llm-rubric
+    value: DoD Cloud SRG Impact Level is assessed (IL5 or IL6)
+  - type: llm-rubric
+    value: ITAR/EAR applicability is evaluated for defense AI workloads
+  - type: llm-rubric
+    value: No federal AI regulation burden is correctly noted (EO 14110 rescinded)
+  - type: llm-rubric
+    value: Domestic ownership eliminates CFIUS/foreign investment concerns
+  - type: llm-rubric
+    value: Disclaimer includes 'verify with local counsel' language
+  - type: llm-rubric
+    value: No EU AI Act obligations since no EU deployment or data subjects
+  - type: llm-rubric
+    value: Disclaimer states this output does not constitute legal advice
+- description: comp-sustainability-reporting eval 1
+  vars:
+    skill_content: file://../skills/comp-sustainability-reporting/SKILL.md
+    prompt: Generate a sustainability report for a 50MW hyperscale data center in Houston, Texas (US-TX) with PUE 1.35, 5MW
+      natural gas turbines running 8,760 hours/year (baseload), 120 million gallons/year water consumption from cooling towers,
+      no RECs purchased. The facility targets SEC Climate Disclosure compliance (effective 2026) and CDP reporting. Calculate
+      Scope 1 and Scope 2 emissions, PUE, WUE, and CUE. Identify compliance gaps for SEC and CDP frameworks.
+  assert:
+  - type: llm-rubric
+    value: Scope 1 emissions are calculated from 5MW gas generation at 8,760 hours
+  - type: llm-rubric
+    value: Scope 2 uses US-TX grid carbon intensity of 380 kg CO2/MWh
+  - type: llm-rubric
+    value: WUE is calculated from 120M gallons water consumption
+  - type: llm-rubric
+    value: PUE of 1.35 is applied to calculate total facility power
+  - type: llm-rubric
+    value: SEC Climate Disclosure compliance gaps are identified
+  - type: llm-rubric
+    value: Bundled sustainability-calculator.py script is referenced with usage example
+- description: comp-sustainability-reporting eval 2
+  vars:
+    skill_content: file://../skills/comp-sustainability-reporting/SKILL.md
+    prompt: Create a sustainability report for a 100MW data center in Stavanger, Norway (EU-NO) with PUE 1.12, no on-site
+      generation (grid-only), 5 million gallons/year water consumption from direct liquid cooling, and no RECs purchased.
+      The facility targets EU CSRD compliance and SBTi target-setting with 2025 as baseline year. Demonstrate the difference
+      between location-based and market-based Scope 2 accounting. The Norway grid is nearly 100% hydroelectric (15 gCO2/kWh)
+      but the European residual mix is ~450 gCO2/kWh.
+  assert:
+  - type: llm-rubric
+    value: Location-based Scope 2 uses Norway grid intensity (15 kg CO2/MWh)
+  - type: llm-rubric
+    value: Market-based vs location-based divergence is explicitly demonstrated
+  - type: llm-rubric
+    value: EU CSRD requires Scope 1+2+3 reporting (Scope 3 gap identified)
+  - type: llm-rubric
+    value: SBTi target-setting with 2025 baseline is addressed
+  - type: llm-rubric
+    value: WUE reflects low water consumption from liquid cooling
+  - type: llm-rubric
+    value: Regulatory and Financial disclaimers reference DISCLAIMER-FRAMEWORK.md
+- description: comp-sustainability-reporting eval 3
+  vars:
+    skill_content: file://../skills/comp-sustainability-reporting/SKILL.md
+    prompt: 'Prepare a full carbon accounting exercise for a 30MW data center in Singapore (SG) targeting SBTi with Scope
+      3 inclusion. PUE 1.25, no on-site generation, 80 million gallons/year water from cooling towers, 50,000 MWh of RECs
+      purchased annually. The facility has 15,000 NVIDIA H100 GPUs with estimated embodied carbon of 1.2 tCO2e per GPU (Scope
+      3 Category 1). Target: 42% absolute reduction in Scope 1+2 by 2030 from 2025 baseline, net-zero by 2050. Calculate all
+      metrics and assess SBTi alignment.'
+  assert:
+  - type: llm-rubric
+    value: Scope 1 is zero with no on-site generation
+  - type: llm-rubric
+    value: Scope 2 uses Singapore grid intensity (400 kg CO2/MWh)
+  - type: llm-rubric
+    value: Market-based Scope 2 is reduced by 50,000 MWh of RECs
+  - type: llm-rubric
+    value: Scope 3 Category 1 calculates GPU embodied carbon (15,000 * 1.2 tCO2e)
+  - type: llm-rubric
+    value: SBTi 42% reduction target assessed against 1.5C pathway
+  - type: llm-rubric
+    value: Scope 3 percentage of total triggers mandatory SBTi Scope 3 target
+- description: dc-project-wizard eval 1
+  vars:
+    skill_content: file://../skills/dc-project-wizard/SKILL.md
+    prompt: Scope a 50MW hyperscale greenfield data center project in Loudoun County, Virginia. The project is at concept
+      stage, led by a developer/builder. Facility type is hyperscale. Target IT load is 50MW with liquid-cooled GPU racks
+      for AI training workloads. Phase 1 of a planned 3-phase campus.
+  assert:
+  - type: llm-rubric
+    value: Archetype selected is Hyperscale Greenfield
+  - type: llm-rubric
+    value: Skill sequence includes all 7 available skills in correct dependency order
+  - type: llm-rubric
+    value: eng-gpu-cluster and eng-cooling-design are marked as parallel (both require only power-capacity-model)
+  - type: llm-rubric
+    value: Virginia sales tax exemption is flagged as applicable (referencing US-STATE-INCENTIVES.md)
+  - type: llm-rubric
+    value: Reference data list includes GPU-REFERENCE.md, COST-BENCHMARKS.md, POWER-TARIFFS.md, US-STATE-INCENTIVES.md, FEDERAL-TAX-GUIDE.md
+  - type: llm-rubric
+    value: Output includes both markdown report structure and JSON sidecar
+  - type: llm-rubric
+    value: Phase 2 follow-up questions include campus phasing and utility provider
+  - type: llm-rubric
+    value: Later-wave skill gaps are flagged (predev-market-study, predev-grid-interconnection not yet available)
+- description: dc-project-wizard eval 2
+  vars:
+    skill_content: file://../skills/dc-project-wizard/SKILL.md
+    prompt: Scope a 30MW sovereign AI facility in Riyadh, Saudi Arabia. Government-affiliated entity as owner-operator. Facility
+      type is sovereign. Development stage is feasibility. AI training workloads for national defense and commercial cloud.
+      Data localization required for government data.
+  assert:
+  - type: llm-rubric
+    value: Archetype selected is Sovereign AI Facility
+  - type: llm-rubric
+    value: comp-sovereignty is listed first or parallel-first in the skill sequence
+  - type: llm-rubric
+    value: REGULATORY-MATRIX.md is referenced for Saudi Arabia regulatory requirements
+  - type: llm-rubric
+    value: POWER-TARIFFS.md is referenced for Middle East power costs
+  - type: llm-rubric
+    value: US-STATE-INCENTIVES.md and FEDERAL-TAX-GUIDE.md are NOT listed (non-US project)
+  - type: llm-rubric
+    value: Risk flags include data localization requirement and ownership structure considerations
+  - type: llm-rubric
+    value: Sovereign CapEx premium (30-50%) is noted in risk flags or project summary
+  - type: llm-rubric
+    value: Phase 2 follow-ups address security clearance level and data residency requirements
+- description: dc-project-wizard eval 3
+  vars:
+    skill_content: file://../skills/dc-project-wizard/SKILL.md
+    prompt: Scope a 10MW brownfield data center conversion in Chicago, Illinois. Converting a former manufacturing warehouse.
+      Investor (PE infrastructure fund) as counterparty. Design stage -- structural assessment complete. Enterprise colocation
+      facility type. No AI/HPC workloads planned.
+  assert:
+  - type: llm-rubric
+    value: Archetype selected is Brownfield Conversion
+  - type: llm-rubric
+    value: eng-brownfield-convert is flagged as unavailable (Wave 4) with manual analysis recommendation
+  - type: llm-rubric
+    value: eng-gpu-cluster is marked as optional or excluded (no AI/HPC workloads)
+  - type: llm-rubric
+    value: Illinois state incentive programs are referenced from US-STATE-INCENTIVES.md
+  - type: llm-rubric
+    value: FEDERAL-TAX-GUIDE.md is referenced for Opportunity Zone and depreciation applicability
+  - type: llm-rubric
+    value: Phase 2 follow-ups include existing building details and known constraints
+  - type: llm-rubric
+    value: Brownfield cost/time tradeoff is noted (60-80% of greenfield cost, 40% less time)
+  - type: llm-rubric
+    value: Output includes both markdown report and JSON sidecar
+- description: eng-bms-dcim eval 1
+  vars:
+    skill_content: file://../skills/eng-bms-dcim/SKILL.md
+    prompt: Design BMS/DCIM architecture for a 200MW hyperscale data center campus with 4 buildings, 40 IT halls, and a requirement
+      for full 3D digital twin with real-time data overlay. Over 10,000 sensor points expected. Tier IV redundancy. Open protocol
+      preferred (BACnet/Modbus/SNMP). Integration with ServiceNow for ITSM. Physical OT/IT network segmentation required.
+      The campus will deploy in 4 phases over 3 years.
+  assert:
+  - type: llm-rubric
+    value: Sensor count estimate exceeds 10,000 with breakdown by type (temperature, humidity, power, pressure)
+  - type: llm-rubric
+    value: BACnet IP for mechanical and Modbus TCP for electrical are specified as primary protocols
+  - type: llm-rubric
+    value: Physical OT/IT network segmentation with dedicated BMS infrastructure is designed
+  - type: llm-rubric
+    value: Digital twin readiness assessment scores criteria and identifies requirements
+  - type: llm-rubric
+    value: 4-tier alarm hierarchy includes auto-remediation triggers for Tier 3-4
+  - type: llm-rubric
+    value: ServiceNow integration architecture for ITSM/CMDB is specified
+- description: eng-bms-dcim eval 2
+  vars:
+    skill_content: file://../skills/eng-bms-dcim/SKILL.md
+    prompt: Design BMS/DCIM for a 20MW multi-tenant colocation facility with 50 tenants across 4 data halls. Tenants require
+      a self-service portal showing real-time power consumption, temperature, and SLA metrics. Tenant billing is based on
+      power consumption measured at PDU level. API access required for top-10 tenants. DCIM must support capacity reservation
+      tracking (committed but not deployed). Tier III. Logical OT/IT segmentation. No digital twin.
+  assert:
+  - type: llm-rubric
+    value: Tenant portal architecture provides real-time power, temperature, and SLA data
+  - type: llm-rubric
+    value: Tenant data isolation ensures each tenant sees only their own monitoring data
+  - type: llm-rubric
+    value: API access for top-10 tenants is architectured with authentication and rate limiting
+  - type: llm-rubric
+    value: Capacity reservation tracking distinguishes committed vs deployed vs available
+  - type: llm-rubric
+    value: PDU-level power metering feeds tenant billing with revenue-grade accuracy
+  - type: llm-rubric
+    value: Logical OT/IT segmentation via VLANs and firewall rules is specified
+- description: eng-bms-dcim eval 3
+  vars:
+    skill_content: file://../skills/eng-bms-dcim/SKILL.md
+    prompt: Design BMS/DCIM for a fleet of 25 edge data center sites (1-2MW each) with centralized management from a regional
+      NOC. Each site is unmanned with remote-only operations. WAN connectivity via dedicated circuits (100Mbps per site).
+      Local BMS must operate independently if WAN is lost. Centralized DCIM aggregates all 25 sites. Alarm escalation to regional
+      NOC with PagerDuty integration. Basic monitoring only -- no digital twin. Tier II.
+  assert:
+  - type: llm-rubric
+    value: Local BMS operates independently at each site when WAN connectivity is lost
+  - type: llm-rubric
+    value: Centralized DCIM aggregates 25 sites with fleet-wide dashboard view
+  - type: llm-rubric
+    value: Store-and-forward data buffering handles WAN outages without data loss
+  - type: llm-rubric
+    value: PagerDuty integration provides alarm escalation from all 25 sites to regional NOC
+  - type: llm-rubric
+    value: Remote access architecture uses secure jump host (no direct BMS access)
+  - type: llm-rubric
+    value: Standardized sensor strategy across fleet enables site-to-site comparison
+- description: eng-brownfield-convert eval 1
+  vars:
+    skill_content: file://../skills/eng-brownfield-convert/SKILL.md
+    prompt: Evaluate a 1960s industrial warehouse in Phoenix, AZ for conversion to a 10MW data center. The building is 120,000
+      sqft single-story with 28ft clear ceiling height, 200 psf floor loading, 40ft column spacing, existing 480V/3000A service,
+      two fiber carriers on-net, and a loading dock with truck court. The building has some asbestos in pipe insulation (built
+      1962). Zoning is industrial. Target density is 15 kW/rack.
+  assert:
+  - type: llm-rubric
+    value: Recommendation is GO with weighted score >= 3.5
+  - type: llm-rubric
+    value: Structural capacity scores 4 or 5 given 200 psf floor loading and 28ft ceiling
+  - type: llm-rubric
+    value: Contamination risk flags asbestos for pre-1980 building with abatement cost estimate
+  - type: llm-rubric
+    value: Power infrastructure identifies need for utility upgrade from 480V/3000A to support 10MW
+  - type: llm-rubric
+    value: Seismic zone scores 5 for Phoenix (low seismic risk)
+  - type: llm-rubric
+    value: Zoning scores 4 or 5 since building is already industrial-zoned
+  - type: llm-rubric
+    value: Remediation cost estimates are included for factors scoring below 3
+- description: eng-brownfield-convert eval 2
+  vars:
+    skill_content: file://../skills/eng-brownfield-convert/SKILL.md
+    prompt: Evaluate a 2005 Class A office building in downtown Chicago for conversion to a 5MW data center. The building
+      is 80,000 sqft across 4 floors with 10ft ceiling height per floor, 75 psf floor loading, 25ft column spacing, 208V/800A
+      service, single fiber carrier, no loading dock (underground parking garage only). Current zoning is commercial/office.
+      Target density is 10 kW/rack.
+  assert:
+  - type: llm-rubric
+    value: Recommendation is CONDITIONAL due to structural and power deficiencies
+  - type: llm-rubric
+    value: Structural capacity scores 1 or 2 given 75 psf floor loading and 10ft ceiling
+  - type: llm-rubric
+    value: Override rule is triggered by at least one factor scoring 1
+  - type: llm-rubric
+    value: Power infrastructure scores 1 or 2 given 208V/800A for 5MW target
+  - type: llm-rubric
+    value: Zoning identifies commercial-to-industrial change-of-use requirement
+  - type: llm-rubric
+    value: Power upgrade cost estimates are included for utility infrastructure work
+  - type: llm-rubric
+    value: Ceiling height constraint is specifically noted as limiting factor
+- description: eng-brownfield-convert eval 3
+  vars:
+    skill_content: file://../skills/eng-brownfield-convert/SKILL.md
+    prompt: Evaluate a 1985 big-box retail building in Northern Virginia (Loudoun County) for conversion to a 20MW data center.
+      The building is 150,000 sqft single-story with 22ft ceiling, 125 psf floor loading, 35ft column bays, existing 480V/2000A
+      service, excellent fiber market (Ashburn corridor -- 5+ carriers within 1 mile), loading dock present. The building
+      was built in 1985 so contamination assessment needed. Current zoning is commercial retail. Target density is 20 kW/rack
+      for mixed AI inference and enterprise workloads.
+  assert:
+  - type: llm-rubric
+    value: Fiber access scores 4 or 5 reflecting Northern Virginia's fiber density
+  - type: llm-rubric
+    value: Power infrastructure identifies gap between 1.5MW existing and 20MW target
+  - type: llm-rubric
+    value: Structural assessment evaluates 125 psf against 20kW/rack requirements
+  - type: llm-rubric
+    value: Contamination risk is assessed for 1985 building construction materials
+  - type: llm-rubric
+    value: Zoning notes retail-to-industrial change needed despite DC-friendly county
+  - type: llm-rubric
+    value: Remediation cost totals aggregate across all factors needing improvement
+  - type: llm-rubric
+    value: Assessment references COST-BENCHMARKS.md for regional cost calibration
+- description: eng-btm-power eval 1
+  vars:
+    skill_content: file://../skills/eng-btm-power/SKILL.md
+    prompt: 'Evaluate behind-the-meter power options for a 20MW hyperscale data center in Texas (ERCOT). The site has 50 acres
+      available. Evaluate solar PV (single-axis tracking) and a 4-hour BESS system. Grid tariff is $55/MWh. The project qualifies
+      for 30% ITC with prevailing wage under post-OBBBA rules. Construction starts Q3 2025. Target: maximize savings vs grid
+      with high renewable penetration.'
+  assert:
+  - type: llm-rubric
+    value: Solar PV capacity factor reflects Texas/ERCOT region (25-35% AC-basis)
+  - type: llm-rubric
+    value: BESS is modeled with degradation (2-3% annually) and cycle life
+  - type: llm-rubric
+    value: ITC at 30% is applied to both solar and BESS as ITC-eligible sources
+  - type: llm-rubric
+    value: Blended LCOE is calculated as generation-weighted average
+  - type: llm-rubric
+    value: Grid comparison shows savings vs $55/MWh ERCOT tariff
+  - type: llm-rubric
+    value: Safe harbor analysis notes July 4, 2026 begin-construction deadline
+- description: eng-btm-power eval 2
+  vars:
+    skill_content: file://../skills/eng-btm-power/SKILL.md
+    prompt: 'Assess BTM power for a 50MW sovereign data center requiring energy independence. Evaluate natural gas combined-cycle
+      turbine (pipeline access confirmed, $4.50/MMBtu) plus 10MW wind generation. The facility requires 99.999% uptime and
+      minimum 72 hours autonomous operation. Grid tariff is $70/MWh. Wind qualifies for PTC at $28.60/MWh with prevailing
+      wage. Location: Oklahoma with average wind speed 8.5 m/s at 80m hub height.'
+  assert:
+  - type: llm-rubric
+    value: Gas turbine LCOE includes fuel cost at $4.50/MMBtu converted to $/MWh
+  - type: llm-rubric
+    value: Wind capacity factor reflects Oklahoma/Central US region (35-45%)
+  - type: llm-rubric
+    value: PTC at $28.60/MWh is applied to wind generation as PTC-eligible source
+  - type: llm-rubric
+    value: Blended LCOE accounts for generation share weighting between gas and wind
+  - type: llm-rubric
+    value: Reliability assessment addresses 99.999% uptime requirement
+  - type: llm-rubric
+    value: Energy independence analysis considers 72-hour autonomous operation
+- description: eng-btm-power eval 3
+  vars:
+    skill_content: file://../skills/eng-btm-power/SKILL.md
+    prompt: 'Evaluate a 10MW edge data center using BESS-only for peak shaving and backup. No fuel source available at site.
+      Grid is primary power at $80/MWh with demand charges of $15/kW/month. Evaluate a 20MWh (2-hour) BESS system for peak
+      shaving and a 40MWh (4-hour) BESS for extended backup. The site qualifies for 30% ITC. Location: suburban California
+      (PG&E territory).'
+  assert:
+  - type: llm-rubric
+    value: BESS LCOE accounts for cycle life and annual degradation
+  - type: llm-rubric
+    value: ITC at 30% is applied to BESS as ITC-eligible storage
+  - type: llm-rubric
+    value: Both 2-hour and 4-hour BESS configurations are evaluated
+  - type: llm-rubric
+    value: Peak shaving economics reference $15/kW/month demand charges
+  - type: llm-rubric
+    value: Grid remains primary power source in recommendation (BESS is supplemental)
+  - type: llm-rubric
+    value: California/PG&E grid tariff of $80/MWh is used for comparison
+- description: eng-commissioning eval 1
+  vars:
+    skill_content: file://../skills/eng-commissioning/SKILL.md
+    prompt: 'Create a commissioning plan for a Tier IV hyperscale data center with 2N power redundancy. The facility has 4
+      utility feeds from 2 independent substations, 8 x 3MW diesel generators (4 per power train), 8 UPS modules (4 per path),
+      and 4 cooling plants. The IST must include actual utility disconnection to verify full transfer sequence. Independent
+      third-party CxA is engaged. Target: IT load deployment in 6 months.'
+  assert:
+  - type: llm-rubric
+    value: Level 1-5 structure is complete with checklists per level
+  - type: llm-rubric
+    value: IST includes actual utility disconnection (not ATS test button simulation)
+  - type: llm-rubric
+    value: Tier IV fault tolerance is verified through 2N path independence testing
+  - type: llm-rubric
+    value: IST scenarios include cascade failure and concurrent failure modes
+  - type: llm-rubric
+    value: 48-72 hour utility coordination for IST disconnection is noted
+  - type: llm-rubric
+    value: Timeline maps L1-L5 progression to 6-month IT deployment target
+- description: eng-commissioning eval 2
+  vars:
+    skill_content: file://../skills/eng-commissioning/SKILL.md
+    prompt: Develop a commissioning plan for a modular data center with factory-integrated power and cooling. 10 modular units
+      each 1MW IT capacity. Factory commissioning covers Level 1 (FWT) and partial Level 3 (system-level functional tests).
+      On-site commissioning covers Level 2 (installation and interconnection), remaining Level 3 (inter-module integration),
+      Level 4 (IST), and Level 5 (seasonal). Tier III, N+1 redundancy. CxA is owner's team with DC experience.
+  assert:
+  - type: llm-rubric
+    value: Factory Level 1 scope is expanded to include system integration testing
+  - type: llm-rubric
+    value: On-site Level 2 focuses on inter-module connections and utility tie-in
+  - type: llm-rubric
+    value: Level 3 distinguishes factory-tested functions from site integration functions
+  - type: llm-rubric
+    value: Level 4 IST scenarios address modular-specific failures (module isolation, bus connection)
+  - type: llm-rubric
+    value: Factory commissioning protocol review by CxA before dispatch is required
+  - type: llm-rubric
+    value: N+1 redundancy verification demonstrates module failure without IT load impact
+- description: eng-commissioning eval 3
+  vars:
+    skill_content: file://../skills/eng-commissioning/SKILL.md
+    prompt: 'Create a commissioning plan for a brownfield data center conversion of a former manufacturing facility. Existing
+      building has 480V electrical service (needs upgrade to 13.8kV), existing fire suppression (wet pipe, needs conversion
+      to pre-action/clean agent), and partial BMS (needs upgrade). New equipment: 4 x 2MW UPS, 4 x 2MW generators, 3 cooling
+      plants. Tier III. Unknown condition of existing grounding grid. CxA is independent third party.'
+  assert:
+  - type: llm-rubric
+    value: Level 0 existing systems assessment is included before commissioning scope is finalized
+  - type: llm-rubric
+    value: Existing grounding grid testing is specified as a Level 0 priority item
+  - type: llm-rubric
+    value: Level 2 covers both new equipment installation and existing system remediation
+  - type: llm-rubric
+    value: Brownfield-specific risks (existing wiring, legacy systems interaction) are addressed in IST
+  - type: llm-rubric
+    value: Fire suppression conversion from wet pipe to pre-action/clean agent is commissioning scope
+  - type: llm-rubric
+    value: Enhanced Year 1 monitoring is specified for Level 5 given brownfield unknowns
+- description: eng-cooling-design eval 1
+  vars:
+    skill_content: file://../skills/eng-cooling-design/SKILL.md
+    prompt: Design the cooling system for a 20MW Tier III hyperscale data center in Phoenix, Arizona with a target PUE of
+      1.25. The facility uses NVIDIA B200 GPUs at 50kW per rack.
+  assert:
+  - type: llm-rubric
+    value: Output includes ASHRAE climate analysis for Phoenix (hot-arid, high design day temperatures)
+  - type: llm-rubric
+    value: Direct liquid cooling is recommended or highly ranked given 50kW/rack density
+  - type: llm-rubric
+    value: PUE estimate is provided as a range, not a point value
+  - type: llm-rubric
+    value: WUE is calculated and water-scarce Phoenix climate is flagged as a concern for evaporative technologies
+  - type: llm-rubric
+    value: GPU-REFERENCE.md B200 cooling data is referenced for per-rack heat rejection
+  - type: llm-rubric
+    value: 'JSON sidecar output includes artifact_type: cooling-design-report'
+- description: eng-cooling-design eval 2
+  vars:
+    skill_content: file://../skills/eng-cooling-design/SKILL.md
+    prompt: Evaluate cooling options for converting a warehouse in Stockholm to a 5MW edge-adjacent data center with air-cooled
+      H100 racks at 30kW average density.
+  assert:
+  - type: llm-rubric
+    value: Brownfield path is activated with existing building assessment
+  - type: llm-rubric
+    value: Free cooling / air-side economizer is recommended given Stockholm climate
+  - type: llm-rubric
+    value: Hours of free cooling per year is estimated for Stockholm latitude (6000+ hours)
+  - type: llm-rubric
+    value: 30kW air-cooled density is validated as feasible with containment and RDHx
+  - type: llm-rubric
+    value: WUE is near zero given waterless cooling recommendation
+  - type: llm-rubric
+    value: Existing HVAC assessment is requested for brownfield conversion
+- description: eng-cooling-design eval 3
+  vars:
+    skill_content: file://../skills/eng-cooling-design/SKILL.md
+    prompt: Design cooling for a sovereign AI facility requiring Tier IV fault tolerance, 10MW IT load, location classified.
+      Assume temperate climate. Water independence is required for operational security.
+  assert:
+  - type: llm-rubric
+    value: Tier IV / 2N cooling redundancy is correctly modeled
+  - type: llm-rubric
+    value: Sovereign-specific considerations addressed (operational independence, supply chain security)
+  - type: llm-rubric
+    value: Water-independent cooling options are evaluated and recommended (dry coolers, closed-loop DLC)
+  - type: llm-rubric
+    value: Sensitivity analysis shows impact of cooling technology choice on PUE and WUE
+  - type: llm-rubric
+    value: Cooling towers are flagged as unsuitable due to water independence requirement
+  - type: llm-rubric
+    value: JSON sidecar includes water usage of zero or near-zero
+- description: eng-density-upgrade eval 1
+  vars:
+    skill_content: file://../skills/eng-density-upgrade/SKILL.md
+    prompt: Plan a density upgrade for a traditional raised-floor enterprise data center in Dallas, TX. Converting 200 racks
+      from 8 kW/rack to 50 kW/rack for AI training workloads. Current cooling is CRAH units with hot-aisle containment. Raised
+      floor height is 24 inches. Target technology is direct-to-chip liquid cooling. Facility must remain operational during
+      migration with zero downtime. Budget is $8-12M.
+  assert:
+  - type: llm-rubric
+    value: CDU count is calculated based on 200 racks at 50 kW density
+  - type: llm-rubric
+    value: Piping route evaluates underfloor feasibility given 24-inch raised floor
+  - type: llm-rubric
+    value: Electrical upgrade specifies circuit requirements for 50 kW racks
+  - type: llm-rubric
+    value: Phased migration plan maintains N+1 cooling redundancy during transition
+  - type: llm-rubric
+    value: Leak detection is specified as mandatory with zone-based coverage
+  - type: llm-rubric
+    value: Rollback plan is included for each migration phase
+  - type: llm-rubric
+    value: Direct-to-chip technology is correctly applied for 50 kW/rack target
+- description: eng-density-upgrade eval 2
+  vars:
+    skill_content: file://../skills/eng-density-upgrade/SKILL.md
+    prompt: Plan a density upgrade for a slab-on-grade hyperscale facility in Ashburn, VA (Northern Virginia). Converting
+      500 racks from 12 kW/rack to 40 kW/rack for inference workloads. Current cooling is in-row cooling with hot-aisle containment.
+      No raised floor. 20ft ceiling height. Target technology is rear-door heat exchangers (RDHx). Maintenance windows available
+      on weekends (8-hour windows). Budget is $15-25M.
+  assert:
+  - type: llm-rubric
+    value: RDHx technology is correctly evaluated for 40 kW/rack target
+  - type: llm-rubric
+    value: Notes that 40 kW is at the upper limit of RDHx effectiveness
+  - type: llm-rubric
+    value: Piping route specifies overhead routing for slab-on-grade facility
+  - type: llm-rubric
+    value: Cable tray conflict assessment is included for overhead piping
+  - type: llm-rubric
+    value: Existing in-row cooling continues as supplemental alongside RDHx
+  - type: llm-rubric
+    value: Migration schedule uses weekend maintenance windows
+  - type: llm-rubric
+    value: CDU sizing accounts for 500-rack deployment
+- description: eng-density-upgrade eval 3
+  vars:
+    skill_content: file://../skills/eng-density-upgrade/SKILL.md
+    prompt: Plan a density upgrade for a modular/prefab facility in Phoenix, AZ. Converting 80 racks from 6 kW/rack to 100
+      kW/rack immersion cooling for HPC workloads. Current cooling is packaged DX units. Facility is in an arid climate with
+      severe water restrictions. The facility has 4 modular units of 20 racks each. External mechanical pad space is available.
+      The upstream eng-cooling-design skill recommended immersion cooling due to water constraints and extreme density target.
+      Budget is $5-8M.
+  assert:
+  - type: llm-rubric
+    value: Immersion cooling is correctly applied for 100 kW/rack target
+  - type: llm-rubric
+    value: Floor loading verification is flagged for immersion tanks at 3,000-5,000 lbs
+  - type: llm-rubric
+    value: Water constraints in Phoenix drive dry cooler heat rejection recommendation
+  - type: llm-rubric
+    value: External CDU placement on mechanical pad is recommended
+  - type: llm-rubric
+    value: Electrical upgrade to 415V is specified for extreme density
+  - type: llm-rubric
+    value: Modular facility type branching addresses per-module migration
+  - type: llm-rubric
+    value: References upstream eng-cooling-design cooling recommendation
+- description: eng-fire-life-safety eval 1
+  vars:
+    skill_content: file://../skills/eng-fire-life-safety/SKILL.md
+    prompt: Design fire and life safety systems for a Tier III enterprise data center with on-site BESS (20MWh lithium-ion,
+      indoor installation). The facility has 4 IT rooms totaling 40,000 sqft, single story. BESS is in a dedicated room adjacent
+      to the electrical switchgear. AHJ is the local fire marshal in Virginia. Facility is 24/7 occupied. Clean agent suppression
+      preferred for IT spaces. 6 x 2.5MW diesel generators with 48-hour fuel storage.
+  assert:
+  - type: llm-rubric
+    value: NFPA 855 compliance is addressed for lithium-ion BESS (thermal runaway, deflagration venting, spacing)
+  - type: llm-rubric
+    value: NFPA 75 requirements are addressed for IT room fire protection
+  - type: llm-rubric
+    value: VESDA aspirating detection is specified for IT rooms with alarm thresholds
+  - type: llm-rubric
+    value: Clean agent suppression (Novec 1230 or FM-200) is specified with design concentration
+  - type: llm-rubric
+    value: 2-hour fire-rated separation between BESS room and IT spaces is required
+  - type: llm-rubric
+    value: BESS spacing requirements (rack-to-rack, rack-to-wall) are quantified
+- description: eng-fire-life-safety eval 2
+  vars:
+    skill_content: file://../skills/eng-fire-life-safety/SKILL.md
+    prompt: Design fire and life safety for a hyperscale data center campus with 50+ IT rooms across 5 buildings totaling
+      500,000 sqft of white space. Tier IV fault-tolerant design. Campus-level fire water distribution loop with dedicated
+      pump house. Each building has 10-12 IT rooms at 5,000 sqft each. No BESS on-site. AHJ is county fire marshal in Oregon.
+      Clean agent preferred. 40 x 3MW diesel generators across the campus. Two-story buildings.
+  assert:
+  - type: llm-rubric
+    value: Campus fire water loop with dedicated pump house is designed for maximum simultaneous demand
+  - type: llm-rubric
+    value: VESDA detection is specified per IT room as independent zones
+  - type: llm-rubric
+    value: Clean agent suppression zones are independent per room for Tier IV concurrent maintainability
+  - type: llm-rubric
+    value: Campus-level fire alarm monitoring system integrates all buildings
+  - type: llm-rubric
+    value: Two-story egress design includes stairwell pressurization requirements
+  - type: llm-rubric
+    value: Diesel generator room fire protection includes flame detection
+- description: eng-fire-life-safety eval 3
+  vars:
+    skill_content: file://../skills/eng-fire-life-safety/SKILL.md
+    prompt: Design fire and life safety for a multi-tenant colocation facility with 30 tenant cages across 3 data halls totaling
+      60,000 sqft. Tier III. Tenants range from 2 cages to full halls. Some tenants require independent suppression zones
+      for compliance (financial services, healthcare). AHJ requires sprinklers over clean agent (belt-and-suspenders). Facility
+      is occupied 24/7. Single story. No BESS. 8 x 2MW diesel generators.
+  assert:
+  - type: llm-rubric
+    value: Tenant-demarcated suppression zones are designed for compliance-sensitive tenants
+  - type: llm-rubric
+    value: Belt-and-suspenders design (clean agent + sprinkler) addresses AHJ requirement
+  - type: llm-rubric
+    value: VESDA zones align with tenant suppression zone boundaries
+  - type: llm-rubric
+    value: Tenant notification protocol for suppression activation is specified
+  - type: llm-rubric
+    value: Suppression impairment management procedure for tenant work is addressed
+  - type: llm-rubric
+    value: Cost impact of belt-and-suspenders dual suppression is quantified
+- description: eng-gpu-cluster eval 1
+  vars:
+    skill_content: file://../skills/eng-gpu-cluster/SKILL.md
+    prompt: Design a 10,000 H100 SXM5 GPU training cluster for a hyperscale facility. The cluster will train large language
+      models up to 1 trillion parameters. Use InfiniBand NDR fabric with fat-tree topology. Target completion in 6 months.
+  assert:
+  - type: llm-rubric
+    value: H100 SXM5 at 700W TDP is used for per-rack power calculation
+  - type: llm-rubric
+    value: NVLink domain size is correctly identified as 8 GPUs per node
+  - type: llm-rubric
+    value: InfiniBand NDR 400G fat-tree topology is designed with leaf/spine counts
+  - type: llm-rubric
+    value: Per-rack power budget includes GPU + networking + storage overhead
+  - type: llm-rubric
+    value: Training cluster utilization factor of 75-85% is applied (not 100%)
+  - type: llm-rubric
+    value: 'JSON sidecar output includes artifact_type: gpu-cluster-design'
+- description: eng-gpu-cluster eval 2
+  vars:
+    skill_content: file://../skills/eng-gpu-cluster/SKILL.md
+    prompt: Design a GPU cluster for a sovereign AI facility using 1000 NVIDIA GB200 NVL72 systems for inference workloads.
+      The facility requires Tier IV fault tolerance and liquid cooling. Latency SLA is 50ms time-to-first-token.
+  assert:
+  - type: llm-rubric
+    value: GB200 NVL72 is correctly modeled as a rack-scale system (72 GPUs per rack, 120kW)
+  - type: llm-rubric
+    value: Liquid cooling is mandatory with 25C max inlet temperature
+  - type: llm-rubric
+    value: Total power calculated at approximately 120MW for 1000 racks
+  - type: llm-rubric
+    value: NVLink domain of 72 GPUs per rack is identified as advantage for large model inference
+  - type: llm-rubric
+    value: Floor loading requirements identified (2000kg+ per rack)
+  - type: llm-rubric
+    value: Sovereign-specific considerations addressed (supply chain, operational independence)
+- description: eng-gpu-cluster eval 3
+  vars:
+    skill_content: file://../skills/eng-gpu-cluster/SKILL.md
+    prompt: 'Plan a brownfield GPU deployment: adding 500 NVIDIA B200 GPUs to an existing facility that currently runs 2000
+      H100 GPUs. The existing facility has air-cooled racks at 30kW, 10MW total power capacity with 3MW available, and InfiniBand
+      NDR fabric.'
+  assert:
+  - type: llm-rubric
+    value: Brownfield path activated with existing infrastructure assessment
+  - type: llm-rubric
+    value: B200 at 1000W TDP requires different cooling than existing H100 at 700W
+  - type: llm-rubric
+    value: Cooling zone separation recommended between H100 (air) and B200 (liquid or RDHx) areas
+  - type: llm-rubric
+    value: Available 3MW power budget is validated against B200 deployment requirements
+  - type: llm-rubric
+    value: Network segmentation or integration strategy addresses different NVLink generations
+  - type: llm-rubric
+    value: Floor loading assessment flags potential reinforcement needs for higher-density B200 racks
+- description: eng-modular-design eval 1
+  vars:
+    skill_content: file://../skills/eng-modular-design/SKILL.md
+    prompt: Design a 20MW phased hyperscale data center using containerized pods. The facility will deploy in 4 phases of
+      5MW each over 3 years. Standard 40ft ISO containers with liquid cooling. Site is in Central Texas with good highway
+      access. Power model provides 2N utility redundancy. Target first-phase operational within 9 months.
+  assert:
+  - type: llm-rubric
+    value: Module specs use 40ft ISO container dimensions with liquid cooling capacity (500kW+)
+  - type: llm-rubric
+    value: Phased rollout plan shows 4 phases of 5MW each with deployment dates
+  - type: llm-rubric
+    value: Factory vs field analysis compares lead time, cost, and quality trade-offs
+  - type: llm-rubric
+    value: Transport logistics address Texas highway weight limits (80,000 lbs)
+  - type: llm-rubric
+    value: Module width designed for permit-free delivery (12ft or under)
+  - type: llm-rubric
+    value: Cost comparison quantifies modular vs traditional $/MW including time-to-revenue benefit
+  - type: llm-rubric
+    value: 'Output includes both markdown report and JSON sidecar with artifact_type: modular-design-report'
+- description: eng-modular-design eval 2
+  vars:
+    skill_content: file://../skills/eng-modular-design/SKILL.md
+    prompt: Design a 2MW edge data center for deployment in a remote mining location in northern Canada. The site has a gravel
+      access road with 60,000 lb weight limit, no crane available on-site, extreme cold climate (ASHRAE A4, winter temperatures
+      to -40C). Self-contained modules with integrated power and cooling required. Unmanned operation.
+  assert:
+  - type: llm-rubric
+    value: Module weight stays under 60,000 lb road limit
+  - type: llm-rubric
+    value: Self-contained cooling rated for ASHRAE A4 / -40C operation
+  - type: llm-rubric
+    value: Deployment plan accounts for no crane availability (alternative placement method)
+  - type: llm-rubric
+    value: Cold climate considerations include freeze protection and condensation management
+  - type: llm-rubric
+    value: Remote monitoring and unmanned operation requirements are addressed
+  - type: llm-rubric
+    value: Module count and sizing achieve 2MW total capacity
+  - type: llm-rubric
+    value: Transport logistics address gravel road constraints
+- description: eng-modular-design eval 3
+  vars:
+    skill_content: file://../skills/eng-modular-design/SKILL.md
+    prompt: Plan a 50MW modular expansion to an existing brownfield data center campus in Northern Virginia. The existing
+      facility is a 30MW traditional build. The expansion must integrate with existing central cooling plant and power distribution.
+      Purpose-built modular pods preferred. Site has limited staging area (0.5 acres) adjacent to the existing building. Crane
+      access available.
+  assert:
+  - type: llm-rubric
+    value: Brownfield integration with existing cooling plant and power distribution is designed
+  - type: llm-rubric
+    value: Module sizing accounts for 0.5-acre staging area constraint
+  - type: llm-rubric
+    value: Phased deployment minimizes disruption to existing 30MW operations
+  - type: llm-rubric
+    value: Interface design covers cooling, power, and network connections to existing facility
+  - type: llm-rubric
+    value: Purpose-built modular approach is detailed (not containerized)
+  - type: llm-rubric
+    value: Cost comparison includes modular expansion vs traditional second building
+  - type: llm-rubric
+    value: Factory lead time for purpose-built pods is realistic (16-24 weeks, not 4-6)
+- description: eng-ops-readiness eval 1
+  vars:
+    skill_content: file://../skills/eng-ops-readiness/SKILL.md
+    prompt: Create an operations readiness plan for a 100MW Tier III hyperscale data center with self-operated 24/7 staffing.
+      The facility has 4 power trains, 3 cooling plants, and 20 IT halls. Commissioning (Level 4 IST) completes in 3 months.
+      The operations team is a new build (no existing team). Self-operated with no managed services provider. Single tenant
+      (cloud provider). The facility manager wants to have Day 1 readiness when IST completes.
+  assert:
+  - type: llm-rubric
+    value: Staffing model provides 50-70 FTE with role breakdown and shift coverage for 24/7 operations
+  - type: llm-rubric
+    value: CFE recruiting timeline starts immediately given 90-120 day time-to-fill vs 3-month IST completion
+  - type: llm-rubric
+    value: SOP count is 155-210 with P1 safety-critical procedures required on Day 1
+  - type: llm-rubric
+    value: Spare parts strategy includes MV breakers with 26-52 week lead time flagged
+  - type: llm-rubric
+    value: Day 1/Day 30/Day 90 milestones are specified with concrete checklist items
+  - type: llm-rubric
+    value: Incident response includes 4 severity levels with escalation matrix and notification requirements
+- description: eng-ops-readiness eval 2
+  vars:
+    skill_content: file://../skills/eng-ops-readiness/SKILL.md
+    prompt: Develop an ops readiness plan for a 20MW Tier III colo facility transitioning from construction to a managed services
+      provider (MSP) for operations. The MSP contract covers 24/7 facility operations, NOC monitoring, and routine maintenance.
+      The owner retains asset management, capital decisions, and tenant relations. 30 tenants expected at stabilization. The
+      MSP requires a 60-day overlap with the construction team for knowledge transfer. Commissioning completes in 6 weeks.
+  assert:
+  - type: llm-rubric
+    value: 60-day MSP overlap period with construction team is planned with knowledge transfer milestones
+  - type: llm-rubric
+    value: Facility-specific SOPs are required (not generic MSP procedures)
+  - type: llm-rubric
+    value: Tenant-facing operations staff (5 FTE for 30 tenants) is budgeted beyond engineering team
+  - type: llm-rubric
+    value: SLA reporting framework for monthly tenant reports is specified
+  - type: llm-rubric
+    value: Vendor service contract assignment from developer to MSP is addressed
+  - type: llm-rubric
+    value: Day 1 checklist includes MSP operational readiness verification
+- description: eng-ops-readiness eval 3
+  vars:
+    skill_content: file://../skills/eng-ops-readiness/SKILL.md
+    prompt: Create an ops readiness plan for a fleet of 5 modular data centers (2MW each, 10MW total) with minimal on-site
+      staff and centralized remote monitoring from a regional NOC. Each site is Tier II with business-hours on-site staffing
+      and 24/7 remote monitoring. Staff rotate between sites. One facility manager covers all 5 sites. Commissioning is staggered
+      (one site per month over 5 months). Budget is constrained -- operations cost must stay under $2M annually.
+  assert:
+  - type: llm-rubric
+    value: Total FTE of 8-10 covers all 5 sites with mobile technician rotation model
+  - type: llm-rubric
+    value: Staggered commissioning handover plan addresses one site per month rollout
+  - type: llm-rubric
+    value: Standardized SOPs across fleet reduce development effort (write once, deploy 5x)
+  - type: llm-rubric
+    value: Shared spare parts pool across 5 sites reduces inventory investment
+  - type: llm-rubric
+    value: Remote monitoring with NOC alarm escalation addresses unmanned hours
+  - type: llm-rubric
+    value: Annual operations cost estimate demonstrates staying under $2M budget constraint
+- description: eng-physical-layout eval 1
+  vars:
+    skill_content: file://../skills/eng-physical-layout/SKILL.md
+    prompt: Design the hall layout for a 10MW traditional enterprise data center with mixed density racks (5-15 kW/rack).
+      The hall is 20,000 sqft with 14ft ceiling height, raised floor at 24 inches. Cooling is underfloor via perforated tiles
+      with CRAH units along the perimeter. Target rack count is 400 racks. Standard enterprise containment. Power via overhead
+      busway.
+  assert:
+  - type: llm-rubric
+    value: Rack count of 400 fits within 20,000 sqft with correct gross-to-net ratio
+  - type: llm-rubric
+    value: Cold aisle width meets BICSI 002-2024 minimum of 48 inches
+  - type: llm-rubric
+    value: Hot aisle width meets BICSI 002-2024 minimum of 36 inches
+  - type: llm-rubric
+    value: Raised floor cable management plan addresses 24-inch raised floor height
+  - type: llm-rubric
+    value: CRAH placement is optimized for underfloor airflow distribution
+  - type: llm-rubric
+    value: BICSI 002-2024 compliance checklist is included in output
+  - type: llm-rubric
+    value: 'Output includes both markdown report and JSON sidecar with artifact_type: physical-layout-plan'
+- description: eng-physical-layout eval 2
+  vars:
+    skill_content: file://../skills/eng-physical-layout/SKILL.md
+    prompt: Design the layout for a 50MW AI training facility using NVIDIA GB200 NVL72 racks at 120kW per rack. The facility
+      has two 25,000 sqft halls with 16ft ceiling height, slab-on-grade construction (no raised floor), reinforced floor rated
+      for 500 lbs/sqft. Cooling is direct-to-chip liquid cooling with overhead manifolds. InfiniBand interconnect fabric in
+      fat-tree topology.
+  assert:
+  - type: llm-rubric
+    value: GB200 NVL72 rack density (120kW) is sourced from GPU-REFERENCE.md
+  - type: llm-rubric
+    value: Floor loading calculation verifies 500 lbs/sqft capacity is sufficient for 120kW racks
+  - type: llm-rubric
+    value: Liquid cooling manifold routing plan is included in the layout
+  - type: llm-rubric
+    value: InfiniBand cable pathway sizing accounts for fat-tree topology cable density
+  - type: llm-rubric
+    value: Slab-on-grade design is used (not raised floor) for ultra-high density
+  - type: llm-rubric
+    value: Aisle widths account for liquid cooling maintenance access requirements
+  - type: llm-rubric
+    value: Rack count calculation is correct for 50MW at 120kW/rack across two halls
+- description: eng-physical-layout eval 3
+  vars:
+    skill_content: file://../skills/eng-physical-layout/SKILL.md
+    prompt: Design a multi-tenant colocation hall of 15,000 sqft to support 5MW across 4 tenant zones. Tenants range from
+      0.5MW to 2MW with densities of 8-25 kW/rack. The hall has 12ft ceiling height, raised floor at 18 inches. Cooling is
+      a mix of underfloor air and in-row units for higher-density tenants. Each tenant zone needs physical cage separation
+      with locking doors.
+  assert:
+  - type: llm-rubric
+    value: Four tenant zones are designed with proportional space allocation
+  - type: llm-rubric
+    value: Physical cage separation with locking doors is specified per zone
+  - type: llm-rubric
+    value: Mixed cooling approach handles different density levels across tenants
+  - type: llm-rubric
+    value: Per-tenant power metering is included in the design
+  - type: llm-rubric
+    value: Cross-connect and meet-me room areas are allocated in common space
+  - type: llm-rubric
+    value: BICSI 002-2024 aisle width compliance is maintained within cage partitions
+  - type: llm-rubric
+    value: 18-inch raised floor constraints are addressed for cable management capacity
+- description: eng-physical-security eval 1
+  vars:
+    skill_content: file://../skills/eng-physical-security/SKILL.md
+    prompt: Design physical security for a commercial colocation facility targeting SOC 2 Type II and ISO 27001 certification.
+      The facility is a 10MW multi-tenant building with 30 tenant cages across 2 data halls. Standard 3-layer security (site,
+      building, data hall). Tenants manage their own cage access. Visitor policy is limited unescorted for pre-vetted tenant
+      personnel. OT network should be logically segmented.
+  assert:
+  - type: llm-rubric
+    value: SOC 2 Type II 90-day CCTV retention requirement is met
+  - type: llm-rubric
+    value: ISO 27001 Annex A.11 physical security controls are mapped
+  - type: llm-rubric
+    value: Tenant cage access is delegated with master override capability
+  - type: llm-rubric
+    value: Mantrap or anti-tailgating is specified at building entry
+  - type: llm-rubric
+    value: OT/IT segmentation is logically separated (VLAN + firewall)
+  - type: llm-rubric
+    value: Visitor management system with pre-registration is included
+  - type: llm-rubric
+    value: 'Output includes both markdown report and JSON sidecar with artifact_type: security-design'
+- description: eng-physical-security eval 2
+  vars:
+    skill_content: file://../skills/eng-physical-security/SKILL.md
+    prompt: Design physical security for a government classified SCIF data center facility. The facility will process Secret-level
+      data and must comply with ICD 705, NIST 800-53 Rev 5, and FedRAMP High. 5-layer security perimeter required. Air-gapped
+      OT network. All visitors escorted. Dual-person integrity (two-person rule) for server room access. RF shielding (TEMPEST)
+      required.
+  assert:
+  - type: llm-rubric
+    value: ICD 705 SCIF requirements are addressed (RF shielding, sound attenuation)
+  - type: llm-rubric
+    value: TEMPEST specifications are included for RF shielding
+  - type: llm-rubric
+    value: Five-layer security zone model is fully designed
+  - type: llm-rubric
+    value: Air-gapped OT network is specified (no IP connectivity)
+  - type: llm-rubric
+    value: Dual-person integrity (two-person rule) is enforced at highest zone
+  - type: llm-rubric
+    value: NIST 800-53 PE family controls are mapped to zone design
+  - type: llm-rubric
+    value: Zero-trust principles are applied across all zone boundaries
+- description: eng-physical-security eval 3
+  vars:
+    skill_content: file://../skills/eng-physical-security/SKILL.md
+    prompt: Design physical security for a sovereign AI facility that must comply with national critical infrastructure requirements.
+      The facility is a 50MW hyperscale campus requiring national operator status (citizens-only access to sensitive areas).
+      Foreign-manufactured security equipment is restricted. 5-layer security with enhanced perimeter (vehicle barriers rated
+      K12 per ASTM F2656). Physically segmented OT network.
+  assert:
+  - type: llm-rubric
+    value: Vehicle barrier rating (K12/ASTM F2656) is specified at perimeter
+  - type: llm-rubric
+    value: National operator requirement enforces citizens-only access at secure zones
+  - type: llm-rubric
+    value: Foreign-manufactured equipment restrictions are documented
+  - type: llm-rubric
+    value: Physical OT network segmentation (not just logical) is specified
+  - type: llm-rubric
+    value: Zero-trust architecture is applied with identity verification per zone
+  - type: llm-rubric
+    value: Compliance mapping addresses national critical infrastructure standards
+  - type: llm-rubric
+    value: Five-layer zone model is customized for sovereign requirements
+- description: eng-power-model eval 1
+  vars:
+    skill_content: file://../skills/eng-power-model/SKILL.md
+    prompt: Design the electrical distribution for a 10MW Tier III data center in Northern Virginia with N+1 UPS redundancy
+      and dual utility feeds at 13.8kV.
+  assert:
+  - type: llm-rubric
+    value: Output includes complete utility-to-rack power chain with efficiency at each stage
+  - type: llm-rubric
+    value: Tier III redundancy (N+1, concurrently maintainable) is correctly modeled
+  - type: llm-rubric
+    value: PUE estimate is provided as a range (e.g., 1.25-1.35), not a point value
+  - type: llm-rubric
+    value: Dual utility feed configuration is addressed in the utility service section
+  - type: llm-rubric
+    value: Capital cost estimate references Northern Virginia regional benchmarks
+  - type: llm-rubric
+    value: 'JSON sidecar output includes artifact_type: power-capacity-model'
+- description: eng-power-model eval 2
+  vars:
+    skill_content: file://../skills/eng-power-model/SKILL.md
+    prompt: 'Model the power infrastructure for a 100MW hyperscale campus with phased build-out: 50MW Phase 1 and 50MW Phase
+      2. The facility will use modular UPS blocks of 4MW each and targets a PUE of 1.2 or below. Dual utility feeds from separate
+      substations.'
+  assert:
+  - type: llm-rubric
+    value: Phased build-out is modeled with separate Phase 1 and Phase 2 sections
+  - type: llm-rubric
+    value: UPS modules are sized at 4MW blocks with correct N+1 count per phase
+  - type: llm-rubric
+    value: PUE target of 1.2 is flagged as requiring liquid cooling or advanced cooling
+  - type: llm-rubric
+    value: Utility feed is sized for full 100MW capacity even in Phase 1 (per gotcha about lead times)
+  - type: llm-rubric
+    value: Generator sizing includes motor starting current overhead
+  - type: llm-rubric
+    value: Sensitivity analysis shows PUE impact of load utilization variation
+- description: eng-power-model eval 3
+  vars:
+    skill_content: file://../skills/eng-power-model/SKILL.md
+    prompt: Evaluate the electrical infrastructure for converting a warehouse to a 5MW edge-adjacent data center. The existing
+      building has a 2MW electrical service at 480V, a 500kW diesel generator, and no UPS. The target is Tier II redundancy.
+  assert:
+  - type: llm-rubric
+    value: Brownfield path is activated with existing infrastructure assessment
+  - type: llm-rubric
+    value: Gap analysis between existing 2MW and required 5MW is clearly quantified
+  - type: llm-rubric
+    value: Existing 500kW generator is evaluated for reuse (likely too small for N+1 at 5MW)
+  - type: llm-rubric
+    value: Tier II (N+1) redundancy is correctly modeled with single distribution path
+  - type: llm-rubric
+    value: Utility service upgrade requirements are specified (voltage, capacity)
+  - type: llm-rubric
+    value: PUE estimate accounts for edge facility overhead (typically higher, 1.4-1.8)
+- description: eng-sla-design eval 1
+  vars:
+    skill_content: file://../skills/eng-sla-design/SKILL.md
+    prompt: Design an SLA framework for a Tier III colocation facility with N+1 cooling and 2N power distribution. The facility
+      serves enterprise tenants requiring 99.982% availability. Planned maintenance windows are 4 hours per month (excluded
+      from SLA calculation). Service credits should cap at 25% of monthly recurring charges. Monitoring at 5-minute intervals.
+  assert:
+  - type: llm-rubric
+    value: Reliability model uses serial/parallel chains with component MTBF/MTTR
+  - type: llm-rubric
+    value: N+1 cooling and 2N power redundancy are correctly modeled
+  - type: llm-rubric
+    value: Calculated availability meets or exceeds 99.982% (Tier III target)
+  - type: llm-rubric
+    value: Credit structure has multiple tiers with cap at 25% of MRC
+  - type: llm-rubric
+    value: Planned maintenance (4 hrs/month) is excluded from SLA measurement
+  - type: llm-rubric
+    value: SLA-BENCHMARKS.md is referenced for industry availability targets
+- description: eng-sla-design eval 2
+  vars:
+    skill_content: file://../skills/eng-sla-design/SKILL.md
+    prompt: Create an SLA framework for a Tier IV hyperscale data center with 2N+1 power and concurrent maintenance capability.
+      Target availability is 99.995%. The facility uses fleet-level statistical SLA reporting (quarterly). The operator requires
+      zero-downtime maintenance policy. Credit structure should include escalation to contract termination after 3 consecutive
+      months of SLA breach. Monitoring at 1-minute intervals.
+  assert:
+  - type: llm-rubric
+    value: 2N+1 power redundancy is modeled with parallel availability formula
+  - type: llm-rubric
+    value: Calculated availability meets or exceeds 99.995% (Tier IV target)
+  - type: llm-rubric
+    value: Zero-downtime maintenance means no planned maintenance exclusions
+  - type: llm-rubric
+    value: Credit structure includes escalation path to contract termination
+  - type: llm-rubric
+    value: Measurement uses 1-minute monitoring intervals
+  - type: llm-rubric
+    value: Concurrent maintainability is validated in the reliability model
+- description: eng-sla-design eval 3
+  vars:
+    skill_content: file://../skills/eng-sla-design/SKILL.md
+    prompt: Evaluate the SLA for a single-site edge facility with one UPS (no redundancy), one generator, and basic N cooling.
+      Calculate actual availability and recommend upgrades to reach 99.9% availability. The site is unmanned with 2-hour average
+      travel time for repair crews. Budget for upgrades is limited to adding one redundant UPS.
+  assert:
+  - type: llm-rubric
+    value: Single UPS (N redundancy) is identified as a reliability risk
+  - type: llm-rubric
+    value: MTTR accounts for 2-hour travel time to unmanned site
+  - type: llm-rubric
+    value: Calculated availability is below 99.9% target without upgrades
+  - type: llm-rubric
+    value: UPS upgrade to N+1 is recommended as highest-impact improvement
+  - type: llm-rubric
+    value: Post-upgrade availability is recalculated showing improvement
+  - type: llm-rubric
+    value: Generator single point of failure is noted as residual risk
+- description: fin-deal-structure eval 1
+  vars:
+    skill_content: file://../skills/fin-deal-structure/SKILL.md
+    prompt: Structure a deal for a 50MW hyperscale data center on an Opportunity Zone-eligible site in Virginia. Total project
+      cost $500M, PE/infra investors with LP/GP structure, 8% preferred return, 20% carried interest. The project includes
+      $50M of on-site solar and BESS eligible for ITC. 200,000 sqft building. Exit via sale at year 7 with 6.5% cap rate.
+      Entity should be Delaware LLC.
+  assert:
+  - type: llm-rubric
+    value: OZ benefits are calculated with post-OBBBA rules (rolling deferral, step-up, gain exclusion)
+  - type: llm-rubric
+    value: ITC is applied at 30% on $50M solar/BESS qualifying cost
+  - type: llm-rubric
+    value: Cost segregation reclassifies building components from 39yr to 5/7/15yr MACRS
+  - type: llm-rubric
+    value: 'Waterfall has 4 tiers: return of capital, preferred return, GP catch-up, carried interest'
+  - type: llm-rubric
+    value: Entity structure is Delaware LLC (pass-through)
+  - type: llm-rubric
+    value: Both Financial Disclaimer and Tax Disclaimer are included
+  - type: llm-rubric
+    value: Exit scenarios include sale, recapitalization, and REIT conversion
+  - type: llm-rubric
+    value: Section 179D deduction is calculated with prevailing wage rate
+- description: fin-deal-structure eval 2
+  vars:
+    skill_content: file://../skills/fin-deal-structure/SKILL.md
+    prompt: Structure a deal for a 10MW enterprise data center acquisition. No Opportunity Zone eligibility. C-corp structure
+      preferred by acquirer. Total acquisition price $100M. Cost segregation study budgeted. No on-site solar/BESS (ITC not
+      applicable). 80,000 sqft building. Exit via sale at year 7 with 7% cap rate. Annual NOI $15M with 3% growth.
+  assert:
+  - type: llm-rubric
+    value: Cost segregation reclassification percentages are calculated for DC components
+  - type: llm-rubric
+    value: MACRS acceleration benefit is quantified with 100% bonus depreciation
+  - type: llm-rubric
+    value: No OZ benefits are modeled (not eligible)
+  - type: llm-rubric
+    value: No ITC is applied (no solar/BESS)
+  - type: llm-rubric
+    value: Exit tax treatment reflects C-corp structure
+  - type: llm-rubric
+    value: Entity structure specifies C-corp with tax implications noted
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+  - type: llm-rubric
+    value: Sensitivity analysis shows impact of cap rate variation on returns
+- description: fin-deal-structure eval 3
+  vars:
+    skill_content: file://../skills/fin-deal-structure/SKILL.md
+    prompt: Structure a deal for a 20MW sovereign data center with DFI co-investment in an emerging market. LP/GP structure
+      with 10% preferred return and 25% carried interest. Total project cost $300M. 65% equity, 35% DFI concessional debt
+      at 3%. No US tax benefits applicable (international jurisdiction). Exit timeline 10+ years. 150,000 sqft building.
+  assert:
+  - type: llm-rubric
+    value: Entity structure accommodates DFI co-investment with governance provisions
+  - type: llm-rubric
+    value: Limited US tax benefits acknowledged for international jurisdiction
+  - type: llm-rubric
+    value: Waterfall models 10% preferred return and 25% carried interest
+  - type: llm-rubric
+    value: DFI concessional debt is modeled at below-market rate
+  - type: llm-rubric
+    value: Exit timeline reflects 10+ year sovereign hold period
+  - type: llm-rubric
+    value: Financial Disclaimer is present noting estimates only
+  - type: llm-rubric
+    value: Currency and repatriation considerations are noted
+  - type: llm-rubric
+    value: Sensitivity analysis includes exit timing as a variable
+- description: fin-debt-sizing eval 1
+  vars:
+    skill_content: file://../skills/fin-debt-sizing/SKILL.md
+    prompt: Size debt for a 20MW greenfield data center. Total project cost $200M, stabilized EBITDA $30M/year (Year 3+ at
+      90% occupancy). Target DSCR 1.30x minimum, interest rate 6%, 15-year amortization with 7-year term. Construction period
+      24 months. Lender requires minimum 8% debt yield and maximum 75% LTV.
+  assert:
+  - type: llm-rubric
+    value: Debt capacity is sized from CFADS (not raw EBITDA)
+  - type: llm-rubric
+    value: CFADS deducts taxes, maintenance capex, and working capital from EBITDA
+  - type: llm-rubric
+    value: DSCR is tested annually and remains above 1.30x minimum
+  - type: llm-rubric
+    value: LTV does not exceed 75% maximum
+  - type: llm-rubric
+    value: Amortization schedule shows beginning balance, payment, principal, interest, ending balance
+  - type: llm-rubric
+    value: Construction interest is capitalized during 24-month draw period
+  - type: llm-rubric
+    value: Balloon payment is identified at year 7 term maturity
+  - type: llm-rubric
+    value: Financial Disclaimer is included (not Tax Disclaimer)
+- description: fin-debt-sizing eval 2
+  vars:
+    skill_content: file://../skills/fin-debt-sizing/SKILL.md
+    prompt: 'Size debt for a 50MW hyperscale data center. Total project cost $800M, stabilized EBITDA $120M/year (contracted
+      single-tenant). Aggressive leverage target: 1.25x DSCR minimum, 5.5% interest rate, 20-year amortization with 10-year
+      term. Construction period 30 months. Lender is life insurance company.'
+  assert:
+  - type: llm-rubric
+    value: Lower DSCR requirement (1.25x) reflects contracted hyperscale cash flows
+  - type: llm-rubric
+    value: Higher leverage achieved due to stable contracted revenue
+  - type: llm-rubric
+    value: Cash trap threshold identified at DSCR below 1.15x
+  - type: llm-rubric
+    value: Balloon payment flagged at 10-year term maturity
+  - type: llm-rubric
+    value: Revenue concentration risk noted for single tenant
+  - type: llm-rubric
+    value: Sensitivity analysis includes NOI decline scenario
+  - type: llm-rubric
+    value: Amortization schedule present with annual covenant testing
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+- description: fin-debt-sizing eval 3
+  vars:
+    skill_content: file://../skills/fin-debt-sizing/SKILL.md
+    prompt: Size debt for a 5MW edge data center facility. Total project cost $40M, stabilized EBITDA $6M/year. Conservative
+      1.40x DSCR target, 7% interest rate, 10-year amortization with 5-year term. Construction period 6 months (modular).
+      Maximum LTV 60%.
+  assert:
+  - type: llm-rubric
+    value: Conservative DSCR (1.40x) reflects edge facility risk profile
+  - type: llm-rubric
+    value: Lower maximum LTV (60%) constrains leverage
+  - type: llm-rubric
+    value: Short construction period (6 months) results in minimal capitalized interest
+  - type: llm-rubric
+    value: Covenant compliance tested annually with Pass/Trap/Default status
+  - type: llm-rubric
+    value: Sensitivity analysis shows impact of rate increase on covenant compliance
+  - type: llm-rubric
+    value: Debt capacity is the minimum of DSCR, LTV, and debt yield constraints
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+  - type: llm-rubric
+    value: Balloon balance is calculated at 5-year term maturity
+- description: fin-due-diligence eval 1
+  vars:
+    skill_content: file://../skills/fin-due-diligence/SKILL.md
+    prompt: Conduct due diligence for the acquisition of an operating 20MW colocation data center in Chicago. The facility
+      is 85% occupied with 15 tenants, 3 years of audited financials are available, and the seller has provided a rent roll,
+      Phase I ESA, and building condition report. The largest tenant is 25% of revenue. The facility is 8 years old with original
+      UPS and generators.
+  assert:
+  - type: llm-rubric
+    value: All 4 workstreams are present (Technical, Commercial, Legal, Financial)
+  - type: llm-rubric
+    value: Each workstream has checklist items with status (Complete/Flagged/Missing)
+  - type: llm-rubric
+    value: Revenue concentration is assessed (25% top tenant)
+  - type: llm-rubric
+    value: Equipment age and remaining life are evaluated for 8-year-old systems
+  - type: llm-rubric
+    value: 3-year historical financials are analyzed
+  - type: llm-rubric
+    value: Summary dashboard shows completion percentage and critical flags count
+  - type: llm-rubric
+    value: Risk levels are assigned (Low/Medium/High/Critical)
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+- description: fin-due-diligence eval 2
+  vars:
+    skill_content: file://../skills/fin-due-diligence/SKILL.md
+    prompt: Conduct due diligence for refinancing a 50MW hyperscale data center in Virginia. The facility has existing debt
+      maturing in 6 months, a single investment-grade tenant on a 10-year contract (7 years remaining), and strong historical
+      EBITDA. The lender requires updated building condition report, environmental assessment, and financial projections.
+  assert:
+  - type: llm-rubric
+    value: Financial workstream is emphasized for refinancing transaction
+  - type: llm-rubric
+    value: Debt covenants and compliance are tested
+  - type: llm-rubric
+    value: Revenue concentration flagged for single-tenant exposure
+  - type: llm-rubric
+    value: Technical workstream is present but scoped for operating facility
+  - type: llm-rubric
+    value: Legal workstream checks lease assignment for new lender
+  - type: llm-rubric
+    value: Items use Complete/Flagged/Missing status tracking
+  - type: llm-rubric
+    value: Summary shows overall risk rating
+  - type: llm-rubric
+    value: Financial Disclaimer is included (no Tax Disclaimer)
+- description: fin-due-diligence eval 3
+  vars:
+    skill_content: file://../skills/fin-due-diligence/SKILL.md
+    prompt: Conduct due diligence for JV entry into a development-stage 30MW data center in Dallas. Land has been acquired,
+      zoning is approved, utility interconnection agreement is signed, but construction has not started. No existing revenue.
+      Construction budget is $300M with 24-month timeline. The developer is seeking a capital partner for 65% of equity.
+  assert:
+  - type: llm-rubric
+    value: Technical workstream focuses on site condition not existing equipment
+  - type: llm-rubric
+    value: Commercial workstream assesses market demand and pre-lease pipeline
+  - type: llm-rubric
+    value: Legal workstream emphasizes permits, zoning, and utility interconnection agreement
+  - type: llm-rubric
+    value: Financial workstream evaluates construction budget not historical financials
+  - type: llm-rubric
+    value: DD scope is adapted for development-stage (pre-construction) asset
+  - type: llm-rubric
+    value: All 4 workstreams are present with status tracking
+  - type: llm-rubric
+    value: Summary dashboard quantifies completion and critical flags
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+- description: fin-insurance-program eval 1
+  vars:
+    skill_content: file://../skills/fin-insurance-program/SKILL.md
+    prompt: Design an insurance program for a 100MW hyperscale data center under construction in Miami, Florida. Total construction
+      value is $1.5B. Construction timeline is 24 months starting June 2026, overlapping two full hurricane seasons. Construction
+      type is tilt-up concrete with steel superstructure. The site is in FEMA flood zone X (minimal flood risk) but within
+      30 miles of the Atlantic coast (named storm exposure). A 50MWh lithium-ion BESS system is included. The general contractor
+      has a strong safety record. Design the builder's risk program with named storm, flood, and BESS coverage.
+  assert:
+  - type: llm-rubric
+    value: Builder's risk coverage is primary with $1.5B TIV
+  - type: llm-rubric
+    value: Named storm deductible range is specified (2-5% TIV)
+  - type: llm-rubric
+    value: LEG 2/3 coverage is recommended with cost premium noted (2-3x LEG 1)
+  - type: llm-rubric
+    value: Lithium-ion BESS requires specialty placement at higher rates
+  - type: llm-rubric
+    value: Two hurricane season overlap is flagged as premium driver
+  - type: llm-rubric
+    value: Testing and commissioning period coverage is included
+- description: fin-insurance-program eval 2
+  vars:
+    skill_content: file://../skills/fin-insurance-program/SKILL.md
+    prompt: 'Create a comprehensive insurance program for an operational colocation facility in Ashburn, Virginia with 500+
+      tenants, 200MW IT capacity, TIV of $2B, annual revenue of $400M. The facility has SOC 2 Type II and ISO 27001 certifications.
+      Top 3 tenants represent 40% of revenue. SLA credits can reach $5M annually. The facility has N+1 redundancy (Tier III
+      equivalent). No BESS. Design coverage across all 6 types: property, BI, cyber, environmental, E&O, and assess whether
+      builder''s risk is needed for a planned 50MW expansion phase.'
+  assert:
+  - type: llm-rubric
+    value: All 6 coverage types are addressed with recommended limits
+  - type: llm-rubric
+    value: Business interruption waiting period considers SLA credit trigger alignment
+  - type: llm-rubric
+    value: Customer concentration risk (40% in top 3) drives contingent BI recommendation
+  - type: llm-rubric
+    value: Cyber insurance leverages SOC 2 and ISO 27001 for premium reduction
+  - type: llm-rubric
+    value: E&O coverage includes defense costs outside limits recommendation
+  - type: llm-rubric
+    value: Builder's risk for expansion is recommended as separate policy
+- description: fin-insurance-program eval 3
+  vars:
+    skill_content: file://../skills/fin-insurance-program/SKILL.md
+    prompt: Design an insurance program for a 50MW sovereign data center with a 100MWh lithium-ion BESS system in a non-hurricane
+      zone (Colorado). TIV $800M including $200M in BESS. The facility serves government agencies with classified workloads.
+      Environmental exposure includes 500,000 gallons of diesel fuel storage for backup generators and the lithium-ion BESS
+      with LFP chemistry. The BESS is in a separate structure 50 feet from the main building with dedicated fire suppression
+      (clean agent, no PFAS-containing foam). Assess BESS insurability, environmental program, and property coverage with
+      BESS exclusions.
+  assert:
+  - type: llm-rubric
+    value: BESS insurability challenge is identified requiring specialty market placement
+  - type: llm-rubric
+    value: LFP chemistry is noted as lower risk than NMC for underwriting
+  - type: llm-rubric
+    value: Separate BESS structure improves main facility property insurability
+  - type: llm-rubric
+    value: Environmental coverage addresses diesel storage and BESS thermal event risk
+  - type: llm-rubric
+    value: PFAS-free fire suppression is noted as positive underwriting factor
+  - type: llm-rubric
+    value: Financial disclaimer references DISCLAIMER-FRAMEWORK.md
+- description: fin-investor-memo eval 1
+  vars:
+    skill_content: file://../skills/fin-investor-memo/SKILL.md
+    prompt: Generate a VC investor memo for a Series B raise ($50-100M) for a 50MW data center campus in Phoenix, Arizona.
+      The company controls 200 acres with 500MW of utility capacity secured, has LOIs for 30MW from two hyperscale tenants,
+      and is led by a founding team with prior exits in infrastructure technology. The first 10MW phase is under construction.
+      Competitive moat is site control (200 acres) and power access (500MW secured with 2-year head start on competitors).
+      TAM is the $300B+ US data center market. Target exit via trade sale to REIT or infrastructure fund within 5-7 years.
+  assert:
+  - type: llm-rubric
+    value: Memo structure follows VC format with TAM, competitive moat, and exit path
+  - type: llm-rubric
+    value: Growth metrics (revenue CAGR, MW pipeline) are emphasized over yield metrics
+  - type: llm-rubric
+    value: Capital intensity paradox is addressed (why VC not project finance)
+  - type: llm-rubric
+    value: Team credentials and prior exits are prominently featured
+  - type: llm-rubric
+    value: Path to exit includes trade sale to REIT with timeline
+  - type: llm-rubric
+    value: Financial disclaimer includes 'not investment advice' language
+- description: fin-investor-memo eval 2
+  vars:
+    skill_content: file://../skills/fin-investor-memo/SKILL.md
+    prompt: 'Create a PE/infrastructure investor memo for a stabilized 200MW hyperscale data center with 95% occupancy, contracted
+      revenue from three hyperscale tenants on 10-15 year take-or-pay leases, and a DSCR of 1.45x. Total insured value $2B.
+      Current NOI of $180M annually with 3% annual escalators. The facility has 100MW of expansion capacity on adjacent land.
+      Capital structure: 60% senior debt at 5.5%, 40% equity. Reference FEDERAL-TAX-GUIDE.md for ITC on $50M qualifying solar
+      CapEx and MACRS depreciation benefits. Target levered equity IRR of 12-15%.'
+  assert:
+  - type: llm-rubric
+    value: Memo structure follows PE/infra format with yield, NOI, and cap rate emphasis
+  - type: llm-rubric
+    value: DSCR of 1.45x is prominently featured as debt service indicator
+  - type: llm-rubric
+    value: Contracted take-or-pay revenue provides downside protection narrative
+  - type: llm-rubric
+    value: FEDERAL-TAX-GUIDE.md is referenced for ITC and MACRS tax benefits
+  - type: llm-rubric
+    value: Expansion potential (100MW) is positioned as value creation opportunity
+  - type: llm-rubric
+    value: Financial disclaimer with 'not investment advice' and sensitivity caveat
+- description: fin-investor-memo eval 3
+  vars:
+    skill_content: file://../skills/fin-investor-memo/SKILL.md
+    prompt: Draft a DFI investor memo for a 30MW sovereign AI facility in Nairobi, Kenya targeting IFC co-investment alongside
+      private capital. The project creates 150 permanent jobs and 1,500 construction jobs, includes a technology transfer
+      program with University of Nairobi and JKUAT, provides sovereign data hosting for Kenyan government agencies, and enables
+      digital economy growth aligned with Kenya's Digital Economy Blueprint. Total investment $400M with DFI providing $100M
+      concessional debt. Reference DFI-FUNDING.md for IFC Performance Standards alignment and AfDB strategic priorities.
+  assert:
+  - type: llm-rubric
+    value: Development impact thesis appears BEFORE financial returns in memo structure
+  - type: llm-rubric
+    value: Job creation (permanent and construction) is quantified prominently
+  - type: llm-rubric
+    value: DFI-FUNDING.md is referenced for IFC Performance Standards alignment
+  - type: llm-rubric
+    value: Technology transfer program with specific universities is featured
+  - type: llm-rubric
+    value: Concessional financing structure explains DFI capital de-risking private investment
+  - type: llm-rubric
+    value: Kenya Digital Economy Blueprint is referenced by name
+- description: fin-ppa-analysis eval 1
+  vars:
+    skill_content: file://../skills/fin-ppa-analysis/SKILL.md
+    prompt: Analyze PPA options for a 30MW data center facility in ERCOT (Texas). Current grid tariff is $45/MWh. A solar
+      PPA has been offered at $35/MWh with 2% annual escalator over 15 years, physical delivery. Self-generation solar option
+      available with on-site land. ERCOT curtailment rates are 3-5% for solar. The operator has RE100 commitments requiring
+      additionality.
+  assert:
+  - type: llm-rubric
+    value: PPA is cheaper than grid on levelized cost basis
+  - type: llm-rubric
+    value: Basis risk is quantified for ERCOT (node-to-hub spread)
+  - type: llm-rubric
+    value: Curtailment rate reflects Texas market (3-5%)
+  - type: llm-rubric
+    value: Levelized cost comparison table includes all three options
+  - type: llm-rubric
+    value: Additionality assessment addresses RE100 requirements
+  - type: llm-rubric
+    value: Sensitivity analysis varies curtailment, grid escalation, and basis risk
+  - type: llm-rubric
+    value: Both Financial Disclaimer and Tax Disclaimer are included
+  - type: llm-rubric
+    value: Self-gen LCOE includes ITC benefit
+- description: fin-ppa-analysis eval 2
+  vars:
+    skill_content: file://../skills/fin-ppa-analysis/SKILL.md
+    prompt: Analyze PPA options for a 10MW data center in PJM (Virginia). Current grid tariff is $65/MWh. A virtual PPA (financial
+      settlement) has been offered at $50/MWh with 1.5% escalator over 12 years. PJM is a congested market with high basis
+      risk. No on-site self-generation option (urban site). The operator needs Scope 2 market-based accounting for ESG reporting.
+  assert:
+  - type: llm-rubric
+    value: Basis risk is significant for PJM ($5-8/MWh range)
+  - type: llm-rubric
+    value: Virtual PPA accounting treatment (ASC 815) is noted
+  - type: llm-rubric
+    value: Net PPA cost exceeds headline price after basis risk adder
+  - type: llm-rubric
+    value: Additionality assessment addresses Scope 2 market-based accounting
+  - type: llm-rubric
+    value: Self-gen viability is limited by urban site constraints
+  - type: llm-rubric
+    value: Levelized comparison shows PPA vs grid with basis risk included
+  - type: llm-rubric
+    value: Sensitivity analysis shows basis risk as critical variable
+  - type: llm-rubric
+    value: Financial and Tax disclaimers are included
+- description: fin-ppa-analysis eval 3
+  vars:
+    skill_content: file://../skills/fin-ppa-analysis/SKILL.md
+    prompt: Analyze energy procurement for a 50MW hyperscale data center in Northern Europe. Grid tariff is $80/MWh (carbon-inclusive).
+      A wind PPA is offered at $55/MWh with 1% escalator over 20 years. Self-generation wind option available with high 35%
+      capacity factor. ITC is not applicable (non-US jurisdiction). CSRD additionality requirements apply. Nordic curtailment
+      rates are low (1-2%).
+  assert:
+  - type: llm-rubric
+    value: International tariff handling without US-specific assumptions
+  - type: llm-rubric
+    value: Self-gen is competitive at 50MW scale with 35% wind capacity factor
+  - type: llm-rubric
+    value: ITC is correctly excluded for non-US jurisdiction
+  - type: llm-rubric
+    value: CSRD additionality requirements are specifically addressed
+  - type: llm-rubric
+    value: Wind PPA is competitive against carbon-inclusive grid tariff
+  - type: llm-rubric
+    value: Low curtailment (1-2%) improves PPA economics
+  - type: llm-rubric
+    value: Sensitivity analysis includes curtailment variation
+  - type: llm-rubric
+    value: Financial Disclaimer is included
+- description: fin-project-model eval 1
+  vars:
+    skill_content: file://../skills/fin-project-model/SKILL.md
+    prompt: Build a 10-year financial model for a 50MW hyperscale data center with 70% senior debt at 6% interest and 30%
+      equity. Total CapEx is $500M. Revenue is contracted at $140/kW/month with 100% occupancy from Year 1 (take-or-pay).
+      OpEx is 50% of revenue. Model MACRS 5-year accelerated depreciation plus 30% ITC on $50M of qualifying solar CapEx.
+      Equity hurdle rate is 10%. Discount rate 8%.
+  assert:
+  - type: llm-rubric
+    value: IRR is calculated for both project (unlevered) and equity (levered)
+  - type: llm-rubric
+    value: NPV is calculated at 8% discount rate
+  - type: llm-rubric
+    value: MOIC is computed as total distributions divided by equity invested
+  - type: llm-rubric
+    value: Multi-tranche waterfall includes preferred return at 10% hurdle
+  - type: llm-rubric
+    value: MACRS 5-year depreciation schedule is applied to qualifying equipment
+  - type: llm-rubric
+    value: ITC of 30% on $50M qualifying solar CapEx produces $15M credit
+  - type: llm-rubric
+    value: DSCR is calculated and maintained above covenant minimum
+  - type: llm-rubric
+    value: Financial and Tax disclaimers are included in output
+- description: fin-project-model eval 2
+  vars:
+    skill_content: file://../skills/fin-project-model/SKILL.md
+    prompt: 'Create a 15-year financial model for a 20MW colocation facility with 3-year occupancy ramp (30% Year 1, 60% Year
+      2, 85% Year 3, 95% stabilized). Revenue at $150/kW/month retail pricing. Capital structure: $120M total CapEx, 65% senior
+      debt at 5.5%, 10% mezzanine at 13% coupon, 25% equity. Mezzanine has 2-year interest-only period. Equity hurdle 12%,
+      80/20 LP/GP split with catch-up. Include 100% bonus depreciation post-OBBBA.'
+  assert:
+  - type: llm-rubric
+    value: 'Occupancy ramp is modeled: 30%, 60%, 85%, then 95% stabilized'
+  - type: llm-rubric
+    value: Mezzanine debt is modeled with 2-year interest-only period
+  - type: llm-rubric
+    value: Equity waterfall has preferred return, catch-up, and carried interest
+  - type: llm-rubric
+    value: Bonus depreciation at 100% is applied in Year 1 post-OBBBA
+  - type: llm-rubric
+    value: MOIC is calculated reflecting multi-year investment horizon
+  - type: llm-rubric
+    value: Sensitivity analysis includes occupancy rate as a key variable
+  - type: llm-rubric
+    value: Financial and Tax disclaimers are included with 'not investment advice' text
+  - type: llm-rubric
+    value: Revenue escalation is applied after stabilization
+- description: fin-project-model eval 3
+  vars:
+    skill_content: file://../skills/fin-project-model/SKILL.md
+    prompt: 'Model a 100MW sovereign data center with government cost-plus contract. Total CapEx $1.5B at $15M/MW (sovereign
+      premium). Revenue is cost-plus-10% margin guaranteed by government appropriation. Capital structure: 20% government
+      debt at 3% (subsidized) and 80% government equity (no external equity). Projection period 20 years. No ITC or PTC. MACRS
+      applies to qualifying equipment. Discount rate 5% (government WACC). No equity waterfall needed (single government entity).'
+  assert:
+  - type: llm-rubric
+    value: Cost-plus revenue model produces stable 10% margin above OpEx
+  - type: llm-rubric
+    value: Low leverage (20% debt) reflects government financing structure
+  - type: llm-rubric
+    value: 20-year projection captures full asset lifecycle
+  - type: llm-rubric
+    value: IRR reflects low-risk government-backed structure
+  - type: llm-rubric
+    value: NPV is calculated at 5% government WACC discount rate
+  - type: llm-rubric
+    value: MACRS depreciation is applied despite government ownership
+  - type: llm-rubric
+    value: Financial disclaimer is included noting estimates only
+  - type: llm-rubric
+    value: Sensitivity analysis identifies construction cost as top driver
+- description: fin-project-tco eval 1
+  vars:
+    skill_content: file://../skills/fin-project-tco/SKILL.md
+    prompt: Calculate the 10-year TCO for a 10MW Tier III data center in Virginia. The facility is greenfield, owner-occupied,
+      with PUE 1.35. Virginia offers sales tax exemption on data center equipment (qualifying at $150M+ investment). Use Dominion
+      Energy industrial rate of 6.5 cents/kWh. The project qualifies for 100% bonus depreciation post-OBBBA. No on-site renewables.
+      Discount rate 8%.
+  assert:
+  - type: llm-rubric
+    value: CapEx is calculated and falls within $100-130M range for a 10MW Tier III facility
+  - type: llm-rubric
+    value: Annual power cost is computed as total facility kW * $0.065/kWh * 8760 hours with escalation
+  - type: llm-rubric
+    value: Virginia sales tax exemption is modeled with $150M investment threshold noted
+  - type: llm-rubric
+    value: Bonus depreciation at 100% is applied to cost-segregated assets (40-60% of CapEx)
+  - type: llm-rubric
+    value: NPV is calculated at 8% discount rate with all costs discounted
+  - type: llm-rubric
+    value: Sensitivity analysis includes power cost, PUE, construction cost, discount rate, and utilization
+  - type: llm-rubric
+    value: Financial and Tax disclaimers are included with 'not investment advice' text
+- description: fin-project-tco eval 2
+  vars:
+    skill_content: file://../skills/fin-project-tco/SKILL.md
+    prompt: Build a 20-year TCO comparison for a 50MW hyperscale data center in Texas (ERCOT) with behind-the-meter solar
+      (20MW array, $30M CapEx) qualifying for 30% ITC with prevailing wage. Texas has no state income tax. Power cost 5.5
+      cents/kWh grid, 3.0 cents/kWh solar PPA. Property tax abatement available for 10 years under JETI program. PUE 1.25
+      (liquid cooling). Discount rate 9%.
+  assert:
+  - type: llm-rubric
+    value: 20-year analysis horizon is used with year-by-year escalation
+  - type: llm-rubric
+    value: ITC is calculated as 30% of $30M qualifying solar CapEx = $9M
+  - type: llm-rubric
+    value: Property tax abatement is modeled for years 1-10, then full property tax years 11-20
+  - type: llm-rubric
+    value: PUE of 1.25 is used reflecting liquid cooling (validated as physically possible)
+  - type: llm-rubric
+    value: Texas ERCOT power rate of 5.5 cents/kWh is validated against POWER-TARIFFS.md
+  - type: llm-rubric
+    value: NPV is calculated at 9% discount rate over 20-year horizon
+  - type: llm-rubric
+    value: Sensitivity tornado chart ranks variables by NPV impact
+  - type: llm-rubric
+    value: Financial and Tax disclaimers are included with 'not investment advice' text
+  - type: llm-rubric
+    value: Sensitivity analyses are presented as illustrations, not probabilistic forecasts
+- description: fin-project-tco eval 3
+  vars:
+    skill_content: file://../skills/fin-project-tco/SKILL.md
+    prompt: Calculate 10-year TCO for a 5MW sovereign AI facility in an Opportunity Zone in Ohio. The facility has enhanced
+      security requirements adding a 40% CapEx premium over standard construction ($15M/MW vs $11M/MW). The site qualifies
+      for Ohio's data center sales tax exemption ($100M+ threshold). OZ investment via Qualified Opportunity Fund. No on-site
+      renewables. PUE 1.40 (air-cooled). Discount rate 10%.
+  assert:
+  - type: llm-rubric
+    value: CapEx reflects sovereign premium at $15M/MW ($75M total for 5MW)
+  - type: llm-rubric
+    value: Staffing model uses higher FTE-per-MW ratio appropriate for sovereign facilities
+  - type: llm-rubric
+    value: Ohio sales tax exemption is modeled with $100M threshold checked against $75M CapEx
+  - type: llm-rubric
+    value: 'Opportunity Zone benefits are calculated: capital gains deferral, 10%/15% basis step-up, gain exclusion at 10yr'
+  - type: llm-rubric
+    value: OpEx-to-CapEx ratio falls in the 10-15% range for sovereign type
+  - type: llm-rubric
+    value: 10-year NPV is calculated at 10% discount rate
+  - type: llm-rubric
+    value: Both Financial and Tax disclaimers are present
+  - type: llm-rubric
+    value: Sensitivity analyses are presented as illustrations, not probabilistic forecasts
+- description: predev-connectivity eval 1
+  vars:
+    skill_content: file://../skills/predev-connectivity/SKILL.md
+    prompt: 'Assess connectivity for a 30MW colocation data center in Ashburn, Virginia (Loudoun County). This is a carrier-neutral
+      facility targeting 20+ on-net carriers. Greenfield site on industrial land within 0.5 miles of multiple lit buildings.
+      Requirements: minimum 4 diverse carrier entrances, direct IX peering with Equinix Ashburn, ultra-low latency (<1ms to
+      peering point), initial 400Gbps aggregate bandwidth scaling to 2Tbps within 5 years. Meet-me room must be a revenue
+      center.'
+  assert:
+  - type: llm-rubric
+    value: Connectivity rating is Excellent given Ashburn's fiber density
+  - type: llm-rubric
+    value: Fiber audit identifies multiple lit buildings within 1 mile radius
+  - type: llm-rubric
+    value: Carrier diversity analysis confirms 4+ physically diverse entrance paths are achievable
+  - type: llm-rubric
+    value: IX peering assessment references Equinix Ashburn with sub-1ms latency
+  - type: llm-rubric
+    value: Meet-me room design includes carrier-neutral architecture and revenue modeling
+  - type: llm-rubric
+    value: Cost estimate includes NRC and MRC components for fiber, carriers, and IX ports
+  - type: llm-rubric
+    value: Output includes both markdown report and JSON sidecar with artifact_type connectivity-assessment
+- description: predev-connectivity eval 2
+  vars:
+    skill_content: file://../skills/predev-connectivity/SKILL.md
+    prompt: Assess connectivity for a 10MW sovereign data center in rural Wyoming, approximately 30 miles from the nearest
+      town with fiber infrastructure. This facility requires government security clearance, domestic-only routing, encrypted
+      transport, and TEMPEST-compliant fiber entrance design. Only 2 carriers have presence within 50 miles. Single fiber
+      route currently exists along the highway corridor. Bandwidth requirement is 40Gbps initial, 100Gbps at 5 years. Latency
+      is not critical (batch AI training workloads). No IX peering needed.
+  assert:
+  - type: llm-rubric
+    value: Connectivity rating reflects the challenging rural location
+  - type: llm-rubric
+    value: Single fiber route is flagged as a critical single point of failure
+  - type: llm-rubric
+    value: Recommendation includes constructing a second diverse physical fiber path
+  - type: llm-rubric
+    value: Limited carrier diversity (2 carriers) is identified as a risk with mitigation strategies
+  - type: llm-rubric
+    value: Sovereign requirements (TEMPEST, encrypted transport, domestic routing) are addressed
+  - type: llm-rubric
+    value: Cost estimate reflects long-distance fiber construction costs
+  - type: llm-rubric
+    value: Fiber entrance design accounts for TEMPEST and physical security requirements
+- description: predev-connectivity eval 3
+  vars:
+    skill_content: file://../skills/predev-connectivity/SKILL.md
+    prompt: 'Assess connectivity for a 20MW hyperscale data center on a coastal site in Mombasa, Kenya, 5km from the SEACOM
+      and EASSy subsea cable landing station. The facility will serve as a regional hub for East Africa with international
+      traffic to Europe, Middle East, and India. Requirements: 3 diverse carrier entrances, remote IX peering to KIXP (Kenya
+      Internet Exchange Point) in Nairobi acceptable, initial 100Gbps bandwidth scaling to 500Gbps, low latency to Europe
+      (<80ms). Carrier options include Safaricom, Liquid Intelligent Technologies, and Airtel Africa.'
+  assert:
+  - type: llm-rubric
+    value: Subsea cable assessment covers both SEACOM and EASSy cable systems with capacity and route details
+  - type: llm-rubric
+    value: Latency to Europe is estimated and validated against the <80ms requirement
+  - type: llm-rubric
+    value: Three carriers are evaluated for physical path diversity to the site
+  - type: llm-rubric
+    value: KIXP remote peering from Mombasa is assessed with added latency estimate vs direct Nairobi peering
+  - type: llm-rubric
+    value: Subsea cable landing rights and consortium access requirements are flagged
+  - type: llm-rubric
+    value: Cost estimate includes subsea access fees and carrier circuit costs for international transit
+  - type: llm-rubric
+    value: Risk factors include subsea cable cut scenarios and carrier concentration in East Africa
+- description: predev-environmental eval 1
+  vars:
+    skill_content: file://../skills/predev-environmental/SKILL.md
+    prompt: Produce an environmental assessment for a 100MW hyperscale data center in Phoenix, Arizona. The site is in an
+      extremely high water-stress region (WRI classification). Cooling is hybrid (air + evaporative for peak). Water source
+      is municipal supply from Salt River Project allocation. The project has 15 x 3MW diesel generators for backup. The site
+      is former agricultural land (no wetlands or endangered species). No sustainability certification targeted but the municipality
+      requires WUE < 1.2. Prior appropriation water doctrine applies.
+  assert:
+  - type: llm-rubric
+    value: Prior appropriation doctrine is correctly applied for Arizona water rights
+  - type: llm-rubric
+    value: Colorado River Compact allocation risk is explicitly addressed with drought scenarios
+  - type: llm-rubric
+    value: WUE < 1.2 municipal requirement is analyzed with design implications
+  - type: llm-rubric
+    value: Zero-liquid-discharge (ZLD) is evaluated with cost and energy trade-off analysis
+  - type: llm-rubric
+    value: Air quality assessment addresses Maricopa County non-attainment area restrictions
+  - type: llm-rubric
+    value: Drought contingency plan includes tiered water reduction scenarios
+- description: predev-environmental eval 2
+  vars:
+    skill_content: file://../skills/predev-environmental/SKILL.md
+    prompt: Create an environmental assessment for a 50MW campus data center in Ashburn, Virginia targeting LEED Gold certification.
+      Cooling is evaporative (cooling towers). Water source is municipal supply from Loudoun Water. 10 x 2.5MW diesel generators
+      for backup. The site is a greenfield parcel in an industrial zone with no wetlands, not in floodplain, no endangered
+      species concerns. ASHRAE climate zone 4A. Low water stress region. Riparian rights apply.
+  assert:
+  - type: llm-rubric
+    value: Riparian water rights doctrine is correctly applied for Virginia
+  - type: llm-rubric
+    value: LEED Gold credit analysis uses ASHRAE 90.4 baseline (not 90.1) for energy optimization
+  - type: llm-rubric
+    value: Cooling tower water efficiency credits are analyzed for LEED Water Efficiency category
+  - type: llm-rubric
+    value: LEED certification timeline (12-18 months) and cost estimate are provided
+  - type: llm-rubric
+    value: Air quality permit requirements for Virginia DEQ are identified
+  - type: llm-rubric
+    value: LEED credit-by-credit analysis shows path to 60+ points for Gold certification
+- description: predev-environmental eval 3
+  vars:
+    skill_content: file://../skills/predev-environmental/SKILL.md
+    prompt: Develop an environmental assessment for a 200MW+ sovereign data center campus in a Nordic country (Sweden). Air-cooled
+      facility using free cooling (climate zone 7, annual average temperature 5C). No water consumption for cooling. BREEAM
+      Outstanding certification targeted. 20 x 3MW diesel generators for backup. Greenfield site on previously logged forest
+      land. Strict EU environmental regulations apply including EU EIA Directive, EU Habitats Directive, and Swedish Environmental
+      Code (Miljobalken). The site is near a protected river (salmon habitat).
+  assert:
+  - type: llm-rubric
+    value: EU EIA Directive requirement is identified for greenfield forest-to-industrial conversion
+  - type: llm-rubric
+    value: EU Habitats Directive compliance is assessed for proximity to protected salmon habitat
+  - type: llm-rubric
+    value: Swedish Environmental Code (Miljobalken) is referenced as governing environmental law
+  - type: llm-rubric
+    value: Minimal water impact is correctly noted for air-cooled facility with free cooling
+  - type: llm-rubric
+    value: BREEAM Outstanding path leverages excellent PUE from Nordic free cooling climate
+  - type: llm-rubric
+    value: Salmon habitat proximity is flagged as key environmental risk requiring mitigation
+- description: predev-grid-interconnection eval 1
+  vars:
+    skill_content: file://../skills/predev-grid-interconnection/SKILL.md
+    prompt: Assess grid interconnection for a 50MW data center in PJM (Dominion Virginia territory, Loudoun County). The site
+      is adjacent to an existing 230kV substation with 30MW of available capacity. The developer has not yet applied to the
+      interconnection queue. Timeline is standard (18-36 months). Willing to fund participant-funded upgrades.
+  assert:
+  - type: llm-rubric
+    value: PJM-specific interconnection process is mapped (not generic ISO process)
+  - type: llm-rubric
+    value: FERC Order 2023 cluster study process is referenced with cohort delay risk
+  - type: llm-rubric
+    value: Queue depth analysis references PJM Dominion zone congestion
+  - type: llm-rubric
+    value: Phased energization strategy is recommended given 30MW existing vs 50MW target
+  - type: llm-rubric
+    value: Cost estimate includes 2x feasibility-to-facilities escalation warning
+  - type: llm-rubric
+    value: Timeline accounts for all study phases (feasibility, system impact, facilities, IA)
+  - type: llm-rubric
+    value: 'Output includes both markdown report and JSON sidecar with artifact_type: grid-interconnection-assessment'
+- description: predev-grid-interconnection eval 2
+  vars:
+    skill_content: file://../skills/predev-grid-interconnection/SKILL.md
+    prompt: Evaluate interconnection options for a 200MW hyperscale data center campus in ERCOT (West Texas). The site is
+      on open land 5 miles from the nearest 345kV transmission line. The developer needs first phase power (50MW) within 18
+      months and full 200MW within 48 months. Willing to fund a dedicated substation.
+  assert:
+  - type: llm-rubric
+    value: ERCOT-specific process is used (not generic PJM/FERC process)
+  - type: llm-rubric
+    value: ERCOT queue depth (300+ GW) and withdrawal rate (80%) are referenced
+  - type: llm-rubric
+    value: Load interconnection is distinguished from generation interconnection
+  - type: llm-rubric
+    value: Dedicated substation at 345kV is recommended for 200MW capacity
+  - type: llm-rubric
+    value: Phased energization plan addresses 50MW Phase 1 within 18 months
+  - type: llm-rubric
+    value: Behind-the-meter generation is evaluated as bridge strategy for initial capacity
+  - type: llm-rubric
+    value: Cost estimate accounts for 5-mile transmission line extension
+- description: predev-grid-interconnection eval 3
+  vars:
+    skill_content: file://../skills/predev-grid-interconnection/SKILL.md
+    prompt: A developer wants to deploy a 8MW edge-adjacent data center in Northern California (PG&E territory, CAISO). The
+      site has existing 12kV distribution service rated at 2MW. The developer wants to avoid the interconnection queue entirely
+      and is considering behind-the-meter natural gas generation. Timeline is critical -- needs power within 12 months.
+  assert:
+  - type: llm-rubric
+    value: Behind-the-meter generation is recommended as primary strategy for 12-month timeline
+  - type: llm-rubric
+    value: CAISO-specific BTM threshold rules are referenced
+  - type: llm-rubric
+    value: Distribution service upgrade from 2MW to 8MW is evaluated as alternative
+  - type: llm-rubric
+    value: California air quality permitting for gas generation is flagged as risk
+  - type: llm-rubric
+    value: ISO queue avoidance is quantified in timeline savings
+  - type: llm-rubric
+    value: Hybrid strategy (BTM generation + grid) is modeled
+  - type: llm-rubric
+    value: Cost comparison between queue path and BTM path is provided
+- description: predev-market-study eval 1
+  vars:
+    skill_content: file://../skills/predev-market-study/SKILL.md
+    prompt: Conduct a data center market study for Northern Virginia (Loudoun County / Prince William County). We are evaluating
+      a 50MW hyperscale greenfield development. Primary workload is AI training. No anchor tenant yet. We know the market
+      is the largest in the US but need a formal supply-demand analysis. Our site feasibility report shows excellent power
+      availability (Dominion Energy territory, 6-7c/kWh) and fiber connectivity.
+  assert:
+  - type: llm-rubric
+    value: Market inventory includes operational, under construction, and planned capacity in MW
+  - type: llm-rubric
+    value: Absorption rate is calculated with trailing 12-month data
+  - type: llm-rubric
+    value: Pricing analysis distinguishes wholesale from retail with $/kW/month rates
+  - type: llm-rubric
+    value: Gap analysis projects supply vs demand over 3-5 year horizon
+  - type: llm-rubric
+    value: AI training demand is identified as a distinct demand driver from general cloud
+  - type: llm-rubric
+    value: Dominion Energy interconnection queue is flagged as a supply constraint
+  - type: llm-rubric
+    value: Output includes both markdown report and JSON sidecar with artifact_type market-study
+- description: predev-market-study eval 2
+  vars:
+    skill_content: file://../skills/predev-market-study/SKILL.md
+    prompt: Analyze the data center market in Lagos, Nigeria and Nairobi, Kenya for a 5MW colocation facility targeting enterprise
+      and cloud tenants. This is an emerging market entry -- we have no existing presence. The facility will serve both local
+      enterprises and international cloud operators seeking African points of presence. Budget for a multi-market comparison
+      to determine which metro offers better entry economics.
+  assert:
+  - type: llm-rubric
+    value: Both Lagos and Nairobi markets are analyzed with comparable methodology
+  - type: llm-rubric
+    value: Supply inventory reflects the small but growing nature of African DC markets
+  - type: llm-rubric
+    value: Power reliability is flagged as a critical differentiator between the two markets
+  - type: llm-rubric
+    value: DFI funding sources are referenced for emerging market DC development
+  - type: llm-rubric
+    value: Demand drivers include both local enterprise and international cloud operator expansion
+  - type: llm-rubric
+    value: Pricing analysis reflects emerging market premium over mature markets
+  - type: llm-rubric
+    value: Risk factors include power infrastructure, regulatory uncertainty, and currency risk
+- description: predev-market-study eval 3
+  vars:
+    skill_content: file://../skills/predev-market-study/SKILL.md
+    prompt: Conduct a market study for a 10MW enterprise colocation facility in Salt Lake City, Utah. This is a secondary
+      US market play -- we believe there is unmet enterprise demand from local financial services, healthcare, and government
+      tenants. We have a pre-committed anchor tenant for 3MW. The site feasibility report shows competitive power rates (Rocky
+      Mountain Power, 5-6c/kWh), good seismic profile, and available fiber infrastructure.
+  assert:
+  - type: llm-rubric
+    value: Market is characterized as secondary/emerging with limited existing supply
+  - type: llm-rubric
+    value: Enterprise demand drivers are specific to the Salt Lake City metro economy
+  - type: llm-rubric
+    value: The 3MW anchor tenant pre-commitment is factored into the viability analysis
+  - type: llm-rubric
+    value: Pricing comparison to primary US markets shows the secondary market discount
+  - type: llm-rubric
+    value: Power cost advantage from Rocky Mountain Power is reflected in market attractiveness
+  - type: llm-rubric
+    value: Gap analysis distinguishes enterprise colo demand from hyperscale demand
+  - type: llm-rubric
+    value: Risk factors include market size limitations and competition from primary market alternatives
+- description: predev-mou-framework eval 1
+  vars:
+    skill_content: file://../skills/predev-mou-framework/SKILL.md
+    prompt: 'Generate a government MOU for a sovereign data center project in a US state. The state economic development authority
+      is offering a 15-year property tax PILOT, sales tax exemption on equipment, and infrastructure improvements (road and
+      water). In exchange, the developer commits to 200 permanent jobs, $800M capital investment over 3 phases, and a workforce
+      training program. The MOU must include clawback provisions tied to job creation milestones. Jurisdiction: Virginia.
+      Timeline to definitive agreement: 90 days.'
+  assert:
+  - type: llm-rubric
+    value: MOU includes property tax PILOT with 15-year term and specific abatement schedule
+  - type: llm-rubric
+    value: Clawback provisions are tied to specific job creation milestones (not generic language)
+  - type: llm-rubric
+    value: Sales tax exemption scope is defined (equipment types, construction materials)
+  - type: llm-rubric
+    value: Infrastructure commitments specify government obligations (road, water improvements)
+  - type: llm-rubric
+    value: Confidentiality provisions are explicitly identified as binding
+  - type: llm-rubric
+    value: Condition precedent includes required legislative/commission approval
+- description: predev-mou-framework eval 2
+  vars:
+    skill_content: file://../skills/predev-mou-framework/SKILL.md
+    prompt: 'Draft a landowner LOI for a 50-acre site purchase option. The developer wants a 24-month exclusive due diligence
+      period with the right to conduct environmental assessments, soil testing, and utility surveys. Purchase option price
+      is $15M, exercisable within the due diligence period. Environmental liability remains with the current landowner for
+      pre-existing contamination. The LOI is non-binding except for exclusivity, confidentiality, and access rights. Include
+      a $500K breakup fee if the developer exercises the option then fails to close. Jurisdiction: Texas.'
+  assert:
+  - type: llm-rubric
+    value: Purchase option price ($15M) and exercise period (24 months) are clearly stated
+  - type: llm-rubric
+    value: Environmental liability for pre-existing contamination is allocated to landowner
+  - type: llm-rubric
+    value: Exclusivity, confidentiality, and access rights are identified as binding provisions
+  - type: llm-rubric
+    value: Due diligence access rights specify permitted activities (environmental, soil, utility)
+  - type: llm-rubric
+    value: Breakup fee of $500K is structured as liquidated damages, not penalty
+  - type: llm-rubric
+    value: LOI explicitly distinguishes binding from non-binding provisions by section
+- description: predev-mou-framework eval 3
+  vars:
+    skill_content: file://../skills/predev-mou-framework/SKILL.md
+    prompt: 'Create a utility MOU for a 100MW+ power commitment for a hyperscale data center campus with phased delivery.
+      Phase 1 requires 30MW within 18 months, Phase 2 adds 40MW at month 30, Phase 3 adds 30MW+ at month 42. The utility will
+      build a dedicated substation with cost sharing (developer pays 60%, utility reimbursed through rate base over 15 years).
+      Dual-feed diverse path required from separate substations. The developer seeks an economic development tariff below
+      standard commercial rates. Non-binding except for confidentiality and cost-sharing for feasibility study. Jurisdiction:
+      Georgia.'
+  assert:
+  - type: llm-rubric
+    value: Phased power delivery schedule specifies MW and timeline for each phase
+  - type: llm-rubric
+    value: Substation cost-sharing terms define developer contribution (60%) and utility recovery mechanism
+  - type: llm-rubric
+    value: Dual-feed requirement from separate substations is explicitly stated
+  - type: llm-rubric
+    value: Economic development tariff request includes reference to comparable rate structures
+  - type: llm-rubric
+    value: MOU explicitly states it does not constitute or replace a formal interconnection agreement
+  - type: llm-rubric
+    value: Feasibility study cost allocation is identified as a binding provision
+- description: predev-permitting eval 1
+  vars:
+    skill_content: file://../skills/predev-permitting/SKILL.md
+    prompt: 'Create a permitting roadmap for a 100MW hyperscale data center campus in Loudoun County, Virginia (data center
+      alley). The site is in a pre-zoned data center industrial park with by-right development rights. Three phases: 30MW,
+      35MW, 35MW over 4 years. Diesel generators (20 x 3MW) require air quality permits. Dual utility feed from Dominion Energy.
+      Building height under 45ft. Air-cooled facility, no water permits for cooling needed. No wetlands, not in floodplain.'
+  assert:
+  - type: llm-rubric
+    value: By-right zoning status is recognized (no CUP or public hearing required)
+  - type: llm-rubric
+    value: Air quality permit for diesel generators is identified with Virginia DEQ as authority
+  - type: llm-rubric
+    value: Utility interconnection is recommended to file immediately on day one
+  - type: llm-rubric
+    value: Critical path analysis shows compressed timeline due to pre-zoned industrial park
+  - type: llm-rubric
+    value: Parallel permit tracks are identified (building, air quality, utility run simultaneously)
+  - type: llm-rubric
+    value: REGULATORY-MATRIX.md is not needed (US domestic jurisdiction)
+- description: predev-permitting eval 2
+  vars:
+    skill_content: file://../skills/predev-permitting/SKILL.md
+    prompt: 'Develop a permitting roadmap for a 50MW sovereign data center in an EU member state (Ireland). The facility will
+      process government data with data residency requirements. The site is greenfield on agricultural land requiring change
+      of use. Environmental Impact Assessment is mandatory under EU EIA Directive. Water cooling using municipal supply (estimated
+      500,000 gallons/day). Generator backup: 10 x 2.5MW diesel. Foreign investment review may apply. Timeline target: operational
+      in 30 months.'
+  assert:
+  - type: llm-rubric
+    value: EU EIA Directive requirement is identified as mandatory for agricultural-to-industrial conversion
+  - type: llm-rubric
+    value: Irish planning authority (An Bord Pleanala) is referenced for planning permission
+  - type: llm-rubric
+    value: REGULATORY-MATRIX.md is loaded for data residency and foreign investment requirements
+  - type: llm-rubric
+    value: Water abstraction license is identified given 500K gal/day municipal consumption
+  - type: llm-rubric
+    value: Timeline assessment warns that 30-month target is aggressive given EIA requirements
+  - type: llm-rubric
+    value: Critical path shows EIA as longest-duration item gating construction start
+- description: predev-permitting eval 3
+  vars:
+    skill_content: file://../skills/predev-permitting/SKILL.md
+    prompt: Create a permitting roadmap for a 25MW modular data center in rural Texas with behind-the-meter natural gas generation.
+      The facility includes 8 x 2MW natural gas reciprocating engines for BTM power and 4 x 2MW diesel generators for backup.
+      The site requires a conditional use permit (currently zoned agricultural). Air quality permits from TCEQ are required
+      for both gas engines and diesel generators. The site is in ERCOT territory. Water source is an on-site well for evaporative
+      cooling. Building height 30ft. No wetlands.
+  assert:
+  - type: llm-rubric
+    value: Conditional use permit is identified as requiring public hearing for agricultural rezoning
+  - type: llm-rubric
+    value: TCEQ air quality permits distinguish between continuous gas engines and emergency diesel
+  - type: llm-rubric
+    value: New Source Review potential is flagged for natural gas engines as continuous emission source
+  - type: llm-rubric
+    value: Water well permit from Texas Water Development Board is identified
+  - type: llm-rubric
+    value: ERCOT interconnection is included for grid backup/export configuration
+  - type: llm-rubric
+    value: Critical path correctly identifies CUP as the gating permit before construction
+- description: predev-project-narrative eval 1
+  vars:
+    skill_content: file://../skills/predev-project-narrative/SKILL.md
+    prompt: 'Generate an investor-facing project narrative for a 50MW hyperscale greenfield data center in Dallas/Fort Worth,
+      Texas. The site feasibility report scored GO (4.1/5.0) with strengths in power (ERCOT, 5.5c/kWh), cost (low construction,
+      no state income tax), and labor. The market study shows a 200MW supply gap in DFW with 95% absorption rate. Target audience
+      is equity investors. Tone is balanced. Key selling points: market opportunity, financial returns, location advantage.
+      Total investment $600M, target IRR 18%, MOIC 2.2x.'
+  assert:
+  - type: llm-rubric
+    value: Output is flowing prose paragraphs, not a structured data dump or bullet list
+  - type: llm-rubric
+    value: Investor-specific language is used (IRR, MOIC, capital structure, exit)
+  - type: llm-rubric
+    value: Market supply gap (200MW) and absorption rate (95%) are woven into the narrative
+  - type: llm-rubric
+    value: Site strengths from feasibility report are highlighted with specific metrics
+  - type: llm-rubric
+    value: Risks are proactively addressed with mitigants (not buried or omitted)
+  - type: llm-rubric
+    value: The ask is specific (dollar amount, terms, return targets)
+  - type: llm-rubric
+    value: 'JSON sidecar includes artifact_type: project-narrative'
+- description: predev-project-narrative eval 2
+  vars:
+    skill_content: file://../skills/predev-project-narrative/SKILL.md
+    prompt: 'Create a government-facing narrative for a sovereign AI facility in New Mexico. The project is a 100MW facility
+      backed by a national AI strategy initiative. The site scored CONDITIONAL (3.2/5.0) due to infrastructure gaps (water
+      scarcity, single fiber route) but high sovereignty alignment. The audience is the state governor''s economic development
+      office. Key selling points: economic impact, sovereignty, technology differentiation. Tone is balanced. Total investment
+      $1.2B. 800 construction jobs, 150 permanent jobs.'
+  assert:
+  - type: llm-rubric
+    value: 'Government-specific framing: jobs, tax revenue, economic impact, sovereignty'
+  - type: llm-rubric
+    value: Jobs-per-MW calculation is included (150 permanent for 100MW aligns with industry norms)
+  - type: llm-rubric
+    value: Infrastructure gaps are framed as partnership opportunities, not project weaknesses
+  - type: llm-rubric
+    value: National AI strategy and sovereignty alignment are prominent themes
+  - type: llm-rubric
+    value: Specific incentive request or partnership ask is included
+  - type: llm-rubric
+    value: Tone acknowledges CONDITIONAL site rating without being defensive
+  - type: llm-rubric
+    value: Competing jurisdictions or urgency is referenced to motivate government action
+- description: predev-project-narrative eval 3
+  vars:
+    skill_content: file://../skills/predev-project-narrative/SKILL.md
+    prompt: Write an internal executive summary for a brownfield conversion project. A real estate holding company is evaluating
+      converting a 200,000 sqft warehouse in Chicago to a 5MW colocation facility. Site feasibility scored CONDITIONAL (3.4/5.0)
+      with high connectivity but high labor costs and taxes. Market study shows moderate demand in Chicago with 15% vacancy
+      in existing colo. Target audience is the internal investment committee for a go/no-go decision. Tone is conservative.
+      Total investment $45M.
+  assert:
+  - type: llm-rubric
+    value: 'Internal executive framing: go/no-go recommendation, opportunity cost, strategic fit'
+  - type: llm-rubric
+    value: Conservative tone with realistic (not optimistic) projections
+  - type: llm-rubric
+    value: Brownfield conversion advantages are quantified (timeline, cost savings vs greenfield)
+  - type: llm-rubric
+    value: 15% vacancy concern is directly addressed with demand differentiation strategy
+  - type: llm-rubric
+    value: High labor and tax costs are acknowledged with specific impact quantification
+  - type: llm-rubric
+    value: 'Decision framework is clear: approve/defer/decline with conditions for each'
+  - type: llm-rubric
+    value: Output reads as an internal memo, not an external marketing piece
+- description: predev-site-feasibility eval 1
+  vars:
+    skill_content: file://../skills/predev-site-feasibility/SKILL.md
+    prompt: 'Evaluate a 20MW hyperscale data center site in Ashburn, Northern Virginia (Loudoun County) for a cloud provider.
+      Greenfield site on industrially zoned land adjacent to a Dominion Energy substation with 50MW available capacity. Three
+      diverse fiber routes within 1 mile. Primary workload is AI training. Top priorities: power, connectivity, tax incentives.'
+  assert:
+  - type: llm-rubric
+    value: Recommendation is GO with weighted score >= 3.5
+  - type: llm-rubric
+    value: Power factor scores 4 or 5 given 50MW available capacity
+  - type: llm-rubric
+    value: Connectivity factor scores 5 given Ashburn fiber density
+  - type: llm-rubric
+    value: Tax incentive scoring references Virginia sales tax exemption program
+  - type: llm-rubric
+    value: Output includes both markdown report structure and JSON sidecar schema
+  - type: llm-rubric
+    value: OZ eligibility is assessed using FEDERAL-TAX-GUIDE.md reference
+  - type: llm-rubric
+    value: Labor factor accounts for Northern Virginia's high labor index
+- description: predev-site-feasibility eval 2
+  vars:
+    skill_content: file://../skills/predev-site-feasibility/SKILL.md
+    prompt: 'Compare three candidate sites for a 10MW enterprise data center: (1) Phoenix, AZ - greenfield industrial park
+      near APS substation, (2) Dallas/Fort Worth, TX - brownfield warehouse conversion near ERCOT node, (3) Chicago, IL -
+      greenfield site in Cook County industrial corridor. Commercial workload, no sovereignty constraints. Top priorities:
+      cost, power, labor.'
+  assert:
+  - type: llm-rubric
+    value: All three sites are independently scored with the same 9-factor methodology
+  - type: llm-rubric
+    value: Site comparison table is included with side-by-side factor scores
+  - type: llm-rubric
+    value: Dallas labor index advantage over Chicago is reflected in scoring
+  - type: llm-rubric
+    value: Phoenix water scarcity risk is flagged in the water factor assessment
+  - type: llm-rubric
+    value: Tax incentive scoring references state-specific programs for AZ, TX, and IL
+  - type: llm-rubric
+    value: Power cost scoring reflects regional differences from POWER-TARIFFS.md data
+  - type: llm-rubric
+    value: Each site receives an independent recommendation (GO/CONDITIONAL/NO-GO)
+- description: predev-site-feasibility eval 3
+  vars:
+    skill_content: file://../skills/predev-site-feasibility/SKILL.md
+    prompt: Evaluate a 50MW sovereign AI facility site in a rural area of New Mexico. The facility requires government security
+      clearance, data sovereignty compliance, and will run classified AI training workloads. The candidate site is 15 miles
+      from the nearest town, has single fiber route access, limited municipal water, and is near a small rural substation
+      with 20MW current capacity. Greenfield on federal land lease.
+  assert:
+  - type: llm-rubric
+    value: Recommendation is CONDITIONAL or NO-GO due to infrastructure gaps
+  - type: llm-rubric
+    value: Power factor scores 1 or 2 given 20MW available vs 50MW required
+  - type: llm-rubric
+    value: Connectivity factor scores low due to single fiber route
+  - type: llm-rubric
+    value: Water factor accounts for New Mexico arid climate and limited supply
+  - type: llm-rubric
+    value: Sovereignty factor scores highly given government/federal alignment
+  - type: llm-rubric
+    value: Specific mitigations are provided for each low-scoring factor
+  - type: llm-rubric
+    value: Override rule is applied if any factor scores 1 (automatic CONDITIONAL)
+- description: predev-stakeholder-map eval 1
+  vars:
+    skill_content: file://../skills/predev-stakeholder-map/SKILL.md
+    prompt: Create a stakeholder map for a 200MW hyperscale data center campus on 150 acres of former agricultural land in
+      a rural Virginia county. The project will consume 2 million gallons of water per day from the local aquifer. The county
+      has no prior DC development. Adjacent properties are single-family homes (0.5 miles) and active farmland. The county
+      board of supervisors is cautiously supportive but faces re-election. No known tribal lands nearby.
+  assert:
+  - type: llm-rubric
+    value: Water consumption (2M gal/day from aquifer) is identified as critical opposition risk
+  - type: llm-rubric
+    value: Adjacent homeowners within 1 mile are scored as high-interest stakeholders
+  - type: llm-rubric
+    value: Agricultural land conversion is flagged as a community concern
+  - type: llm-rubric
+    value: County board of supervisors scored as key players (high influence, high interest)
+  - type: llm-rubric
+    value: Engagement strategy includes pre-announcement engagement before public hearings
+  - type: llm-rubric
+    value: Mitigation for water risk includes specific measures (WUE target, alternative sources)
+- description: predev-stakeholder-map eval 2
+  vars:
+    skill_content: file://../skills/predev-stakeholder-map/SKILL.md
+    prompt: Map stakeholders for a 15MW colocation facility in a brownfield conversion of a former warehouse in an urban neighborhood
+      in Chicago. The neighborhood has an active community organization concerned about gentrification and industrial noise.
+      Adjacent uses include residential (100 meters), a school (300 meters), and retail. Existing building requires generator
+      installation (6 diesel generators for N+1 backup). The alderman is supportive but the community organization has blocked
+      prior industrial projects.
+  assert:
+  - type: llm-rubric
+    value: Community organization is scored as key player with demonstrated ability to block projects
+  - type: llm-rubric
+    value: Noise from diesel generators is identified as high-severity risk given school proximity
+  - type: llm-rubric
+    value: School administration is identified as a stakeholder with specific concerns
+  - type: llm-rubric
+    value: Community benefits agreement (CBA) is recommended as primary engagement tool
+  - type: llm-rubric
+    value: Generator testing schedule restrictions are proposed as noise mitigation
+  - type: llm-rubric
+    value: Gentrification and displacement concerns are addressed in engagement strategy
+- description: predev-stakeholder-map eval 3
+  vars:
+    skill_content: file://../skills/predev-stakeholder-map/SKILL.md
+    prompt: Develop a stakeholder map for a 100MW sovereign AI data center being developed for a national government. The
+      facility is classified as critical national infrastructure. Stakeholders include the national security council, defense
+      ministry, intelligence agencies, the national AI strategy office, the host municipality, local environmental authority,
+      and media (both supportive tech press and critical environmental media). The project has interagency coordination requirements
+      between defense and civilian agencies. Location is outside the national capital in a greenfield site.
+  assert:
+  - type: llm-rubric
+    value: National security stakeholders are scored as highest-influence key players
+  - type: llm-rubric
+    value: Interagency coordination friction points are identified between defense and civilian agencies
+  - type: llm-rubric
+    value: Classified engagement track is separated from public engagement track
+  - type: llm-rubric
+    value: Municipal government is identified as key player for local permits despite national priority
+  - type: llm-rubric
+    value: Media strategy differentiates between tech-supportive and environmental-critical outlets
+  - type: llm-rubric
+    value: Security perimeter impact on surrounding community is assessed as opposition risk
+- description: proc-bid-evaluation eval 1
+  vars:
+    skill_content: file://../skills/proc-bid-evaluation/SKILL.md
+    prompt: 'Evaluate 5 bids received for a 50MW hyperscale data center construction contract in Dallas, Texas. The upstream
+      RFP specified best-value evaluation with weights: Technical 40%, Price 30%, Schedule 15%, Qualifications 15%. Must-have
+      requirements include: $500M bonding capacity, 3+ data center projects over 20MW in the last 5 years, EMR below 1.0,
+      and Texas contractor license. Bidder A is a large national firm ($2.1B bid), Bidder B is a DC specialist ($1.95B bid,
+      aggressive 18-month schedule), Bidder C is regional with one 30MW project ($2.0B bid), Bidder D failed to submit bid
+      bond, Bidder E has EMR of 1.3.'
+  assert:
+  - type: llm-rubric
+    value: Bidder D is eliminated in responsiveness check for missing bid bond
+  - type: llm-rubric
+    value: Bidder E is eliminated in compliance check for EMR exceeding 1.0 threshold
+  - type: llm-rubric
+    value: Remaining 3 bidders are scored across all 4 weighted criteria summing to 100%
+  - type: llm-rubric
+    value: Price normalization is discussed or applied across the 3 compliant bids
+  - type: llm-rubric
+    value: Risk assessment covers financial stability, capacity, technical, and schedule factors
+  - type: llm-rubric
+    value: Recommendation identifies a specific bidder with conditions for award
+- description: proc-bid-evaluation eval 2
+  vars:
+    skill_content: file://../skills/proc-bid-evaluation/SKILL.md
+    prompt: 'Evaluate 3 bids for cooling equipment procurement using LPTA methodology. The RFP was for 10 adiabatic cooling
+      units (500kW sensible each) for a 5MW colocation expansion in Chicago. Technical pass/fail criteria: UL listed, minimum
+      0.95 SHR, Modbus TCP communication, 2-year warranty. Bidder A: $4.2M, meets all technical requirements, 12-week delivery.
+      Bidder B: $3.8M, meets all technical requirements, 16-week delivery. Bidder C: $3.5M, SHR is 0.92 (below 0.95 minimum),
+      10-week delivery.'
+  assert:
+  - type: llm-rubric
+    value: Bidder C is eliminated for failing SHR technical requirement (0.92 < 0.95)
+  - type: llm-rubric
+    value: LPTA methodology correctly selects lowest-priced compliant bidder (Bidder B at $3.8M)
+  - type: llm-rubric
+    value: Technical scoring is documented as pass/fail even under LPTA
+  - type: llm-rubric
+    value: Delivery schedule difference (12 vs 16 weeks) is documented as a consideration
+  - type: llm-rubric
+    value: SHR specification is correctly identified as sensible heat ratio
+  - type: llm-rubric
+    value: Recommendation includes delivery timeline as an award condition
+- description: proc-bid-evaluation eval 3
+  vars:
+    skill_content: file://../skills/proc-bid-evaluation/SKILL.md
+    prompt: 'Evaluate 2 bids for managed services at a 20MW enterprise data center. One bidder is the incumbent operator (3
+      years, generally satisfactory performance with 2 SLA breaches). The other is a new entrant with strong hyperscale experience
+      but no enterprise colo track record. Best-value evaluation with weights: Technical 35%, Price 25%, Qualifications 25%,
+      Transition Plan 15%. The incumbent bid is 12% higher than the new entrant. Evaluate for incumbent bias and provide objective
+      recommendation.'
+  assert:
+  - type: llm-rubric
+    value: Incumbent bias is explicitly addressed and documented
+  - type: llm-rubric
+    value: Incumbent's SLA breaches are factored into technical and qualifications scoring
+  - type: llm-rubric
+    value: Transition risk for new entrant is assessed in the risk section
+  - type: llm-rubric
+    value: 12% price premium of incumbent is quantified and weighed against transition costs
+  - type: llm-rubric
+    value: Two-bidder competition is flagged with re-solicitation consideration documented
+  - type: llm-rubric
+    value: Recommendation clearly states rationale regardless of which bidder is selected
+- description: proc-contract-structure eval 1
+  vars:
+    skill_content: file://../skills/proc-contract-structure/SKILL.md
+    prompt: Structure a contract for a 200MW hyperscale EPC turnkey data center campus in Northern Virginia. Single contractor
+      delivering 4 data halls (50MW each) over 3 phases. Total contract value approximately $1.8B. The employer wants maximum
+      risk transfer and cost certainty. The contractor is a Tier 1 EPC firm with extensive DC experience. Performance guarantees
+      required for PUE (1.25), cooling capacity (50MW IT per hall at 95F dry-bulb), and Tier III availability (99.982%). Jurisdiction
+      is Virginia (common law). Reference FIDIC-CONTRACTS.md for form selection.
+  assert:
+  - type: llm-rubric
+    value: FIDIC Silver Book is recommended with rationale citing maximum employer risk transfer for EPC turnkey
+  - type: llm-rubric
+    value: Milestone payment schedule is provided with percentages and triggers for each construction phase
+  - type: llm-rubric
+    value: Retention terms specify rate, release schedule, and performance bond alternative
+  - type: llm-rubric
+    value: Delay liquidated damages include daily rate and cap as percentage of contract value
+  - type: llm-rubric
+    value: Performance LDs cover PUE guarantee with measurement methodology at design ambient conditions
+  - type: llm-rubric
+    value: Performance guarantees reference Tier III availability target from SLA-BENCHMARKS.md
+- description: proc-contract-structure eval 2
+  vars:
+    skill_content: file://../skills/proc-contract-structure/SKILL.md
+    prompt: 'Design a multi-trade contract structure for a 100MW campus data center in Frankfurt, Germany. The employer has
+      a dedicated design team and wants to retain design control. Three separate contract packages: (1) civil and structural
+      shell-and-core, (2) MEP fit-out including power and cooling, (3) IT infrastructure and cabling. Civil law jurisdiction.
+      Total project budget EUR 800M. The employer is concerned about interface coordination between packages and wants clear
+      milestone alignment across all three contracts. Performance guarantees required for PUE and Tier III availability.'
+  assert:
+  - type: llm-rubric
+    value: Red Book recommended for shell-and-core with employer design team rationale
+  - type: llm-rubric
+    value: Yellow Book recommended for MEP and/or IT packages with design-build rationale
+  - type: llm-rubric
+    value: Interface risk allocation between the three trade packages is explicitly addressed
+  - type: llm-rubric
+    value: Milestone coordination mechanism across three contracts is described
+  - type: llm-rubric
+    value: Civil law jurisdiction impact on LD enforceability is discussed with genuine pre-estimate requirement
+  - type: llm-rubric
+    value: Performance guarantees are allocated to specific contractors by scope responsibility
+- description: proc-contract-structure eval 3
+  vars:
+    skill_content: file://../skills/proc-contract-structure/SKILL.md
+    prompt: 'Structure a contract for a modular data center deployment: 20 factory-built 1MW pods to be manufactured in a
+      US facility and deployed across 5 sites in the Middle East over 24 months. Each pod is a self-contained unit with integrated
+      power, cooling, and IT infrastructure. The contract needs to cover factory acceptance testing, international shipping,
+      site assembly, and commissioning. The employer wants a hybrid contract structure covering both manufacturing and construction.
+      Total value approximately $300M. Civil law jurisdiction (UAE law). Consider both factory and field warranty provisions.'
+  assert:
+  - type: llm-rubric
+    value: Hybrid contract structure addresses both factory manufacturing and site installation phases
+  - type: llm-rubric
+    value: Factory acceptance testing (FAT) requirements and milestone triggers are defined
+  - type: llm-rubric
+    value: Shipping and logistics risk allocation is addressed with Incoterms or equivalent
+  - type: llm-rubric
+    value: Warranty provisions distinguish between factory manufacturing defects and site installation defects
+  - type: llm-rubric
+    value: Multi-site deployment coordination and standardized acceptance criteria are addressed
+  - type: llm-rubric
+    value: Retention and performance bond terms account for the manufacturing-plus-construction hybrid scope
+- description: proc-equipment-spec eval 1
+  vars:
+    skill_content: file://../skills/proc-equipment-spec/SKILL.md
+    prompt: 'Generate full equipment specifications for a 20MW Tier III data center in Phoenix, Arizona. Equipment categories:
+      switchgear, UPS (N+1 lithium-ion), PDU/RPP, generators (natural gas), CRAH units, racks/cabinets, and structured cabling.
+      The upstream power-capacity-model shows dual 34.5kV utility feeds with 24MW total facility load (PUE 1.2) and N+1 UPS
+      at 2000kVA per module. The cooling-design-report specifies adiabatic cooling with 15,000kW total capacity. Use performance-based
+      specification format.'
+  assert:
+  - type: llm-rubric
+    value: Output contains specification sheets for all 7 requested equipment categories
+  - type: llm-rubric
+    value: 'UPS specification references upstream data: 2000kVA per module, N+1 configuration'
+  - type: llm-rubric
+    value: Generator specification includes altitude derating note for Phoenix elevation (~1,100ft)
+  - type: llm-rubric
+    value: All specifications use vendor-neutral language without brand names
+  - type: llm-rubric
+    value: CRAH specification includes sensible cooling capacity and SHR requirement
+  - type: llm-rubric
+    value: 'JSON sidecar includes artifact_type: equipment-specifications and equipment_categories array'
+- description: proc-equipment-spec eval 2
+  vars:
+    skill_content: file://../skills/proc-equipment-spec/SKILL.md
+    prompt: 'Create equipment specifications for a liquid cooling retrofit in an existing 5MW colocation facility. Equipment
+      needed: CDU (coolant distribution units) for direct-to-chip liquid cooling, rear-door heat exchangers for 40kW racks,
+      and secondary chilled water piping components. No upstream artifacts available. Rack density target is 40kW/rack across
+      120 racks. Facility is at sea level in Northern Virginia.'
+  assert:
+  - type: llm-rubric
+    value: CDU specification includes flow rate, supply/return temperature, and pressure requirements
+  - type: llm-rubric
+    value: Rear-door HEX specification matches 40kW per rack cooling requirement
+  - type: llm-rubric
+    value: Specifications include [TO BE CONFIRMED] placeholders for missing upstream data
+  - type: llm-rubric
+    value: Piping specifications include material, pressure rating, and connection standards
+  - type: llm-rubric
+    value: Output addresses brownfield/retrofit constraints (existing infrastructure compatibility)
+  - type: llm-rubric
+    value: Communication protocol requirements include BACnet or Modbus for BMS integration
+- description: proc-equipment-spec eval 3
+  vars:
+    skill_content: file://../skills/proc-equipment-spec/SKILL.md
+    prompt: Generate generator and UPS specifications for a 10MW Tier IV sovereign data center at 5,000 feet elevation in
+      Colorado Springs, Colorado. The facility requires 2N redundancy with 72 hours fuel storage autonomy. Domestic sourcing
+      is required for all critical power equipment. Security clearance level is CUI (Controlled Unclassified Information).
+      Use prescriptive specification format.
+  assert:
+  - type: llm-rubric
+    value: Generator specification includes explicit altitude derating calculation (~14% at 5,000ft)
+  - type: llm-rubric
+    value: 72-hour fuel storage requirement is documented with fuel consumption calculation basis
+  - type: llm-rubric
+    value: 2N redundancy configuration is specified for both generators and UPS
+  - type: llm-rubric
+    value: Domestic sourcing requirement is stated for all critical power components
+  - type: llm-rubric
+    value: CUI handling requirements are referenced in documentation and access control provisions
+  - type: llm-rubric
+    value: Prescriptive format specifies exact configurations rather than performance outcomes
+- description: proc-rfp-generator eval 1
+  vars:
+    skill_content: file://../skills/proc-rfp-generator/SKILL.md
+    prompt: 'Generate a full construction RFP for a 10MW Tier III data center in Dallas, Texas using design-build delivery.
+      The project has upstream power and cooling artifacts: power-capacity-model shows dual 13.8kV utility feeds with N+1
+      UPS at 12MW total facility load (PUE 1.35), and cooling-design-report specifies adiabatic cooling with dry coolers at
+      11,500kW total capacity. Target budget is $100-120M. Expect 5-7 respondents. Use AIA contract form.'
+  assert:
+  - type: llm-rubric
+    value: Output contains all 7 RFP sections (Introduction, Scope, Technical, Evaluation, Submission, Commercial, Appendices)
+  - type: llm-rubric
+    value: 'Technical requirements reference specific upstream data: dual 13.8kV feeds, N+1 UPS, 12MW facility load, adiabatic
+      cooling, 11,500kW cooling capacity'
+  - type: llm-rubric
+    value: Evaluation criteria weights sum to exactly 100%
+  - type: llm-rubric
+    value: AIA contract form is specified in Commercial Terms section
+  - type: llm-rubric
+    value: Liquidated damages are described as genuine pre-estimate of loss
+  - type: llm-rubric
+    value: 'JSON sidecar includes artifact_type: rfp-document and evaluation_criteria array'
+- description: proc-rfp-generator eval 2
+  vars:
+    skill_content: file://../skills/proc-rfp-generator/SKILL.md
+    prompt: Create an M&E equipment RFP for a cooling system upgrade at an existing 5MW colocation facility in Chicago. The
+      upgrade replaces aging CRAHs with in-row cooling units and adds rear-door heat exchangers for high-density racks. Budget
+      is $8-12M. Three pre-qualified vendors will be invited. Use FIDIC contract form. No upstream artifacts available.
+  assert:
+  - type: llm-rubric
+    value: Brownfield/upgrade context is reflected in scope of work
+  - type: llm-rubric
+    value: Technical requirements include [TO BE CONFIRMED] placeholders for missing upstream data
+  - type: llm-rubric
+    value: FIDIC contract form is specified with appropriate provisions for equipment procurement
+  - type: llm-rubric
+    value: Evaluation criteria are weighted appropriately for equipment (higher technical weight vs construction)
+  - type: llm-rubric
+    value: 'Equipment categories explicitly listed: in-row cooling units and rear-door heat exchangers'
+  - type: llm-rubric
+    value: Vendor qualification requirements address OEM/reseller status
+- description: proc-rfp-generator eval 3
+  vars:
+    skill_content: file://../skills/proc-rfp-generator/SKILL.md
+    prompt: Generate a managed services RFP for operations of a 50MW hyperscale data center facility. The contract is for
+      a 5-year term with SLA-based KPIs including 99.999% availability, 15-minute critical response time, and PUE maintenance
+      below 1.30. Expect 8-10 respondents from major DC operators. Staffing model is dedicated on-site with 24x7 coverage.
+      No contract form preference.
+  assert:
+  - type: llm-rubric
+    value: SLA requirements include 99.999% availability and 15-minute critical response time
+  - type: llm-rubric
+    value: KPI framework covers availability, PUE maintenance, incident response, and customer satisfaction
+  - type: llm-rubric
+    value: Staffing model specifies dedicated on-site 24x7 coverage
+  - type: llm-rubric
+    value: 5-year contract term is reflected in commercial terms
+  - type: llm-rubric
+    value: Transition plan requirements are included for incumbent-to-new-provider handoff
+  - type: llm-rubric
+    value: Contract form recommendation is provided since no preference was stated
+- description: proc-schedule eval 1
+  vars:
+    skill_content: file://../skills/proc-schedule/SKILL.md
+    prompt: 'Generate a construction schedule for a single 50MW data hall greenfield hyperscale data center in Loudoun County,
+      Virginia. Construction start date: June 1, 2026. Target substantial completion: December 2027 (18 months). Transformers
+      have not been ordered yet (60-week lead time). Include CPM analysis showing the critical path, float analysis for non-critical
+      tasks, and resource loading by trade. Run the bundled cpm-scheduler.py script to generate the baseline schedule.'
+  assert:
+  - type: llm-rubric
+    value: Transformer procurement is identified on or near the critical path due to 60-week lead time
+  - type: llm-rubric
+    value: Forward and backward pass results show ES, EF, LS, LF for all tasks
+  - type: llm-rubric
+    value: Float analysis identifies tasks with schedule flexibility vs zero-float critical tasks
+  - type: llm-rubric
+    value: Resource loading shows trade headcounts by construction phase
+  - type: llm-rubric
+    value: Critical path is explicitly identified as a sequence of tasks from start to finish
+  - type: llm-rubric
+    value: 18-month target feasibility is assessed against the calculated total duration
+- description: proc-schedule eval 2
+  vars:
+    skill_content: file://../skills/proc-schedule/SKILL.md
+    prompt: 'Generate a construction schedule for a 200MW hyperscale campus with 4 data halls (50MW each) in Prineville, Oregon.
+      Phased delivery: Hall 1 substantial completion in 20 months, Hall 2 in 24 months, Hall 3 in 28 months, Hall 4 in 32
+      months. Shared campus infrastructure (utility feeds, central cooling plant, site roads) must be completed before individual
+      hall construction begins. Transformers for all 4 halls ordered at project kickoff. Analyze parallel construction resource
+      conflicts and identify schedule acceleration opportunities. Run cpm-scheduler.py with --phases 4.'
+  assert:
+  - type: llm-rubric
+    value: Shared infrastructure tasks are predecessors for all 4 data halls
+  - type: llm-rubric
+    value: Multi-phase critical path analysis identifies the schedule-driving hall sequence
+  - type: llm-rubric
+    value: Parallel construction of multiple halls is modeled with staggered or overlapping timelines
+  - type: llm-rubric
+    value: Resource conflicts between parallel halls are identified in the resource histogram
+  - type: llm-rubric
+    value: Total campus duration accounts for parallel construction compression (30-40% shorter than sequential)
+  - type: llm-rubric
+    value: Long-lead procurement for all 4 halls starting at project kickoff is reflected in the schedule
+- description: proc-schedule eval 3
+  vars:
+    skill_content: file://../skills/proc-schedule/SKILL.md
+    prompt: 'Generate a construction schedule for a brownfield conversion of a former 200,000 sqft warehouse in Atlanta, Georgia
+      into a 20MW enterprise data center. The building requires demolition of interior partitions, asbestos abatement in the
+      roof deck, and structural reinforcement for generator pad loading. Construction start: September 2026. Target completion:
+      March 2028 (18 months). Existing utility service (13.8kV) can be upgraded in place. Include brownfield-specific tasks
+      (demolition, abatement) and assess impact on critical path. Run cpm-scheduler.py with --brownfield true.'
+  assert:
+  - type: llm-rubric
+    value: Demolition and hazmat abatement tasks are included at the start of the schedule
+  - type: llm-rubric
+    value: Brownfield tasks are on the dependency chain preceding standard construction tasks
+  - type: llm-rubric
+    value: Critical path analysis accounts for the additional brownfield pre-work duration
+  - type: llm-rubric
+    value: Enterprise facility type scaling is applied to standard task durations
+  - type: llm-rubric
+    value: Total duration is assessed against the 18-month target completion
+  - type: llm-rubric
+    value: Resource loading reflects abatement-specific crews in addition to standard construction trades
+- description: proc-supply-chain eval 1
+  vars:
+    skill_content: file://../skills/proc-supply-chain/SKILL.md
+    prompt: 'Assess supply chain risks for a 100MW hyperscale data center in Ashburn, Virginia with an 18-month target delivery
+      from ground-breaking to substantial completion. Equipment scope includes: 6x 40MVA oil-filled transformers, 12x 2.5MW
+      diesel generators, 24x 1000kVA UPS systems, 48x CRAH units, 2x 1500-ton chillers, and associated switchgear, PDUs, racks,
+      and cabling. The developer has no existing purchase agreements. Budget is flexible for critical path items.'
+  assert:
+  - type: llm-rubric
+    value: Transformers are identified as the critical path constraint with 52-78 week lead time
+  - type: llm-rubric
+    value: 18-month target delivery is flagged as at-risk due to transformer lead times
+  - type: llm-rubric
+    value: Advance purchase agreement for transformers is recommended with specific timeline
+  - type: llm-rubric
+    value: Geopolitical risks include tariff impacts on electrical equipment sourcing
+  - type: llm-rubric
+    value: Single-source risk is assessed for transformers with manufacturer count noted
+  - type: llm-rubric
+    value: Total procurement timeline identifies transformer delivery as the binding constraint
+- description: proc-supply-chain eval 2
+  vars:
+    skill_content: file://../skills/proc-supply-chain/SKILL.md
+    prompt: 'Assess supply chain risks for a 50MW sovereign data center in Riyadh, Saudi Arabia. The project is partially
+      funded by the Saudi Public Investment Fund and requires 40% domestic content compliance. Equipment must include: medium-voltage
+      switchgear, generators (natural gas, not diesel due to emissions requirements), UPS systems, and direct-to-chip liquid
+      cooling (CDUs and manifolds). The facility will host classified government AI workloads requiring equipment from allied
+      nations only (no Chinese-origin components). Target delivery: 24 months.'
+  assert:
+  - type: llm-rubric
+    value: Domestic content requirement (40%) is analyzed with compliance strategy
+  - type: llm-rubric
+    value: Allied-nation sourcing restriction eliminates Chinese-origin equipment from consideration
+  - type: llm-rubric
+    value: Direct-to-chip liquid cooling CDUs and manifolds are flagged as high single-source risk
+  - type: llm-rubric
+    value: Natural gas generators are assessed separately from diesel with manufacturer options listed
+  - type: llm-rubric
+    value: Geopolitical analysis addresses both China-origin restrictions and Middle East logistics
+  - type: llm-rubric
+    value: Alternative supplier strategy identifies non-Chinese manufacturers for critical categories
+- description: proc-supply-chain eval 3
+  vars:
+    skill_content: file://../skills/proc-supply-chain/SKILL.md
+    prompt: 'Assess supply chain risks for a modular data center fleet deployment: 10 sites across the United States (2 in
+      Virginia, 2 in Texas, 2 in Oregon, 2 in Nevada, 1 in Iowa, 1 in Georgia), each site receiving 5x 2MW prefab data center
+      modules over 36 months. Total: 50 modules, 100MW aggregate. The developer wants to standardize equipment across all
+      modules for bulk purchasing leverage. Equipment per module: 1x transformer, 2x generators, 4x UPS, integrated cooling
+      (rear-door HEX). Modules are factory-built in a central facility in Texas. Assess multi-site procurement optimization
+      and identify bulk purchase opportunities.'
+  assert:
+  - type: llm-rubric
+    value: Bulk purchase strategy is developed for standardized equipment across 50 modules
+  - type: llm-rubric
+    value: Centralized factory staging in Texas is incorporated into the procurement timeline
+  - type: llm-rubric
+    value: Multi-site delivery logistics are analyzed across the 10 deployment locations
+  - type: llm-rubric
+    value: Transformer bulk purchase of 50 units is flagged as a major advance commitment opportunity
+  - type: llm-rubric
+    value: Standardization benefits are quantified or discussed for supplier flexibility and pricing
+  - type: llm-rubric
+    value: Phased delivery schedule across 36 months is mapped to equipment procurement milestones

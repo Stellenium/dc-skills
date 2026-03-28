@@ -1,0 +1,44 @@
+{
+  "skill_name": "comp-certification",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a certification roadmap for a greenfield 200MW hyperscale data center targeting ISO 27001, SOC 2 Type II, and Uptime Tier III certification simultaneously. The facility is in Northern Virginia, no existing certifications, and must achieve all three within 18 months to meet a hyperscale anchor tenant's SLA requirements. The tenant requires SOC 2 Type II before signing a 10-year lease.",
+      "expected_output": "A certification roadmap showing: ISO 27001 ISMS implementation starting immediately (9-12 months), SOC 2 Type I as an interim milestone (3-4 months after controls operational), SOC 2 Type II observation period beginning after Type I (minimum 6 months), Uptime Tier III TCDD submitted during construction followed by TCCF after build completion. Overlap matrix highlighting that ISO 27001 and SOC 2 share access control, change management, and incident management controls but Uptime Tier III has zero ISO 27001 overlap. Recommended sequence: start ISO 27001 first (framework benefits SOC 2), submit TCDD in parallel (design-phase activity), then SOC 2 readiness assessment after ISMS core is operational.",
+      "assertions": [
+        "ISO 27001 implementation timeline is 9-18 months with Stage 1 and Stage 2 audits",
+        "SOC 2 Type II minimum 6-month observation period is explicitly stated",
+        "Uptime Tier III and ISO 27001 zero control overlap is identified",
+        "Recommended sequence starts with ISO 27001 to provide framework for SOC 2",
+        "Overlap matrix shows shared controls between ISO 27001 and SOC 2",
+        "Cost estimation includes consulting, audit fees, and remediation per certification"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop a certification upgrade plan for an operational colocation facility that currently holds SOC 2 Type I certification. The facility needs to upgrade to SOC 2 Type II and add PCI DSS v4.0 compliance to serve financial services tenants. The facility has 200+ tenants, mixed workloads, and has been operational for 3 years. Budget is constrained -- prioritize certifications by revenue impact.",
+      "expected_output": "A roadmap prioritizing SOC 2 Type II upgrade first (highest revenue impact -- required by most enterprise tenants, 6-month observation period starting from controls being operational). PCI DSS v4.0 as second priority targeting financial services tenant segment. Gap analysis showing: existing SOC 2 Type I controls provide partial coverage for Type II but need operating evidence over 6 months. PCI DSS v4.0 gap analysis covering the 64 new requirements added in v4.0 vs v3.2.1, particularly MFA and targeted risk analysis. Multi-tenant scoping challenges addressed -- PCI DSS requires network segmentation between PCI and non-PCI tenants.",
+      "assertions": [
+        "SOC 2 Type II upgrade is prioritized based on broader tenant applicability",
+        "6-month observation period for Type II is identified as timeline constraint",
+        "PCI DSS v4.0 new requirements are referenced (64 new requirements vs v3.2.1)",
+        "Multi-tenant scoping and network segmentation for PCI DSS is addressed",
+        "Overlap between SOC 2 and PCI DSS controls is mapped",
+        "Budget-constrained sequencing recommendation is provided"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a certification program for a sovereign data center in Berlin, Germany that must serve EU government contracts. The facility requires EN 50600 and ISO 27001 certifications. It is a brownfield conversion of an industrial building. The German federal government requires EN 50600 Availability Class 3 and ISO 27001 for all data center contracts. Additionally, assess whether Uptime Tier certification adds value for the European market.",
+      "expected_output": "A roadmap with EN 50600 classification (Availability Class 3, Protection Class 3, Energy Efficiency Enabling target) and ISO 27001 ISMS implementation running in parallel. Brownfield gap analysis for EN 50600-2-1 through 2-5 against existing building infrastructure. Assessment that EN 50600 is the primary market standard for EU government contracts and Uptime Tier certification has limited recognition in European public sector procurement -- EN 50600 is the correct choice. ISO 27001 and EN 50600 have some physical security overlap but are largely complementary (ISO covers information security management; EN 50600 covers physical infrastructure classification).",
+      "assertions": [
+        "EN 50600 classification includes Availability, Protection, and Energy Efficiency levels",
+        "ISO 27001 and EN 50600 are assessed for overlap and complementarity",
+        "Brownfield conversion gaps are identified against EN 50600-2 series",
+        "EN 50600 is recommended over Uptime Tier for EU government market",
+        "Regulatory disclaimer is included with 'does not constitute legal advice' language",
+        "DISCLAIMER-FRAMEWORK.md is referenced for full disclaimer terms"
+      ]
+    }
+  ]
+}

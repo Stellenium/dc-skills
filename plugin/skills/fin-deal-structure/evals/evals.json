@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-deal-structure",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Structure a deal for a 50MW hyperscale data center on an Opportunity Zone-eligible site in Virginia. Total project cost $500M, PE/infra investors with LP/GP structure, 8% preferred return, 20% carried interest. The project includes $50M of on-site solar and BESS eligible for ITC. 200,000 sqft building. Exit via sale at year 7 with 6.5% cap rate. Entity should be Delaware LLC.",
+      "expected_output": "A deal structure showing: Delaware LLC entity structure, OZ benefits calculated (10% step-up at 5yr, potential 100% gain exclusion at 10yr), ITC applied to $50M solar/BESS at 30% ($15M credit), cost segregation reclassifying 40-60% of construction cost from 39yr to 5-15yr MACRS, Section 179D deduction at $5.36/sqft, 4-tier waterfall (return of capital, 8% preferred return, GP catch-up, 20% carried interest), exit scenario comparison (sale, recap, REIT conversion), and both Financial and Tax disclaimers.",
+      "assertions": [
+        "OZ benefits are calculated with post-OBBBA rules (rolling deferral, step-up, gain exclusion)",
+        "ITC is applied at 30% on $50M solar/BESS qualifying cost",
+        "Cost segregation reclassifies building components from 39yr to 5/7/15yr MACRS",
+        "Waterfall has 4 tiers: return of capital, preferred return, GP catch-up, carried interest",
+        "Entity structure is Delaware LLC (pass-through)",
+        "Both Financial Disclaimer and Tax Disclaimer are included",
+        "Exit scenarios include sale, recapitalization, and REIT conversion",
+        "Section 179D deduction is calculated with prevailing wage rate"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Structure a deal for a 10MW enterprise data center acquisition. No Opportunity Zone eligibility. C-corp structure preferred by acquirer. Total acquisition price $100M. Cost segregation study budgeted. No on-site solar/BESS (ITC not applicable). 80,000 sqft building. Exit via sale at year 7 with 7% cap rate. Annual NOI $15M with 3% growth.",
+      "expected_output": "A deal structure showing: C-corp entity, no OZ benefits, no ITC, cost segregation reclassification percentages for the acquired facility, MACRS acceleration via cost seg, Section 179D eligibility assessment, exit tax treatment under C-corp structure (double taxation risk), waterfall if applicable, and Financial Disclaimer (no Tax Disclaimer since no FEDERAL-TAX-GUIDE.md tax credit references -- however cost seg and MACRS are tax items requiring Tax Disclaimer).",
+      "assertions": [
+        "Cost segregation reclassification percentages are calculated for DC components",
+        "MACRS acceleration benefit is quantified with 100% bonus depreciation",
+        "No OZ benefits are modeled (not eligible)",
+        "No ITC is applied (no solar/BESS)",
+        "Exit tax treatment reflects C-corp structure",
+        "Entity structure specifies C-corp with tax implications noted",
+        "Financial Disclaimer is included",
+        "Sensitivity analysis shows impact of cap rate variation on returns"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Structure a deal for a 20MW sovereign data center with DFI co-investment in an emerging market. LP/GP structure with 10% preferred return and 25% carried interest. Total project cost $300M. 65% equity, 35% DFI concessional debt at 3%. No US tax benefits applicable (international jurisdiction). Exit timeline 10+ years. 150,000 sqft building.",
+      "expected_output": "A deal structure showing: entity structure accommodating DFI participation and sovereign requirements, limited or no US tax optimization (international project), waterfall with 10% preferred return and 25% carried interest, DFI debt at concessional 3% rate, long-hold exit assumptions, and Financial Disclaimer. Tax Disclaimer may be omitted if no US tax benefits are modeled.",
+      "assertions": [
+        "Entity structure accommodates DFI co-investment with governance provisions",
+        "Limited US tax benefits acknowledged for international jurisdiction",
+        "Waterfall models 10% preferred return and 25% carried interest",
+        "DFI concessional debt is modeled at below-market rate",
+        "Exit timeline reflects 10+ year sovereign hold period",
+        "Financial Disclaimer is present noting estimates only",
+        "Currency and repatriation considerations are noted",
+        "Sensitivity analysis includes exit timing as a variable"
+      ]
+    }
+  ]
+}

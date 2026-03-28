@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-debt-sizing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Size debt for a 20MW greenfield data center. Total project cost $200M, stabilized EBITDA $30M/year (Year 3+ at 90% occupancy). Target DSCR 1.30x minimum, interest rate 6%, 15-year amortization with 7-year term. Construction period 24 months. Lender requires minimum 8% debt yield and maximum 75% LTV.",
+      "expected_output": "A debt sizing model showing: maximum debt capacity in the $150-170M range, LTV 65-75%, amortization schedule with annual DSCR recalculation, construction facility with capitalized interest, covenant compliance table showing DSCR, debt yield, and LTV tested annually, balloon balance at year 7, sensitivity analysis with NOI +/-10% and rate +/-100bps.",
+      "assertions": [
+        "Debt capacity is sized from CFADS (not raw EBITDA)",
+        "CFADS deducts taxes, maintenance capex, and working capital from EBITDA",
+        "DSCR is tested annually and remains above 1.30x minimum",
+        "LTV does not exceed 75% maximum",
+        "Amortization schedule shows beginning balance, payment, principal, interest, ending balance",
+        "Construction interest is capitalized during 24-month draw period",
+        "Balloon payment is identified at year 7 term maturity",
+        "Financial Disclaimer is included (not Tax Disclaimer)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Size debt for a 50MW hyperscale data center. Total project cost $800M, stabilized EBITDA $120M/year (contracted single-tenant). Aggressive leverage target: 1.25x DSCR minimum, 5.5% interest rate, 20-year amortization with 10-year term. Construction period 30 months. Lender is life insurance company.",
+      "expected_output": "A debt sizing model showing: higher leverage ratio reflecting contracted cash flows, debt capacity reflecting 1.25x DSCR, cash trap threshold at 1.15x identified, balloon payment at year 10 flagged, sensitivity showing single-tenant concentration risk.",
+      "assertions": [
+        "Lower DSCR requirement (1.25x) reflects contracted hyperscale cash flows",
+        "Higher leverage achieved due to stable contracted revenue",
+        "Cash trap threshold identified at DSCR below 1.15x",
+        "Balloon payment flagged at 10-year term maturity",
+        "Revenue concentration risk noted for single tenant",
+        "Sensitivity analysis includes NOI decline scenario",
+        "Amortization schedule present with annual covenant testing",
+        "Financial Disclaimer is included"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Size debt for a 5MW edge data center facility. Total project cost $40M, stabilized EBITDA $6M/year. Conservative 1.40x DSCR target, 7% interest rate, 10-year amortization with 5-year term. Construction period 6 months (modular). Maximum LTV 60%.",
+      "expected_output": "A debt sizing model showing: lower debt capacity relative to project cost reflecting higher risk profile, shorter construction period with minimal capitalized interest, tighter covenant requirements (1.40x DSCR, 60% LTV), sensitivity to rate changes showing edge facility vulnerability.",
+      "assertions": [
+        "Conservative DSCR (1.40x) reflects edge facility risk profile",
+        "Lower maximum LTV (60%) constrains leverage",
+        "Short construction period (6 months) results in minimal capitalized interest",
+        "Covenant compliance tested annually with Pass/Trap/Default status",
+        "Sensitivity analysis shows impact of rate increase on covenant compliance",
+        "Debt capacity is the minimum of DSCR, LTV, and debt yield constraints",
+        "Financial Disclaimer is included",
+        "Balloon balance is calculated at 5-year term maturity"
+      ]
+    }
+  ]
+}

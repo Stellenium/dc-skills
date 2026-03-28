@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-rfp-response",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Prepare an RFP response for a government agency (US General Services Administration) RFP for a 10MW sovereign data center build-to-suit. The RFP contains 50 requirements covering physical security (SCIF-capable spaces), availability (Tier III minimum with 99.982% uptime), data residency (all data must remain within US borders), local content (30% local workforce during construction), and FedRAMP High authorization. Our company has 15 years of experience, 8 operational facilities, and SOC 2 Type II and ISO 27001 certifications. Key differentiators: fastest modular deployment in the industry (16-week lead time), 99.995% historical uptime across portfolio, and existing FedRAMP Moderate authorization (upgrading to High). We have a compliance gap on the SCIF requirement -- we plan to subcontract to a cleared facility contractor.",
+      "expected_output": "A comprehensive RFP response with compliance matrix covering all 50 requirements with Compliant/Partial/Exception status for each. Security requirements addressed with specificity including the SCIF subcontracting approach as a Partial compliance item. Win themes (speed to market, operational track record, security expertise) present in executive summary and technical approach. Government-appropriate formal tone throughout.",
+      "assertions": [
+        "Compliance matrix covers all stated requirements with Compliant, Partial, or Exception status",
+        "Security requirements including SCIF capability are addressed with specific plans",
+        "Win themes are present in both the executive summary and technical approach sections",
+        "Tone is formal and appropriate for government procurement",
+        "SCIF gap is addressed as Partial with subcontracting alternative, not ignored",
+        "FedRAMP High upgrade path is explained in the technical approach"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create an RFP response for a Fortune 500 enterprise seeking 5MW of colocation space in an existing facility. The RFP contains 30 requirements covering SLA (99.99% availability with financial credits), connectivity (minimum 3 diverse fiber providers), pricing (per-kW/month with 3-year term), and expansion options (right of first refusal on adjacent space up to 10MW). Our company operates the target facility with current availability of 99.997% over the past 24 months. Differentiators: existing facility with immediate availability (no construction risk), carrier-dense with 12 network providers on-net, and dedicated customer success manager. We are the incumbent provider for the customer's secondary site. Compliance gap: the RFP requires 72-hour UPS runtime but our facility has 48-hour battery backup plus N+1 generators with 72-hour fuel supply.",
+      "expected_output": "An enterprise-focused RFP response with compliance matrix for all 30 requirements. SLA commitments reference specific tier levels and credit structures. The UPS runtime gap is addressed as Partial with explanation that generator backup achieves the 72-hour intent. Case studies relevant to enterprise colocation. Incumbent advantage leveraged as a win theme.",
+      "assertions": [
+        "Compliance matrix is present with status for all 30 requirements",
+        "SLA commitments reference specific availability percentages and credit structures",
+        "Partial and Exception items include alternative explanations, not blank entries",
+        "Case studies are relevant to enterprise colocation use cases",
+        "UPS runtime gap addressed with generator backup as functionally equivalent alternative",
+        "Pricing section uses per-kW/month format as specified in the RFP"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Prepare an RFP response for a hyperscale cloud provider issuing an RFP for 50MW wholesale lease with expansion to 200MW across a campus. The RFP contains 80+ requirements covering power density (minimum 30kW per rack with liquid cooling readiness), cooling (PUE target under 1.25), sustainability (100% renewable energy matching within 3 years, Scope 1+2+3 reporting), and contractual terms (10-year initial term with 5-year renewal options). Our company is developing a greenfield campus with 100MW Phase 1 capacity. Differentiators: purpose-built for AI/HPC density (designed for 50kW+ per rack), on-site 60MW solar PPA in place, and direct liquid cooling infrastructure from day one. Win themes: AI-ready infrastructure, sustainability leadership, and campus scale. No compliance gaps identified but the sustainability Scope 3 reporting requirement needs clarification on boundary definition.",
+      "expected_output": "A hyperscale-focused RFP response with compliance matrix covering the large 80+ requirement set. Sustainability and ESG requirements addressed with specifics on the solar PPA and renewable energy matching timeline. Technical approach covers AI/HPC density with liquid cooling architecture. Pricing format matches wholesale lease structure with per-MW pricing. Scope 3 reporting flagged for clarification but addressed with proposed methodology.",
+      "assertions": [
+        "Compliance matrix maps the full 80+ requirement set",
+        "Sustainability requirements addressed with specific renewable energy plans and timeline",
+        "Technical approach covers high-density AI/HPC infrastructure with liquid cooling",
+        "Pricing structure uses wholesale per-MW format appropriate for hyperscale",
+        "Scope 3 reporting addressed with proposed boundary definition pending clarification",
+        "Win themes of AI-ready infrastructure and sustainability appear across multiple sections"
+      ]
+    }
+  ]
+}

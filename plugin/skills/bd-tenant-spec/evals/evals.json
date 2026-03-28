@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-tenant-spec",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run the tenant requirements questionnaire for an AI training company requesting 500 racks at 50kW per rack in a Tier III facility. They want direct-to-chip liquid cooling, 400Gbps InfiniBand interconnect between racks, carrier-neutral connectivity with 100Gbps internet, SOC 2 Type II compliance, and a private cage. They plan to grow 75% in 12 months and 150% in 24 months. They want a 3-year contract with deployment within 6 months. They initially asked for air cooling but their density requirements are 50kW/rack.",
+      "expected_output": "A tenant requirements document capturing 25MW initial power (500 racks x 50kW), flagging the air cooling vs 50kW/rack conflict (must be liquid cooling), estimating 36-month growth to ~62.5MW, recommending direct-to-chip liquid cooling, and noting that 75% annual growth means planning for 1.5x stated requirements. InfiniBand requirements affect rack placement (east-west bandwidth sensitivity).",
+      "assertions": [
+        "Conflict flagged: 50kW/rack density is incompatible with air cooling, liquid cooling required",
+        "Initial power correctly calculated at approximately 25MW (500 racks x 50kW)",
+        "Growth projection identifies that 150% growth in 24 months requires significant expansion capacity",
+        "InfiniBand interconnect requirements noted as affecting physical layout and rack placement",
+        "Questionnaire mode is evident -- requirements gathered FROM the tenant",
+        "Resource estimate includes PUE-adjusted total power and floor space calculation"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Conduct tenant requirements discovery for an enterprise tenant requesting 50 racks at mixed density: 30 racks at 8kW (enterprise apps and databases) and 20 racks at 15kW (virtualization and containers). They require SOC 2 Type II and HIPAA compliance for healthcare data, a private suite with escorted visitor policy, Tier III availability with 99.99% power SLA, hybrid cloud connectivity (AWS Direct Connect and Azure ExpressRoute), and 10ms latency to New York City. Contract term preference is 5 years with 20% annual growth. Deployment needed within 4 months.",
+      "expected_output": "A tenant requirements document capturing mixed-density configuration (30x8kW + 20x15kW = 540kW total IT load), HIPAA compliance driving private suite requirement, hybrid cloud cross-connect needs, and noting the gap between requested 99.99% power SLA and Tier III's 99.982% design availability. Compliance cost stacking (SOC 2 + HIPAA) is flagged.",
+      "assertions": [
+        "Mixed density is correctly captured: 30 racks at 8kW and 20 racks at 15kW",
+        "Total IT load calculated as approximately 540kW",
+        "HIPAA compliance requirement validated against private suite security model",
+        "Gap between 99.99% SLA request and Tier III design availability is flagged",
+        "Hybrid cloud cross-connect requirements (AWS Direct Connect, Azure ExpressRoute) are documented",
+        "Compliance cost stacking for SOC 2 + HIPAA is noted"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Discover requirements for a hyperscale cloud provider pre-leasing 20MW initial capacity with plans to scale to 60MW within 24 months. They require carrier-neutral connectivity with minimum 3 diverse fiber paths, Tier III with custom 99.995% availability SLA, air cooling for initial deployment (rack density 8kW/rack), and a 10-year lease. They want expansion rights to an additional 40MW beyond the 60MW plan. Geographic requirement is within 50 miles of a major IX (Internet Exchange) with less than 5ms latency to Chicago. No specific compliance requirements beyond SOC 2.",
+      "expected_output": "A tenant requirements document capturing the 20MW-to-60MW-to-100MW growth trajectory, noting that the custom 99.995% availability target exceeds Tier III design (99.982%) and approaches Tier IV territory, documenting the massive expansion requirement (5x initial capacity), and flagging that air cooling at 8kW/rack is viable initially but may constrain density upgrades during the 10-year term.",
+      "assertions": [
+        "Growth trajectory captured: 20MW initial, 60MW at 24 months, 100MW total with expansion rights",
+        "Custom SLA target (99.995%) flagged as exceeding Tier III design availability",
+        "10-year lease term with expansion provisions documented",
+        "Air cooling validated as feasible at 8kW/rack density",
+        "Long-term density upgrade risk flagged for 10-year planning horizon",
+        "Carrier diversity requirement (3+ diverse fiber paths) and IX proximity documented"
+      ]
+    }
+  ]
+}

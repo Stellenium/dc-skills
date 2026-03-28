@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-btm-power",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Evaluate behind-the-meter power options for a 20MW hyperscale data center in Texas (ERCOT). The site has 50 acres available. Evaluate solar PV (single-axis tracking) and a 4-hour BESS system. Grid tariff is $55/MWh. The project qualifies for 30% ITC with prevailing wage under post-OBBBA rules. Construction starts Q3 2025. Target: maximize savings vs grid with high renewable penetration.",
+      "expected_output": "A BTM power assessment showing solar PV LCOE leveraging Texas GHI (~5.5 kWh/m2/day), BESS for solar firming with 4-hour duration, blended solar+BESS LCOE competitive with ERCOT grid at $55/MWh, 30% ITC applied to both solar and BESS CapEx, and recommended hybrid configuration with savings percentage.",
+      "assertions": [
+        "Solar PV capacity factor reflects Texas/ERCOT region (25-35% AC-basis)",
+        "BESS is modeled with degradation (2-3% annually) and cycle life",
+        "ITC at 30% is applied to both solar and BESS as ITC-eligible sources",
+        "Blended LCOE is calculated as generation-weighted average",
+        "Grid comparison shows savings vs $55/MWh ERCOT tariff",
+        "Safe harbor analysis notes July 4, 2026 begin-construction deadline"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Assess BTM power for a 50MW sovereign data center requiring energy independence. Evaluate natural gas combined-cycle turbine (pipeline access confirmed, $4.50/MMBtu) plus 10MW wind generation. The facility requires 99.999% uptime and minimum 72 hours autonomous operation. Grid tariff is $70/MWh. Wind qualifies for PTC at $28.60/MWh with prevailing wage. Location: Oklahoma with average wind speed 8.5 m/s at 80m hub height.",
+      "expected_output": "A BTM assessment showing gas turbine as baseload with high capacity factor (85-95%), wind as supplemental with Oklahoma capacity factor (35-45%), PTC applied to wind generation, combined reliability assessment for sovereign-grade uptime, gas fuel cost modeled with escalation, and blended LCOE compared to $70/MWh grid.",
+      "assertions": [
+        "Gas turbine LCOE includes fuel cost at $4.50/MMBtu converted to $/MWh",
+        "Wind capacity factor reflects Oklahoma/Central US region (35-45%)",
+        "PTC at $28.60/MWh is applied to wind generation as PTC-eligible source",
+        "Blended LCOE accounts for generation share weighting between gas and wind",
+        "Reliability assessment addresses 99.999% uptime requirement",
+        "Energy independence analysis considers 72-hour autonomous operation"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate a 10MW edge data center using BESS-only for peak shaving and backup. No fuel source available at site. Grid is primary power at $80/MWh with demand charges of $15/kW/month. Evaluate a 20MWh (2-hour) BESS system for peak shaving and a 40MWh (4-hour) BESS for extended backup. The site qualifies for 30% ITC. Location: suburban California (PG&E territory).",
+      "expected_output": "A BTM assessment comparing 2-hour vs 4-hour BESS configurations, LCOE for each BESS option including degradation and cycle life, ITC at 30% applied to BESS CapEx, peak shaving value analysis against demand charges, and recommendation based on edge site economics where grid remains primary.",
+      "assertions": [
+        "BESS LCOE accounts for cycle life and annual degradation",
+        "ITC at 30% is applied to BESS as ITC-eligible storage",
+        "Both 2-hour and 4-hour BESS configurations are evaluated",
+        "Peak shaving economics reference $15/kW/month demand charges",
+        "Grid remains primary power source in recommendation (BESS is supplemental)",
+        "California/PG&E grid tariff of $80/MWh is used for comparison"
+      ]
+    }
+  ]
+}

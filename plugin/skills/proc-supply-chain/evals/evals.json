@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-supply-chain",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess supply chain risks for a 100MW hyperscale data center in Ashburn, Virginia with an 18-month target delivery from ground-breaking to substantial completion. Equipment scope includes: 6x 40MVA oil-filled transformers, 12x 2.5MW diesel generators, 24x 1000kVA UPS systems, 48x CRAH units, 2x 1500-ton chillers, and associated switchgear, PDUs, racks, and cabling. The developer has no existing purchase agreements. Budget is flexible for critical path items.",
+      "expected_output": "Supply chain assessment identifying transformers as the critical path constraint (52-78 week lead time exceeds 18-month target). Risk matrix scoring all equipment categories. Recommendation to place transformer orders immediately with advance purchase agreements. Geopolitical risks including Section 301 tariffs and rare earth dependencies. Alternative supplier strategy with dual-award recommendation for transformers. Total procurement timeline showing transformer as the binding constraint.",
+      "assertions": [
+        "Transformers are identified as the critical path constraint with 52-78 week lead time",
+        "18-month target delivery is flagged as at-risk due to transformer lead times",
+        "Advance purchase agreement for transformers is recommended with specific timeline",
+        "Geopolitical risks include tariff impacts on electrical equipment sourcing",
+        "Single-source risk is assessed for transformers with manufacturer count noted",
+        "Total procurement timeline identifies transformer delivery as the binding constraint"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Assess supply chain risks for a 50MW sovereign data center in Riyadh, Saudi Arabia. The project is partially funded by the Saudi Public Investment Fund and requires 40% domestic content compliance. Equipment must include: medium-voltage switchgear, generators (natural gas, not diesel due to emissions requirements), UPS systems, and direct-to-chip liquid cooling (CDUs and manifolds). The facility will host classified government AI workloads requiring equipment from allied nations only (no Chinese-origin components). Target delivery: 24 months.",
+      "expected_output": "Supply chain assessment addressing domestic content requirements (40% threshold), allied-nation sourcing restrictions, and natural gas generator availability. DLC/CDU equipment identified as high single-source risk. Geopolitical analysis covering China-origin component restrictions, rare earth dependencies, and Middle East logistics. Alternative supplier strategy focusing on non-Chinese manufacturers for all categories. Domestic content compliance strategy.",
+      "assertions": [
+        "Domestic content requirement (40%) is analyzed with compliance strategy",
+        "Allied-nation sourcing restriction eliminates Chinese-origin equipment from consideration",
+        "Direct-to-chip liquid cooling CDUs and manifolds are flagged as high single-source risk",
+        "Natural gas generators are assessed separately from diesel with manufacturer options listed",
+        "Geopolitical analysis addresses both China-origin restrictions and Middle East logistics",
+        "Alternative supplier strategy identifies non-Chinese manufacturers for critical categories"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Assess supply chain risks for a modular data center fleet deployment: 10 sites across the United States (2 in Virginia, 2 in Texas, 2 in Oregon, 2 in Nevada, 1 in Iowa, 1 in Georgia), each site receiving 5x 2MW prefab data center modules over 36 months. Total: 50 modules, 100MW aggregate. The developer wants to standardize equipment across all modules for bulk purchasing leverage. Equipment per module: 1x transformer, 2x generators, 4x UPS, integrated cooling (rear-door HEX). Modules are factory-built in a central facility in Texas. Assess multi-site procurement optimization and identify bulk purchase opportunities.",
+      "expected_output": "Multi-site procurement strategy with centralized purchasing for 50 standardized modules. Bulk purchase analysis for 50 transformers, 100 generators, 200 UPS units. Factory staging strategy in Texas with phased delivery schedule across 10 sites. Lead time optimization through advance commitment and standardization. Regional logistics analysis for delivery to each state. Bulk pricing leverage estimated at 15-25% discount for fleet purchases.",
+      "assertions": [
+        "Bulk purchase strategy is developed for standardized equipment across 50 modules",
+        "Centralized factory staging in Texas is incorporated into the procurement timeline",
+        "Multi-site delivery logistics are analyzed across the 10 deployment locations",
+        "Transformer bulk purchase of 50 units is flagged as a major advance commitment opportunity",
+        "Standardization benefits are quantified or discussed for supplier flexibility and pricing",
+        "Phased delivery schedule across 36 months is mapped to equipment procurement milestones"
+      ]
+    }
+  ]
+}

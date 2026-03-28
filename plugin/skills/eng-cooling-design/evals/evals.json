@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-cooling-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design the cooling system for a 20MW Tier III hyperscale data center in Phoenix, Arizona with a target PUE of 1.25. The facility uses NVIDIA B200 GPUs at 50kW per rack.",
+      "expected_output": "A cooling design report with climate analysis (hot-arid Phoenix), technology ranking favoring direct liquid cooling and adiabatic systems, ASHRAE TC 9.9 compliance analysis, PUE and WUE estimates with ranges, and per-rack cooling requirements based on B200 TDP data.",
+      "assertions": [
+        "Output includes ASHRAE climate analysis for Phoenix (hot-arid, high design day temperatures)",
+        "Direct liquid cooling is recommended or highly ranked given 50kW/rack density",
+        "PUE estimate is provided as a range, not a point value",
+        "WUE is calculated and water-scarce Phoenix climate is flagged as a concern for evaporative technologies",
+        "GPU-REFERENCE.md B200 cooling data is referenced for per-rack heat rejection",
+        "JSON sidecar output includes artifact_type: cooling-design-report"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate cooling options for converting a warehouse in Stockholm to a 5MW edge-adjacent data center with air-cooled H100 racks at 30kW average density.",
+      "expected_output": "A brownfield cooling analysis leveraging Stockholm's cold climate for free cooling, with air-side economizer as primary recommendation, containment strategy for 30kW racks, and brownfield-specific constraints (existing HVAC, structural load limits).",
+      "assertions": [
+        "Brownfield path is activated with existing building assessment",
+        "Free cooling / air-side economizer is recommended given Stockholm climate",
+        "Hours of free cooling per year is estimated for Stockholm latitude (6000+ hours)",
+        "30kW air-cooled density is validated as feasible with containment and RDHx",
+        "WUE is near zero given waterless cooling recommendation",
+        "Existing HVAC assessment is requested for brownfield conversion"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design cooling for a sovereign AI facility requiring Tier IV fault tolerance, 10MW IT load, location classified. Assume temperate climate. Water independence is required for operational security.",
+      "expected_output": "A sovereign-focused cooling design with 2N cooling redundancy, no single point of failure, water-independent options prioritized (dry coolers, closed-loop systems), and classified-site operational considerations.",
+      "assertions": [
+        "Tier IV / 2N cooling redundancy is correctly modeled",
+        "Sovereign-specific considerations addressed (operational independence, supply chain security)",
+        "Water-independent cooling options are evaluated and recommended (dry coolers, closed-loop DLC)",
+        "Sensitivity analysis shows impact of cooling technology choice on PUE and WUE",
+        "Cooling towers are flagged as unsuitable due to water independence requirement",
+        "JSON sidecar includes water usage of zero or near-zero"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "skill_name": "predev-connectivity",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess connectivity for a 30MW colocation data center in Ashburn, Virginia (Loudoun County). This is a carrier-neutral facility targeting 20+ on-net carriers. Greenfield site on industrial land within 0.5 miles of multiple lit buildings. Requirements: minimum 4 diverse carrier entrances, direct IX peering with Equinix Ashburn, ultra-low latency (<1ms to peering point), initial 400Gbps aggregate bandwidth scaling to 2Tbps within 5 years. Meet-me room must be a revenue center.",
+      "expected_output": "A connectivity assessment rating the site as Excellent. Ashburn is the densest fiber market in the world with 70+ carriers and multiple carrier hotels (Equinix DC1-DC15, CoreSite VA1-VA3). The fiber audit should show dozens of lit buildings within 1 mile. Carrier diversity should easily meet 4+ entrance requirement with physically separate conduit routes. Equinix Ashburn IX peering should show <1ms latency. Meet-me room design should be sized for 20+ carriers with carrier-neutral architecture and cross-connect revenue modeling. Cost estimates should reflect Ashburn's competitive fiber market (lower construction costs due to existing infrastructure density).",
+      "assertions": [
+        "Connectivity rating is Excellent given Ashburn's fiber density",
+        "Fiber audit identifies multiple lit buildings within 1 mile radius",
+        "Carrier diversity analysis confirms 4+ physically diverse entrance paths are achievable",
+        "IX peering assessment references Equinix Ashburn with sub-1ms latency",
+        "Meet-me room design includes carrier-neutral architecture and revenue modeling",
+        "Cost estimate includes NRC and MRC components for fiber, carriers, and IX ports",
+        "Output includes both markdown report and JSON sidecar with artifact_type connectivity-assessment"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Assess connectivity for a 10MW sovereign data center in rural Wyoming, approximately 30 miles from the nearest town with fiber infrastructure. This facility requires government security clearance, domestic-only routing, encrypted transport, and TEMPEST-compliant fiber entrance design. Only 2 carriers have presence within 50 miles. Single fiber route currently exists along the highway corridor. Bandwidth requirement is 40Gbps initial, 100Gbps at 5 years. Latency is not critical (batch AI training workloads). No IX peering needed.",
+      "expected_output": "A connectivity assessment rating the site as Challenging or Poor. The single fiber route along the highway corridor is a critical vulnerability -- a single cut disrupts all connectivity. Should recommend constructing a second diverse fiber path (potentially via a different highway or railroad right-of-way) as a mandatory mitigation. Carrier diversity is severely limited at 2 carriers -- should recommend engaging a third carrier for diversity or building dark fiber that multiple carriers can light. Sovereign requirements (TEMPEST, encrypted transport, domestic routing) add complexity and cost. Cost estimates should reflect long-distance fiber construction (30+ miles at $20-50/linear foot). Despite challenges, the low bandwidth requirement and batch workload tolerance make the connectivity gap manageable with proper investment.",
+      "assertions": [
+        "Connectivity rating reflects the challenging rural location",
+        "Single fiber route is flagged as a critical single point of failure",
+        "Recommendation includes constructing a second diverse physical fiber path",
+        "Limited carrier diversity (2 carriers) is identified as a risk with mitigation strategies",
+        "Sovereign requirements (TEMPEST, encrypted transport, domestic routing) are addressed",
+        "Cost estimate reflects long-distance fiber construction costs",
+        "Fiber entrance design accounts for TEMPEST and physical security requirements"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Assess connectivity for a 20MW hyperscale data center on a coastal site in Mombasa, Kenya, 5km from the SEACOM and EASSy subsea cable landing station. The facility will serve as a regional hub for East Africa with international traffic to Europe, Middle East, and India. Requirements: 3 diverse carrier entrances, remote IX peering to KIXP (Kenya Internet Exchange Point) in Nairobi acceptable, initial 100Gbps bandwidth scaling to 500Gbps, low latency to Europe (<80ms). Carrier options include Safaricom, Liquid Intelligent Technologies, and Airtel Africa.",
+      "expected_output": "A connectivity assessment rating the site as Good. Proximity to SEACOM and EASSy subsea cable landing stations provides excellent international connectivity potential. Latency to Europe should be achievable (<80ms via SEACOM/EASSy Mediterranean routes). The three available carriers (Safaricom, Liquid, Airtel) provide adequate diversity but physical path diversity between the site and landing station must be verified. KIXP remote peering from Mombasa adds ~4-8ms latency vs Nairobi-based direct peering but is acceptable for non-latency-critical workloads. Subsea cable assessment should detail SEACOM and EASSy capacity, consortium membership, and commercial access requirements. Should note that subsea cable landing rights require consortium member engagement.",
+      "assertions": [
+        "Subsea cable assessment covers both SEACOM and EASSy cable systems with capacity and route details",
+        "Latency to Europe is estimated and validated against the <80ms requirement",
+        "Three carriers are evaluated for physical path diversity to the site",
+        "KIXP remote peering from Mombasa is assessed with added latency estimate vs direct Nairobi peering",
+        "Subsea cable landing rights and consortium access requirements are flagged",
+        "Cost estimate includes subsea access fees and carrier circuit costs for international transit",
+        "Risk factors include subsea cable cut scenarios and carrier concentration in East Africa"
+      ]
+    }
+  ]
+}

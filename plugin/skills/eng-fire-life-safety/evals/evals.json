@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-fire-life-safety",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design fire and life safety systems for a Tier III enterprise data center with on-site BESS (20MWh lithium-ion, indoor installation). The facility has 4 IT rooms totaling 40,000 sqft, single story. BESS is in a dedicated room adjacent to the electrical switchgear. AHJ is the local fire marshal in Virginia. Facility is 24/7 occupied. Clean agent suppression preferred for IT spaces. 6 x 2.5MW diesel generators with 48-hour fuel storage.",
+      "expected_output": "A fire/life safety design with VESDA detection in all IT rooms and plenums, Novec 1230 or FM-200 clean agent in IT spaces, NFPA 855 compliant BESS protection (off-gas detection, water-based suppression, deflagration venting, 2-hour fire-rated separation), pre-action sprinkler in support areas, diesel fuel storage SPCC compliance, egress design with emergency lighting and Knox box. BESS spacing requirements quantified and floor area impact noted.",
+      "assertions": [
+        "NFPA 855 compliance is addressed for lithium-ion BESS (thermal runaway, deflagration venting, spacing)",
+        "NFPA 75 requirements are addressed for IT room fire protection",
+        "VESDA aspirating detection is specified for IT rooms with alarm thresholds",
+        "Clean agent suppression (Novec 1230 or FM-200) is specified with design concentration",
+        "2-hour fire-rated separation between BESS room and IT spaces is required",
+        "BESS spacing requirements (rack-to-rack, rack-to-wall) are quantified"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design fire and life safety for a hyperscale data center campus with 50+ IT rooms across 5 buildings totaling 500,000 sqft of white space. Tier IV fault-tolerant design. Campus-level fire water distribution loop with dedicated pump house. Each building has 10-12 IT rooms at 5,000 sqft each. No BESS on-site. AHJ is county fire marshal in Oregon. Clean agent preferred. 40 x 3MW diesel generators across the campus. Two-story buildings.",
+      "expected_output": "A campus-scale fire/life safety design with dedicated fire pump house and campus fire water distribution loop sized for maximum demand. Per-building VESDA systems with campus-level fire alarm monitoring. Clean agent suppression per IT room (independent zones for concurrent maintainability per Tier IV). Pre-action sprinkler in corridors, offices, and mechanical spaces. Diesel generator room protection (flame detection, pre-action sprinkler). Two-story egress design with stairwell pressurization. Fire department access roads per campus layout.",
+      "assertions": [
+        "Campus fire water loop with dedicated pump house is designed for maximum simultaneous demand",
+        "VESDA detection is specified per IT room as independent zones",
+        "Clean agent suppression zones are independent per room for Tier IV concurrent maintainability",
+        "Campus-level fire alarm monitoring system integrates all buildings",
+        "Two-story egress design includes stairwell pressurization requirements",
+        "Diesel generator room fire protection includes flame detection"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design fire and life safety for a multi-tenant colocation facility with 30 tenant cages across 3 data halls totaling 60,000 sqft. Tier III. Tenants range from 2 cages to full halls. Some tenants require independent suppression zones for compliance (financial services, healthcare). AHJ requires sprinklers over clean agent (belt-and-suspenders). Facility is occupied 24/7. Single story. No BESS. 8 x 2MW diesel generators.",
+      "expected_output": "A colo fire/life safety design with tenant-demarcated suppression zones. Clean agent per tenant zone (or per hall for smaller tenants with shared zones). Pre-action sprinkler overlay as required by AHJ (belt-and-suspenders). VESDA per data hall with zone isolation capability. Tenant notification protocol for suppression activation. Suppression system impairment management for tenant work. Cost analysis addressing the belt-and-suspenders requirement doubling installed suppression cost.",
+      "assertions": [
+        "Tenant-demarcated suppression zones are designed for compliance-sensitive tenants",
+        "Belt-and-suspenders design (clean agent + sprinkler) addresses AHJ requirement",
+        "VESDA zones align with tenant suppression zone boundaries",
+        "Tenant notification protocol for suppression activation is specified",
+        "Suppression impairment management procedure for tenant work is addressed",
+        "Cost impact of belt-and-suspenders dual suppression is quantified"
+      ]
+    }
+  ]
+}

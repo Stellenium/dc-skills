@@ -1,0 +1,47 @@
+{
+  "skill_name": "eng-physical-security",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design physical security for a commercial colocation facility targeting SOC 2 Type II and ISO 27001 certification. The facility is a 10MW multi-tenant building with 30 tenant cages across 2 data halls. Standard 3-layer security (site, building, data hall). Tenants manage their own cage access. Visitor policy is limited unescorted for pre-vetted tenant personnel. OT network should be logically segmented.",
+      "expected_output": "A physical security design with 3-layer zone model (perimeter, building with mantrap, data halls with biometric). CCTV system with 90-day retention (SOC 2 requirement). Tenant cage access control delegated to tenants with master override for facility operator. Visitor management system with pre-registration. OT network segmented via VLANs and firewall from tenant and corporate networks. Compliance mapping to both SOC 2 CC6.4 and ISO 27001 Annex A.11.",
+      "assertions": [
+        "SOC 2 Type II 90-day CCTV retention requirement is met",
+        "ISO 27001 Annex A.11 physical security controls are mapped",
+        "Tenant cage access is delegated with master override capability",
+        "Mantrap or anti-tailgating is specified at building entry",
+        "OT/IT segmentation is logically separated (VLAN + firewall)",
+        "Visitor management system with pre-registration is included",
+        "Output includes both markdown report and JSON sidecar with artifact_type: security-design"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design physical security for a government classified SCIF data center facility. The facility will process Secret-level data and must comply with ICD 705, NIST 800-53 Rev 5, and FedRAMP High. 5-layer security perimeter required. Air-gapped OT network. All visitors escorted. Dual-person integrity (two-person rule) for server room access. RF shielding (TEMPEST) required.",
+      "expected_output": "A SCIF-compliant security design with 5-layer zone model including vault-level security. TEMPEST RF shielding specifications. Air-gapped OT network with no IP connectivity to any other network. Dual-person integrity enforcement at Zone 5. Sound attenuation requirements. Compliance mapping to ICD 705, NIST 800-53 PE family controls, and FedRAMP High. All visitors escorted with no unescorted access at any zone.",
+      "assertions": [
+        "ICD 705 SCIF requirements are addressed (RF shielding, sound attenuation)",
+        "TEMPEST specifications are included for RF shielding",
+        "Five-layer security zone model is fully designed",
+        "Air-gapped OT network is specified (no IP connectivity)",
+        "Dual-person integrity (two-person rule) is enforced at highest zone",
+        "NIST 800-53 PE family controls are mapped to zone design",
+        "Zero-trust principles are applied across all zone boundaries"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design physical security for a sovereign AI facility that must comply with national critical infrastructure requirements. The facility is a 50MW hyperscale campus requiring national operator status (citizens-only access to sensitive areas). Foreign-manufactured security equipment is restricted. 5-layer security with enhanced perimeter (vehicle barriers rated K12 per ASTM F2656). Physically segmented OT network.",
+      "expected_output": "A sovereign facility security design with enhanced 5-layer model. Vehicle barriers rated K12 (15,000 lb vehicle at 50 mph). National operator requirements enforced through citizenship verification at Zones 4-5. Equipment sourcing restricted to domestic or allied-nation manufacturers. Physical OT network segmentation with domestic-manufactured network equipment. Zero-trust architecture with identity verification at every zone boundary.",
+      "assertions": [
+        "Vehicle barrier rating (K12/ASTM F2656) is specified at perimeter",
+        "National operator requirement enforces citizens-only access at secure zones",
+        "Foreign-manufactured equipment restrictions are documented",
+        "Physical OT network segmentation (not just logical) is specified",
+        "Zero-trust architecture is applied with identity verification per zone",
+        "Compliance mapping addresses national critical infrastructure standards",
+        "Five-layer zone model is customized for sovereign requirements"
+      ]
+    }
+  ]
+}

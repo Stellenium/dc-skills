@@ -1,0 +1,47 @@
+{
+  "skill_name": "eng-brownfield-convert",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Evaluate a 1960s industrial warehouse in Phoenix, AZ for conversion to a 10MW data center. The building is 120,000 sqft single-story with 28ft clear ceiling height, 200 psf floor loading, 40ft column spacing, existing 480V/3000A service, two fiber carriers on-net, and a loading dock with truck court. The building has some asbestos in pipe insulation (built 1962). Zoning is industrial. Target density is 15 kW/rack.",
+      "expected_output": "A brownfield conversion assessment with GO recommendation. The warehouse should score excellently on structural capacity (200 psf, 28ft ceiling, wide bays), well on logistics (loading dock), and well on zoning (already industrial). Power should score 3-4 (480V service present but needs upgrade for 10MW). Contamination should flag asbestos risk for the 1962 building with abatement cost estimate. Fiber should score 3-4 with two carriers. Phoenix seismic zone 0 should score 5. Overall weighted score should be >=3.5 with GO recommendation, with remediation items for asbestos abatement and power upgrade.",
+      "assertions": [
+        "Recommendation is GO with weighted score >= 3.5",
+        "Structural capacity scores 4 or 5 given 200 psf floor loading and 28ft ceiling",
+        "Contamination risk flags asbestos for pre-1980 building with abatement cost estimate",
+        "Power infrastructure identifies need for utility upgrade from 480V/3000A to support 10MW",
+        "Seismic zone scores 5 for Phoenix (low seismic risk)",
+        "Zoning scores 4 or 5 since building is already industrial-zoned",
+        "Remediation cost estimates are included for factors scoring below 3"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate a 2005 Class A office building in downtown Chicago for conversion to a 5MW data center. The building is 80,000 sqft across 4 floors with 10ft ceiling height per floor, 75 psf floor loading, 25ft column spacing, 208V/800A service, single fiber carrier, no loading dock (underground parking garage only). Current zoning is commercial/office. Target density is 10 kW/rack.",
+      "expected_output": "A brownfield conversion assessment with CONDITIONAL recommendation. The office building should score poorly on structural capacity (75 psf floor loading is insufficient for server racks, 10ft ceiling is too low for containment and overhead infrastructure). Power should score 1-2 (208V/800A is grossly insufficient for 5MW, major utility work needed). The structural score of 1-2 should trigger the override rule forcing CONDITIONAL regardless of weighted average. Zoning change from commercial to data center use should score 2-3 (feasible but time-consuming in Chicago). Remediation costs should include structural reinforcement, major electrical upgrade, and zoning change fees.",
+      "assertions": [
+        "Recommendation is CONDITIONAL due to structural and power deficiencies",
+        "Structural capacity scores 1 or 2 given 75 psf floor loading and 10ft ceiling",
+        "Override rule is triggered by at least one factor scoring 1",
+        "Power infrastructure scores 1 or 2 given 208V/800A for 5MW target",
+        "Zoning identifies commercial-to-industrial change-of-use requirement",
+        "Power upgrade cost estimates are included for utility infrastructure work",
+        "Ceiling height constraint is specifically noted as limiting factor"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate a 1985 big-box retail building in Northern Virginia (Loudoun County) for conversion to a 20MW data center. The building is 150,000 sqft single-story with 22ft ceiling, 125 psf floor loading, 35ft column bays, existing 480V/2000A service, excellent fiber market (Ashburn corridor -- 5+ carriers within 1 mile), loading dock present. The building was built in 1985 so contamination assessment needed. Current zoning is commercial retail. Target density is 20 kW/rack for mixed AI inference and enterprise workloads.",
+      "expected_output": "A brownfield conversion assessment with mixed scores leading to CONDITIONAL recommendation. Fiber should score 5 (Ashburn/NoVA is the densest fiber market in the US). Structural should score 3-4 (125 psf may need reinforcement for 20kW racks but 22ft ceiling is good). Power should score 2-3 (480V/2000A is about 1.5MW, needs major upgrade to 20MW -- significant utility work in a market with queue pressure). Contamination should flag 1985 building for potential legacy materials. Zoning should score 2-3 (retail-to-industrial requires change-of-use, though Loudoun County is DC-friendly). Total remediation costs should reference COST-BENCHMARKS.md data for Northern Virginia market rates.",
+      "assertions": [
+        "Fiber access scores 4 or 5 reflecting Northern Virginia's fiber density",
+        "Power infrastructure identifies gap between 1.5MW existing and 20MW target",
+        "Structural assessment evaluates 125 psf against 20kW/rack requirements",
+        "Contamination risk is assessed for 1985 building construction materials",
+        "Zoning notes retail-to-industrial change needed despite DC-friendly county",
+        "Remediation cost totals aggregate across all factors needing improvement",
+        "Assessment references COST-BENCHMARKS.md for regional cost calibration"
+      ]
+    }
+  ]
+}

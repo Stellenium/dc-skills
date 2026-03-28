@@ -1,0 +1,47 @@
+{
+  "skill_name": "predev-project-narrative",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate an investor-facing project narrative for a 50MW hyperscale greenfield data center in Dallas/Fort Worth, Texas. The site feasibility report scored GO (4.1/5.0) with strengths in power (ERCOT, 5.5c/kWh), cost (low construction, no state income tax), and labor. The market study shows a 200MW supply gap in DFW with 95% absorption rate. Target audience is equity investors. Tone is balanced. Key selling points: market opportunity, financial returns, location advantage. Total investment $600M, target IRR 18%, MOIC 2.2x.",
+      "expected_output": "A polished 2-3 page concept paper written in persuasive prose (not bullet lists). Opens with a compelling executive summary paragraph about the DFW opportunity. Market section quantifies the 200MW supply gap and absorption rate. Site section highlights ERCOT power advantage and Texas cost structure. Financial section uses investor language (IRR, MOIC, capital structure). Risks section proactively addresses ERCOT grid reliability and interconnection queue. Closes with a specific investment ask.",
+      "assertions": [
+        "Output is flowing prose paragraphs, not a structured data dump or bullet list",
+        "Investor-specific language is used (IRR, MOIC, capital structure, exit)",
+        "Market supply gap (200MW) and absorption rate (95%) are woven into the narrative",
+        "Site strengths from feasibility report are highlighted with specific metrics",
+        "Risks are proactively addressed with mitigants (not buried or omitted)",
+        "The ask is specific (dollar amount, terms, return targets)",
+        "JSON sidecar includes artifact_type: project-narrative"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a government-facing narrative for a sovereign AI facility in New Mexico. The project is a 100MW facility backed by a national AI strategy initiative. The site scored CONDITIONAL (3.2/5.0) due to infrastructure gaps (water scarcity, single fiber route) but high sovereignty alignment. The audience is the state governor's economic development office. Key selling points: economic impact, sovereignty, technology differentiation. Tone is balanced. Total investment $1.2B. 800 construction jobs, 150 permanent jobs.",
+      "expected_output": "A narrative framed around economic impact and national security rather than financial returns. Opens with sovereignty and national competitiveness framing. Quantifies jobs (800 construction, 150 permanent), tax revenue, and CAPEX investment. Addresses infrastructure gaps as opportunities for state partnership (water infrastructure, fiber buildout). Positions the ask as a public-private partnership with specific incentive requests.",
+      "assertions": [
+        "Government-specific framing: jobs, tax revenue, economic impact, sovereignty",
+        "Jobs-per-MW calculation is included (150 permanent for 100MW aligns with industry norms)",
+        "Infrastructure gaps are framed as partnership opportunities, not project weaknesses",
+        "National AI strategy and sovereignty alignment are prominent themes",
+        "Specific incentive request or partnership ask is included",
+        "Tone acknowledges CONDITIONAL site rating without being defensive",
+        "Competing jurisdictions or urgency is referenced to motivate government action"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write an internal executive summary for a brownfield conversion project. A real estate holding company is evaluating converting a 200,000 sqft warehouse in Chicago to a 5MW colocation facility. Site feasibility scored CONDITIONAL (3.4/5.0) with high connectivity but high labor costs and taxes. Market study shows moderate demand in Chicago with 15% vacancy in existing colo. Target audience is the internal investment committee for a go/no-go decision. Tone is conservative. Total investment $45M.",
+      "expected_output": "A concise internal narrative focused on go/no-go decision framing. Conservative tone with honest assessment of challenges (high labor costs, tax burden, moderate vacancy). Positions the brownfield conversion advantage (speed to market, lower CapEx vs greenfield). Addresses the 15% vacancy concern with demand differentiation strategy. Provides clear recommendation with conditions and a specific decision request (approve, defer, or decline with rationale for each).",
+      "assertions": [
+        "Internal executive framing: go/no-go recommendation, opportunity cost, strategic fit",
+        "Conservative tone with realistic (not optimistic) projections",
+        "Brownfield conversion advantages are quantified (timeline, cost savings vs greenfield)",
+        "15% vacancy concern is directly addressed with demand differentiation strategy",
+        "High labor and tax costs are acknowledged with specific impact quantification",
+        "Decision framework is clear: approve/defer/decline with conditions for each",
+        "Output reads as an internal memo, not an external marketing piece"
+      ]
+    }
+  ]
+}

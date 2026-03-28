@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-bid-evaluation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Evaluate 5 bids received for a 50MW hyperscale data center construction contract in Dallas, Texas. The upstream RFP specified best-value evaluation with weights: Technical 40%, Price 30%, Schedule 15%, Qualifications 15%. Must-have requirements include: $500M bonding capacity, 3+ data center projects over 20MW in the last 5 years, EMR below 1.0, and Texas contractor license. Bidder A is a large national firm ($2.1B bid), Bidder B is a DC specialist ($1.95B bid, aggressive 18-month schedule), Bidder C is regional with one 30MW project ($2.0B bid), Bidder D failed to submit bid bond, Bidder E has EMR of 1.3.",
+      "expected_output": "A bid evaluation memo with responsiveness check (Bidder D eliminated for missing bid bond), compliance matrix (Bidder E fails EMR requirement), technical and price scoring of remaining 3 compliant bidders, risk assessment, and recommendation with rationale. Scoring summary table shows weighted totals and rankings.",
+      "assertions": [
+        "Bidder D is eliminated in responsiveness check for missing bid bond",
+        "Bidder E is eliminated in compliance check for EMR exceeding 1.0 threshold",
+        "Remaining 3 bidders are scored across all 4 weighted criteria summing to 100%",
+        "Price normalization is discussed or applied across the 3 compliant bids",
+        "Risk assessment covers financial stability, capacity, technical, and schedule factors",
+        "Recommendation identifies a specific bidder with conditions for award"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate 3 bids for cooling equipment procurement using LPTA methodology. The RFP was for 10 adiabatic cooling units (500kW sensible each) for a 5MW colocation expansion in Chicago. Technical pass/fail criteria: UL listed, minimum 0.95 SHR, Modbus TCP communication, 2-year warranty. Bidder A: $4.2M, meets all technical requirements, 12-week delivery. Bidder B: $3.8M, meets all technical requirements, 16-week delivery. Bidder C: $3.5M, SHR is 0.92 (below 0.95 minimum), 10-week delivery.",
+      "expected_output": "LPTA evaluation memo showing Bidder C fails technical pass/fail on SHR requirement. Between compliant Bidders A and B, Bidder B wins on lowest price. Delivery schedule difference is noted but does not override LPTA pricing decision. Recommendation to award to Bidder B with delivery timeline condition.",
+      "assertions": [
+        "Bidder C is eliminated for failing SHR technical requirement (0.92 < 0.95)",
+        "LPTA methodology correctly selects lowest-priced compliant bidder (Bidder B at $3.8M)",
+        "Technical scoring is documented as pass/fail even under LPTA",
+        "Delivery schedule difference (12 vs 16 weeks) is documented as a consideration",
+        "SHR specification is correctly identified as sensible heat ratio",
+        "Recommendation includes delivery timeline as an award condition"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate 2 bids for managed services at a 20MW enterprise data center. One bidder is the incumbent operator (3 years, generally satisfactory performance with 2 SLA breaches). The other is a new entrant with strong hyperscale experience but no enterprise colo track record. Best-value evaluation with weights: Technical 35%, Price 25%, Qualifications 25%, Transition Plan 15%. The incumbent bid is 12% higher than the new entrant. Evaluate for incumbent bias and provide objective recommendation.",
+      "expected_output": "Evaluation memo that explicitly addresses incumbent bias, scores both bidders objectively, weighs transition risk for the new entrant against the incumbent's known performance including SLA breaches, and provides a recommendation acknowledging the trade-offs. Notes that 2 bids may warrant re-solicitation consideration.",
+      "assertions": [
+        "Incumbent bias is explicitly addressed and documented",
+        "Incumbent's SLA breaches are factored into technical and qualifications scoring",
+        "Transition risk for new entrant is assessed in the risk section",
+        "12% price premium of incumbent is quantified and weighed against transition costs",
+        "Two-bidder competition is flagged with re-solicitation consideration documented",
+        "Recommendation clearly states rationale regardless of which bidder is selected"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-ops-readiness",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create an operations readiness plan for a 100MW Tier III hyperscale data center with self-operated 24/7 staffing. The facility has 4 power trains, 3 cooling plants, and 20 IT halls. Commissioning (Level 4 IST) completes in 3 months. The operations team is a new build (no existing team). Self-operated with no managed services provider. Single tenant (cloud provider). The facility manager wants to have Day 1 readiness when IST completes.",
+      "expected_output": "A comprehensive ops readiness plan with 50-70 FTE staffing model (CFEs, electrical/mechanical techs, NOC operators, security, admin). 24/7 shift coverage with 4-shift rotation. 155-210 SOPs prioritized by safety criticality (P1 emergency procedures first). Critical spares list with $5-10M estimated inventory including MV breakers (26-52 week lead time). 4-severity incident response with escalation matrix to CEO/CTO. Day 1/30/90 milestones. Recruiting timeline starting immediately (90-120 day CFE time-to-fill before IST completes in 3 months).",
+      "assertions": [
+        "Staffing model provides 50-70 FTE with role breakdown and shift coverage for 24/7 operations",
+        "CFE recruiting timeline starts immediately given 90-120 day time-to-fill vs 3-month IST completion",
+        "SOP count is 155-210 with P1 safety-critical procedures required on Day 1",
+        "Spare parts strategy includes MV breakers with 26-52 week lead time flagged",
+        "Day 1/Day 30/Day 90 milestones are specified with concrete checklist items",
+        "Incident response includes 4 severity levels with escalation matrix and notification requirements"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Develop an ops readiness plan for a 20MW Tier III colo facility transitioning from construction to a managed services provider (MSP) for operations. The MSP contract covers 24/7 facility operations, NOC monitoring, and routine maintenance. The owner retains asset management, capital decisions, and tenant relations. 30 tenants expected at stabilization. The MSP requires a 60-day overlap with the construction team for knowledge transfer. Commissioning completes in 6 weeks.",
+      "expected_output": "An ops readiness plan addressing the MSP handover with 60-day overlap period, knowledge transfer milestones, facility-specific SOP development (not generic MSP procedures), 22-28 FTE MSP team sizing, tenant-facing operations planning (5 FTE for 30 tenants), SLA reporting framework for monthly tenant reports, spare parts inventory handover, vendor contract assignment from developer to MSP. Day 1 focuses on MSP operational readiness verification.",
+      "assertions": [
+        "60-day MSP overlap period with construction team is planned with knowledge transfer milestones",
+        "Facility-specific SOPs are required (not generic MSP procedures)",
+        "Tenant-facing operations staff (5 FTE for 30 tenants) is budgeted beyond engineering team",
+        "SLA reporting framework for monthly tenant reports is specified",
+        "Vendor service contract assignment from developer to MSP is addressed",
+        "Day 1 checklist includes MSP operational readiness verification"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create an ops readiness plan for a fleet of 5 modular data centers (2MW each, 10MW total) with minimal on-site staff and centralized remote monitoring from a regional NOC. Each site is Tier II with business-hours on-site staffing and 24/7 remote monitoring. Staff rotate between sites. One facility manager covers all 5 sites. Commissioning is staggered (one site per month over 5 months). Budget is constrained -- operations cost must stay under $2M annually.",
+      "expected_output": "A lean ops readiness plan with 8-10 FTE covering all 5 sites (mobile technicians rotating between sites, centralized NOC operators). Staggered commissioning handover plan (one site per month). Simplified SOP set (60-85 per site, standardized across fleet). Minimal spare parts (shared pool across 5 sites with mobile spares van). Remote monitoring architecture with alarm escalation to NOC. Incident response adapted for remote response (30-60 min dispatch time). Annual operations cost estimate under $2M.",
+      "assertions": [
+        "Total FTE of 8-10 covers all 5 sites with mobile technician rotation model",
+        "Staggered commissioning handover plan addresses one site per month rollout",
+        "Standardized SOPs across fleet reduce development effort (write once, deploy 5x)",
+        "Shared spare parts pool across 5 sites reduces inventory investment",
+        "Remote monitoring with NOC alarm escalation addresses unmanned hours",
+        "Annual operations cost estimate demonstrates staying under $2M budget constraint"
+      ]
+    }
+  ]
+}

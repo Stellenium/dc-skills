@@ -1,0 +1,15 @@
+{
+  "skill_name": "REPLACE-WITH-SKILL-NAME",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "REPLACE: Describe a realistic scenario that exercises the skill's core capability.",
+      "expected_output": "REPLACE: Describe what a correct output looks like -- key sections, data points, and structure.",
+      "assertions": [
+        "REPLACE: First assertion -- a specific claim about the output that can be graded PASS/FAIL",
+        "REPLACE: Second assertion -- another grading criterion",
+        "REPLACE: Third assertion -- edge case or quality check"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-government-proposal",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a state-level government proposal for a 100MW hyperscale data center campus in Columbus, Ohio. The developer is requesting a 15-year sales tax exemption on equipment and a 10-year property tax abatement through a PILOT agreement. In return, the developer offers: 45 permanent operations jobs, 2,000 peak construction jobs, $1.2 billion capital investment over 3 phases, and a $5M community workforce training fund. Ohio's JobsOhio program is the target incentive vehicle. The site is in an Opportunity Zone census tract. Two competing developers are also pitching Ohio sites.",
+      "expected_output": "A polished state-level government proposal with jobs/tax revenue/economic impact framing. Strategic alignment section references Ohio's economic development strategy and JobsOhio program. Economic impact section quantifies annual property tax revenue, construction employment multiplier, and workforce training benefits. Ask/offer matrix shows clear public benefit. References US-STATE-INCENTIVES.md for Ohio program details.",
+      "assertions": [
+        "Proposal uses state-level framing focused on jobs, tax revenue, and economic development",
+        "Strategic alignment references Ohio-specific programs or economic development goals",
+        "Economic impact section quantifies permanent jobs, construction jobs, capital investment, and tax revenue",
+        "Ask/offer matrix demonstrates government receives more value than it gives",
+        "Opportunity Zone eligibility is mentioned as additional federal benefit",
+        "Competitive positioning against other developers is addressed"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a federal government proposal for a 50MW sovereign AI compute facility near a military installation in Virginia. The facility will support classified and unclassified AI workloads for the Department of Defense. The developer is requesting a long-term land lease from DoD, expedited security clearance processing for construction workers, and a 10-year anchor tenancy commitment. The facility will be SCIF-capable and FedRAMP High authorized. Frame around national security and compute sovereignty, referencing the CHIPS and Science Act and the National AI Initiative.",
+      "expected_output": "A polished federal proposal with national security and compute sovereignty framing. Strategic alignment references CHIPS Act, National AI Initiative, and defense compute requirements. Security provisions address SCIF capability and personnel clearance. Ask/offer matrix emphasizes national security value over commercial returns. Formal tone appropriate for federal agency.",
+      "assertions": [
+        "Proposal uses federal framing focused on national security and compute sovereignty",
+        "CHIPS and Science Act is referenced in strategic alignment",
+        "National AI Initiative or equivalent federal strategy is cited",
+        "SCIF capability and security clearance requirements are addressed",
+        "Tone is formal and mission-focused, not commercially oriented",
+        "Ask/offer matrix leads with national security benefit, not private returns"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a foreign government proposal for a 30MW data center in Nairobi, Kenya to support the Kenyan government's Digital Economy Blueprint and Africa's Growing AI ecosystem. The developer is requesting: government land allocation near Konza Technopolis, expedited permitting, and a 15-year tax holiday under Kenya's Special Economic Zone program. The developer offers: 120 permanent jobs, technology transfer program with local universities, $400M investment, and sovereign data hosting capability. The project is eligible for IFC and AfDB financing. Reference REGULATORY-MATRIX.md for Kenya's data protection framework and DFI-FUNDING.md for development finance alignment.",
+      "expected_output": "A polished foreign government proposal with sovereign AI and digital infrastructure framing. References Kenya's Digital Economy Blueprint by name. Strategic alignment maps to national digital strategy goals. DFI funding eligibility (IFC, AfDB) is highlighted as risk mitigation for the government. Technology transfer and local capacity building are emphasized. References REGULATORY-MATRIX.md and DFI-FUNDING.md.",
+      "assertions": [
+        "Kenya's Digital Economy Blueprint is referenced by name in strategic alignment",
+        "Sovereign AI capability and data residency are framed as national priorities",
+        "DFI funding eligibility (IFC and AfDB) is highlighted with specific program references",
+        "Technology transfer and university partnerships are prominently featured",
+        "Proposal references REGULATORY-MATRIX.md for data protection framework",
+        "Tone adapts to foreign government context with sovereignty and capacity-building emphasis"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "skill_name": "comp-data-classification",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a data classification framework for a sovereign data center in Virginia that will host both TS/SCI government workloads and commercial enterprise tenants in the same campus. The facility has two buildings: Building A for classified government work (Secret and TS/SCI) and Building B for commercial tenants (Confidential and below). The government tenant requires CNSS Instruction 1253 compliance, TEMPEST shielding, and air-gapped networks. Assess the mixed-sensitivity architecture requirements and physical separation needed between buildings.",
+      "expected_output": "A comprehensive data classification framework with 5 levels (Public through TS/SCI), physical separation model using separate buildings with independent infrastructure (power, cooling, network). Building A: TEMPEST-shielded SCIF spaces, NSA Type 1 encryption, air-gapped networks, biometric + clearance access control, separate utility feeds from separate substations. Building B: standard data center classification (Internal/Confidential), AES-256 at rest, TLS 1.3 in transit. No shared infrastructure between buildings. CNSA 2.0 Suite requirement for Building A quantum-resistant encryption. Cross-domain solution requires NSA CDSMO approval with 12-18 month lead time. TEMPEST shielding adds 40-60% to Building A construction cost.",
+      "assertions": [
+        "Five classification levels are defined from Public through TS/SCI",
+        "TEMPEST shielding requirement and 40-60% cost impact are stated",
+        "Separate infrastructure (power, cooling, network) required between buildings",
+        "Air-gapped network requirement for TS/SCI is specified",
+        "CNSA 2.0 Suite / quantum-resistant encryption mandate is referenced",
+        "Cross-domain solution NSA approval requirement and timeline are noted"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a data classification framework for a 500-tenant colocation facility in Chicago that serves both HIPAA-covered healthcare organizations and PCI DSS-compliant financial services companies. The facility uses shared power and cooling infrastructure but has logically segmented networks. Some tenants handle both PHI and cardholder data. Design classification levels, encryption requirements, handling procedures, and assess whether the current shared infrastructure model meets both HIPAA and PCI DSS requirements.",
+      "expected_output": "A framework with 4 classification levels (Public, Internal, Confidential-PHI, Confidential-PCI). Shared power and cooling is acceptable for HIPAA and PCI (neither requires physical infrastructure separation at the power/cooling level). Network segmentation between PCI CDE and non-PCI environments is mandatory per PCI DSS Requirement 1. HIPAA requires BAAs with all tenants handling PHI. Encryption: AES-256 at rest for both PHI and PCI data, TLS 1.3 in transit. For dual-compliance tenants: unified control framework mapping HIPAA Security Rule to PCI DSS v4.0 requirements, identifying overlapping controls (access control, audit logging, encryption, incident response). Disposal: NIST SP 800-88 Purge minimum for SSDs, physical destruction recommended.",
+      "assertions": [
+        "HIPAA and PCI DSS classification levels are defined with handling requirements",
+        "Shared power/cooling is assessed as acceptable for both frameworks",
+        "PCI DSS network segmentation requirement is specified",
+        "AES-256 encryption at rest is required for both PHI and cardholder data",
+        "Overlapping controls between HIPAA and PCI DSS are identified",
+        "SSD disposal requires physical destruction per NIST SP 800-88 guidance"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a data classification framework for a hyperscale cloud region in Frankfurt, Germany handling EU personal data under GDPR with mixed classification levels. The region serves: (a) standard commercial customers (Internal/Confidential), (b) EU government customers requiring data sovereignty (Restricted), and (c) financial services customers under DORA regulation. All data must remain within EU jurisdiction. Assess encryption standards, quantum-resistant considerations, and the physical-to-logical classification mapping. The facility currently uses logical separation only.",
+      "expected_output": "A framework with 4 levels: Public, Internal, Confidential (GDPR personal data, financial data under DORA), Restricted (EU government sovereignty data). GDPR requires pseudonymization and encryption for personal data (Art. 32). DORA adds specific ICT risk management and resilience testing requirements. EU government sovereignty tier requires: dedicated infrastructure (not just logical separation -- upgrade from current approach), EU-entity-only access controls, encryption key management within EU jurisdiction. Quantum-resistant considerations: EU government customers should plan for PQC migration. Physical-to-logical mapping: government sovereignty data requires at minimum dedicated racks with physical access controls; logical separation alone is insufficient for Restricted classification. Encryption: AES-256 at rest with EU-jurisdiction key management, TLS 1.3 in transit.",
+      "assertions": [
+        "GDPR Article 32 encryption and pseudonymization requirements are referenced",
+        "DORA regulation requirements for financial services are addressed",
+        "EU government sovereignty tier requires physical separation beyond logical only",
+        "Encryption key management must remain within EU jurisdiction",
+        "Quantum-resistant encryption planning is recommended for government tier",
+        "Regulatory disclaimer references DISCLAIMER-FRAMEWORK.md"
+      ]
+    }
+  ]
+}

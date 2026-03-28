@@ -1,0 +1,44 @@
+{
+  "skill_name": "fin-insurance-program",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design an insurance program for a 100MW hyperscale data center under construction in Miami, Florida. Total construction value is $1.5B. Construction timeline is 24 months starting June 2026, overlapping two full hurricane seasons. Construction type is tilt-up concrete with steel superstructure. The site is in FEMA flood zone X (minimal flood risk) but within 30 miles of the Atlantic coast (named storm exposure). A 50MWh lithium-ion BESS system is included. The general contractor has a strong safety record. Design the builder's risk program with named storm, flood, and BESS coverage.",
+      "expected_output": "A builder's risk-focused insurance program for $1.5B TIV with: named storm deductible of 2-5% TIV ($30-75M), flood sub-limit assessment (Zone X = lower exposure but still relevant for named storm surge), LEG 2/3 coverage recommended for complex MEP systems, testing/commissioning sub-limit for 3-6 month period post-construction, soft cost coverage for construction delay (interest carry, professional fees). BESS coverage: lithium-ion 50MWh requires specialty placement, potentially separate from main builder's risk, at significantly higher rates. Named storm season overlap (two full seasons) increases premium significantly. Recommendation to stage critical equipment deliveries outside peak hurricane season if possible.",
+      "assertions": [
+        "Builder's risk coverage is primary with $1.5B TIV",
+        "Named storm deductible range is specified (2-5% TIV)",
+        "LEG 2/3 coverage is recommended with cost premium noted (2-3x LEG 1)",
+        "Lithium-ion BESS requires specialty placement at higher rates",
+        "Two hurricane season overlap is flagged as premium driver",
+        "Testing and commissioning period coverage is included"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a comprehensive insurance program for an operational colocation facility in Ashburn, Virginia with 500+ tenants, 200MW IT capacity, TIV of $2B, annual revenue of $400M. The facility has SOC 2 Type II and ISO 27001 certifications. Top 3 tenants represent 40% of revenue. SLA credits can reach $5M annually. The facility has N+1 redundancy (Tier III equivalent). No BESS. Design coverage across all 6 types: property, BI, cyber, environmental, E&O, and assess whether builder's risk is needed for a planned 50MW expansion phase.",
+      "expected_output": "A 6-coverage program: (1) Property at $2B TIV with equipment breakdown endorsement, agreed amount, replacement cost on IT equipment. (2) BI with 18-24 month period of indemnity, 24-hour waiting period to align with SLA triggers, contingent BI for top-3 customer concentration (40% revenue). (3) Cyber $50-100M limit, SOC 2/ISO 27001 certifications reduce premium, negotiate war exclusion carvebacks, systemic risk sublimit for colo. (4) Environmental $25M for generator diesel storage, clean agent fire suppression. (5) E&O $25-50M with defense outside limits, contractual SLA liability coverage, technology E&O form. (6) Builder's risk for 50MW expansion as separate policy. Total estimated annual program premium range provided as % of TIV and revenue.",
+      "assertions": [
+        "All 6 coverage types are addressed with recommended limits",
+        "Business interruption waiting period considers SLA credit trigger alignment",
+        "Customer concentration risk (40% in top 3) drives contingent BI recommendation",
+        "Cyber insurance leverages SOC 2 and ISO 27001 for premium reduction",
+        "E&O coverage includes defense costs outside limits recommendation",
+        "Builder's risk for expansion is recommended as separate policy"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design an insurance program for a 50MW sovereign data center with a 100MWh lithium-ion BESS system in a non-hurricane zone (Colorado). TIV $800M including $200M in BESS. The facility serves government agencies with classified workloads. Environmental exposure includes 500,000 gallons of diesel fuel storage for backup generators and the lithium-ion BESS with LFP chemistry. The BESS is in a separate structure 50 feet from the main building with dedicated fire suppression (clean agent, no PFAS-containing foam). Assess BESS insurability, environmental program, and property coverage with BESS exclusions.",
+      "expected_output": "An insurance program addressing BESS insurability as the central challenge. BESS ($200M) likely requires specialty placement through London/Bermuda markets -- standard property carriers increasingly exclude or sub-limit lithium-ion. LFP chemistry is lower risk than NMC (fewer thermal runaway events) but still requires specialty underwriting. Separate structure (50 feet) improves main building insurability. Property: $800M TIV with BESS potentially on separate policy or high sub-limit. Environmental: $500K diesel storage drives pollution liability, BESS thermal event environmental response, clean agent (no PFAS) simplifies environmental risk. No PFAS exposure from fire suppression is a positive underwriting factor. Government/classified workload may limit carrier access for risk engineering inspections.",
+      "assertions": [
+        "BESS insurability challenge is identified requiring specialty market placement",
+        "LFP chemistry is noted as lower risk than NMC for underwriting",
+        "Separate BESS structure improves main facility property insurability",
+        "Environmental coverage addresses diesel storage and BESS thermal event risk",
+        "PFAS-free fire suppression is noted as positive underwriting factor",
+        "Financial disclaimer references DISCLAIMER-FRAMEWORK.md"
+      ]
+    }
+  ]
+}

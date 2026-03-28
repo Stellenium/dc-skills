@@ -1,0 +1,44 @@
+{
+  "skill_name": "bd-partnership-proposal",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a partnership proposal for a technology JV with a major cloud hyperscaler for a 100MW data center campus in Dallas, Texas. The hyperscaler will serve as the anchor tenant committing to 60MW over 10 years at a pre-negotiated rate, with options for the remaining 40MW. The developer contributes the site (entitled, 50 acres), development expertise, and operations capability. The hyperscaler contributes a 10-year compute commitment, technology design requirements, and customer demand certainty. Proposed structure: 60/40 JV (developer majority) with the hyperscaler's compute commitment valued as equity contribution. Include term sheet with governance, economics, technology refresh obligations, and exclusivity terms.",
+      "expected_output": "A polished JV proposal with technology partner framing. Strategic rationale emphasizes demand certainty and risk reduction from anchor tenant commitment. Contribution framework values the compute commitment as equity. Governance structure addresses technology refresh CapEx obligations. Term sheet includes equity split, preferred return, distribution waterfall, exclusivity radius, and technology refresh cycle. Document is submission-ready narrative, not a data table.",
+      "assertions": [
+        "Technology partner framing with compute commitment as core value proposition",
+        "Contribution framework includes developer site/expertise and hyperscaler compute commitment",
+        "Technology refresh CapEx obligations are explicitly addressed in governance or economics",
+        "Term sheet includes structured commercial terms with equity split, governance, and exit provisions",
+        "Exclusivity terms are defined with geographic specificity",
+        "Document is a polished narrative proposal, not a raw data table or checklist"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a partnership proposal for an infrastructure JV with a regional electric utility for a 50MW data center in upstate New York. The utility owns 100 acres adjacent to a 115kV substation with 80MW of available capacity. The utility will contribute the land and dedicated power feed (valued at $30M via independent appraisal) as equity. The developer contributes $120M in cash equity plus development and operational expertise. Proposed structure: JV with equity based on capital contribution proportions. The utility wants board representation, protective provisions on major decisions, and a right of first refusal on future phases. Address land valuation methodology and operating responsibility allocation.",
+      "expected_output": "Infrastructure partner proposal with land/power contribution as equity. Land valuation methodology discussed (appraisal approach with utility infrastructure premium). Operating responsibility clearly allocated between utility (power delivery, maintenance) and developer (DC operations, tenant management). Governance framework with utility board seats proportional to equity. ROFO on future phases addressed in exit/expansion section. Contribution framework shows developer cash vs utility in-kind equity.",
+      "assertions": [
+        "Infrastructure partner framing with land and power as equity contribution",
+        "Land valuation methodology is discussed with approach to valuing utility infrastructure",
+        "Operating responsibilities are allocated between utility and developer roles",
+        "Governance framework provides utility board representation proportional to equity stake",
+        "Right of first refusal on future phases is included in term sheet",
+        "Contribution framework distinguishes cash equity from in-kind equity contributions"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a partnership proposal for a sovereign wealth fund co-investment in a 200MW data center campus in Johannesburg, South Africa. The SWF (from a Gulf state) is investing $400M for a 40% stake; the developer retains 60%. The project qualifies for IFC and AfDB co-lending. The SWF requires: 2 of 5 board seats, protective provisions on asset sales and additional debt above $500M, preferred return of 10% with standard infrastructure waterfall, and an exit path via IPO or secondary sale after year 5. The project must address South African POPIA compliance, BBBEE requirements, local hiring commitments, and load shedding resilience through on-site generation. Reference DFI-FUNDING.md for IFC/AfDB alignment.",
+      "expected_output": "Financial partner proposal adapted for sovereign wealth fund with governance protections. Investment thesis for African DC infrastructure with DFI co-lending as risk mitigation. Governance framework with protective provisions per SWF requirements. Waterfall structure with 10% preferred return. Local compliance (POPIA, BBBEE) addressed. Load shedding resilience through BTM power. Exit mechanisms including IPO path and secondary sale. DFI-FUNDING.md referenced for IFC and AfDB program alignment.",
+      "assertions": [
+        "Financial partner framing with sovereign wealth fund governance protections",
+        "Preferred return and distribution waterfall structure are detailed in economics section",
+        "Board composition gives SWF 2 of 5 seats with protective provisions on major decisions",
+        "DFI co-lending (IFC and AfDB) is highlighted as risk mitigation and funding diversification",
+        "South African regulatory requirements (POPIA, BBBEE) and load shedding resilience are addressed",
+        "Exit mechanisms include both IPO path and secondary sale with timeline"
+      ]
+    }
+  ]
+}

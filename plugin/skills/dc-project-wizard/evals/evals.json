@@ -1,0 +1,50 @@
+{
+  "skill_name": "dc-project-wizard",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Scope a 50MW hyperscale greenfield data center project in Loudoun County, Virginia. The project is at concept stage, led by a developer/builder. Facility type is hyperscale. Target IT load is 50MW with liquid-cooled GPU racks for AI training workloads. Phase 1 of a planned 3-phase campus.",
+      "expected_output": "A project plan selecting the Hyperscale Greenfield archetype from SKILL-CHAIN-MAP.md. Skill sequence starts with predev-site-feasibility, then eng-power-model, then eng-gpu-cluster and eng-cooling-design in parallel, then proc-rfp-generator and fin-project-tco. comp-sovereignty optional (domestic commercial). Risk flags include Virginia sales tax exemption eligibility, Loudoun County power availability constraints, and high construction cost market. Reference data includes all 6 files. JSON sidecar with skill_sequence array and risk_flags.",
+      "assertions": [
+        "Archetype selected is Hyperscale Greenfield",
+        "Skill sequence includes all 7 available skills in correct dependency order",
+        "eng-gpu-cluster and eng-cooling-design are marked as parallel (both require only power-capacity-model)",
+        "Virginia sales tax exemption is flagged as applicable (referencing US-STATE-INCENTIVES.md)",
+        "Reference data list includes GPU-REFERENCE.md, COST-BENCHMARKS.md, POWER-TARIFFS.md, US-STATE-INCENTIVES.md, FEDERAL-TAX-GUIDE.md",
+        "Output includes both markdown report structure and JSON sidecar",
+        "Phase 2 follow-up questions include campus phasing and utility provider",
+        "Later-wave skill gaps are flagged (predev-market-study, predev-grid-interconnection not yet available)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Scope a 30MW sovereign AI facility in Riyadh, Saudi Arabia. Government-affiliated entity as owner-operator. Facility type is sovereign. Development stage is feasibility. AI training workloads for national defense and commercial cloud. Data localization required for government data.",
+      "expected_output": "A project plan selecting the Sovereign AI Facility archetype. comp-sovereignty is listed FIRST (before site-feasibility for sovereign projects). Risk flags reference REGULATORY-MATRIX.md for Saudi PDPL data localization, ownership restrictions, and CITC licensing. Power tariff flags from POWER-TARIFFS.md. No US-specific reference files. JSON sidecar with sovereign-specific risk_flags. Phase 2 follow-ups include security clearance, data residency specifics, and government vs commercial tenant split.",
+      "assertions": [
+        "Archetype selected is Sovereign AI Facility",
+        "comp-sovereignty is listed first or parallel-first in the skill sequence",
+        "REGULATORY-MATRIX.md is referenced for Saudi Arabia regulatory requirements",
+        "POWER-TARIFFS.md is referenced for Middle East power costs",
+        "US-STATE-INCENTIVES.md and FEDERAL-TAX-GUIDE.md are NOT listed (non-US project)",
+        "Risk flags include data localization requirement and ownership structure considerations",
+        "Sovereign CapEx premium (30-50%) is noted in risk flags or project summary",
+        "Phase 2 follow-ups address security clearance level and data residency requirements"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Scope a 10MW brownfield data center conversion in Chicago, Illinois. Converting a former manufacturing warehouse. Investor (PE infrastructure fund) as counterparty. Design stage -- structural assessment complete. Enterprise colocation facility type. No AI/HPC workloads planned.",
+      "expected_output": "A project plan selecting the Brownfield Conversion archetype. eng-brownfield-convert is flagged as NOT AVAILABLE (Wave 4) with manual analysis recommended for structural capacity, contamination, and floor loading. eng-gpu-cluster marked as optional/not needed. Illinois incentive programs flagged from US-STATE-INCENTIVES.md. JSON sidecar includes gap_flags or equivalent notation for unavailable skills.",
+      "assertions": [
+        "Archetype selected is Brownfield Conversion",
+        "eng-brownfield-convert is flagged as unavailable (Wave 4) with manual analysis recommendation",
+        "eng-gpu-cluster is marked as optional or excluded (no AI/HPC workloads)",
+        "Illinois state incentive programs are referenced from US-STATE-INCENTIVES.md",
+        "FEDERAL-TAX-GUIDE.md is referenced for Opportunity Zone and depreciation applicability",
+        "Phase 2 follow-ups include existing building details and known constraints",
+        "Brownfield cost/time tradeoff is noted (60-80% of greenfield cost, 40% less time)",
+        "Output includes both markdown report and JSON sidecar"
+      ]
+    }
+  ]
+}

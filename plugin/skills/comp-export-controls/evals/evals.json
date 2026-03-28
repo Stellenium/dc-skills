@@ -1,0 +1,44 @@
+{
+  "skill_name": "comp-export-controls",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess export control compliance for a US hyperscale data center in Texas deploying 10,000 NVIDIA H100 GPUs (each rated at 3,958 TOPS). The facility has 15 foreign national engineers on-site: 8 from India, 4 from China, and 3 from South Korea. The Chinese engineers have hands-on access to GPU cluster configurations. All engineers are US-based employees with work visas. Evaluate EAR classification, deemed export implications for each nationality group, and recommend a Technology Control Plan.",
+      "expected_output": "An export control assessment showing: H100 GPUs classified under ECCN 3A090 or equivalent as advanced computing items exceeding 4,800 TOPS threshold. Deemed export analysis for each nationality: India (Country Group A:2 -- license generally not required for most items), China (Country Group D:1/D:5 -- license required for advanced computing items, deemed export to Chinese nationals with hands-on GPU access triggers EAR license requirement), South Korea (Country Group A:1 -- Wassenaar participant, license generally not required). Technology Control Plan required for Chinese national access including: physical access restrictions to GPU areas, information classification procedures, training, and potential BIS license application for deemed exports.",
+      "assertions": [
+        "H100 GPUs are classified with ECCN referencing advanced computing thresholds",
+        "Deemed export analysis differentiates by nationality and country group",
+        "Chinese national access to GPU configurations is flagged as requiring EAR license",
+        "India and South Korea are assessed as lower-risk country groups",
+        "Technology Control Plan is recommended with specific access restrictions",
+        "REGULATORY-MATRIX.md is referenced for country-specific regulatory data"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate export compliance for a European cloud company (headquartered in Netherlands) importing 5,000 US-origin NVIDIA H200 GPUs for a sovereign AI project in Abu Dhabi, UAE. The GPUs will ship from the US to Netherlands, then be re-exported to UAE. The UAE facility will serve government AI training workloads. Assess EAR re-export rules, UAE country group classification, government end-use implications, and any license requirements. The project is partially funded by the UAE sovereign wealth fund.",
+      "expected_output": "An assessment covering: EAR de minimis rule and re-export controls (US-origin items retain EAR jurisdiction regardless of location), UAE country group classification (B -- moderate restrictions), government end-use assessment (military end-use screening required), H200 TOPS exceeding advanced computing threshold requiring license for certain destinations. Re-export from Netherlands to UAE requires independent EAR analysis. UAE sovereign wealth fund involvement does not trigger OFAC concerns (UAE is not sanctioned) but government end-use adds scrutiny. License application to BIS likely required for advanced computing items to UAE government end-user.",
+      "assertions": [
+        "EAR re-export jurisdiction for US-origin items is correctly explained",
+        "UAE is classified in appropriate country group with restrictions noted",
+        "Government end-use triggers additional BIS scrutiny",
+        "H200 performance exceeds advanced computing thresholds",
+        "Re-export from Netherlands to UAE requires separate EAR analysis",
+        "Disclaimer includes 'does not constitute legal advice' language"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Design a deemed export compliance program for a colocation facility in Northern Virginia with 500+ tenants from 40 countries. Tenants include US defense contractors, European banks, Asian technology companies, and Middle Eastern government entities. Foreign national employees of tenants regularly access the facility for equipment installation, maintenance, and decommissioning. The facility hosts NVIDIA A100 and H100 GPUs owned by various tenants. Address: deemed export risk assessment, access control architecture, tenant screening procedures, and ongoing compliance monitoring.",
+      "expected_output": "A comprehensive deemed export compliance program covering: risk assessment by tenant nationality and equipment classification, tiered access control architecture (unrestricted areas, controlled areas for classified equipment, restricted areas for defense tenants), tenant onboarding screening (Entity List, SDN, sectoral sanctions for all tenant entities and their foreign national employees), ongoing monitoring procedures (re-screening at quarterly intervals, BIS rule change monitoring), Technology Control Plan template for the facility, training program for facility staff, record retention (5 years), and voluntary self-disclosure procedures. Special attention to defense contractor tenants requiring ITAR compliance and segregation from foreign national access areas.",
+      "assertions": [
+        "Deemed export risk is assessed per tenant nationality and equipment type",
+        "Tiered physical access control architecture is designed for multi-tenant facility",
+        "Entity List and OFAC SDN screening is required for all tenants and foreign nationals",
+        "ITAR segregation requirements for defense contractor tenants are addressed",
+        "Ongoing monitoring includes periodic re-screening and BIS rule change tracking",
+        "Record retention of 5 years minimum is specified per EAR requirements"
+      ]
+    }
+  ]
+}

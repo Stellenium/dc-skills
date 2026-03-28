@@ -1,0 +1,44 @@
+{
+  "skill_name": "eng-sla-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design an SLA framework for a Tier III colocation facility with N+1 cooling and 2N power distribution. The facility serves enterprise tenants requiring 99.982% availability. Planned maintenance windows are 4 hours per month (excluded from SLA calculation). Service credits should cap at 25% of monthly recurring charges. Monitoring at 5-minute intervals.",
+      "expected_output": "An SLA framework with reliability block diagram showing serial/parallel chains, component availability using MTBF/MTTR data from SLA-BENCHMARKS.md, system availability calculation meeting Tier III 99.982% target, credit structure with 3 tiers capping at 25% MRC, measurement methodology with 5-minute monitoring, and planned maintenance exclusion clause.",
+      "assertions": [
+        "Reliability model uses serial/parallel chains with component MTBF/MTTR",
+        "N+1 cooling and 2N power redundancy are correctly modeled",
+        "Calculated availability meets or exceeds 99.982% (Tier III target)",
+        "Credit structure has multiple tiers with cap at 25% of MRC",
+        "Planned maintenance (4 hrs/month) is excluded from SLA measurement",
+        "SLA-BENCHMARKS.md is referenced for industry availability targets"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create an SLA framework for a Tier IV hyperscale data center with 2N+1 power and concurrent maintenance capability. Target availability is 99.995%. The facility uses fleet-level statistical SLA reporting (quarterly). The operator requires zero-downtime maintenance policy. Credit structure should include escalation to contract termination after 3 consecutive months of SLA breach. Monitoring at 1-minute intervals.",
+      "expected_output": "An SLA framework with Tier IV reliability modeling (2N+1 power), calculated availability exceeding 99.995%, fleet-level measurement methodology, zero-downtime maintenance (no exclusion windows), escalating credit structure with termination rights, and quarterly reporting cadence.",
+      "assertions": [
+        "2N+1 power redundancy is modeled with parallel availability formula",
+        "Calculated availability meets or exceeds 99.995% (Tier IV target)",
+        "Zero-downtime maintenance means no planned maintenance exclusions",
+        "Credit structure includes escalation path to contract termination",
+        "Measurement uses 1-minute monitoring intervals",
+        "Concurrent maintainability is validated in the reliability model"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Evaluate the SLA for a single-site edge facility with one UPS (no redundancy), one generator, and basic N cooling. Calculate actual availability and recommend upgrades to reach 99.9% availability. The site is unmanned with 2-hour average travel time for repair crews. Budget for upgrades is limited to adding one redundant UPS.",
+      "expected_output": "An availability model showing actual system availability below 99.9% due to single points of failure, identification of UPS as the weakest serial link without redundancy, MTTR adjusted for 2-hour travel time, specific recommendation to add N+1 UPS redundancy, and recalculated availability after the upgrade showing improvement toward 99.9%.",
+      "assertions": [
+        "Single UPS (N redundancy) is identified as a reliability risk",
+        "MTTR accounts for 2-hour travel time to unmanned site",
+        "Calculated availability is below 99.9% target without upgrades",
+        "UPS upgrade to N+1 is recommended as highest-impact improvement",
+        "Post-upgrade availability is recalculated showing improvement",
+        "Generator single point of failure is noted as residual risk"
+      ]
+    }
+  ]
+}

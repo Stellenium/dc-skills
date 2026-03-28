@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-contract-structure",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Structure a contract for a 200MW hyperscale EPC turnkey data center campus in Northern Virginia. Single contractor delivering 4 data halls (50MW each) over 3 phases. Total contract value approximately $1.8B. The employer wants maximum risk transfer and cost certainty. The contractor is a Tier 1 EPC firm with extensive DC experience. Performance guarantees required for PUE (1.25), cooling capacity (50MW IT per hall at 95F dry-bulb), and Tier III availability (99.982%). Jurisdiction is Virginia (common law). Reference FIDIC-CONTRACTS.md for form selection.",
+      "expected_output": "Contract structure recommending FIDIC Silver Book for maximum risk transfer with EPC turnkey delivery. Milestone payment schedule across 4 halls with phased delivery. Retention at 5% with performance bond. Comprehensive LD framework for delay (0.3-0.5%/day capped at 10-15%) and performance (PUE, cooling capacity, availability). Performance guarantees tied to SLA-BENCHMARKS.md targets.",
+      "assertions": [
+        "FIDIC Silver Book is recommended with rationale citing maximum employer risk transfer for EPC turnkey",
+        "Milestone payment schedule is provided with percentages and triggers for each construction phase",
+        "Retention terms specify rate, release schedule, and performance bond alternative",
+        "Delay liquidated damages include daily rate and cap as percentage of contract value",
+        "Performance LDs cover PUE guarantee with measurement methodology at design ambient conditions",
+        "Performance guarantees reference Tier III availability target from SLA-BENCHMARKS.md"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Design a multi-trade contract structure for a 100MW campus data center in Frankfurt, Germany. The employer has a dedicated design team and wants to retain design control. Three separate contract packages: (1) civil and structural shell-and-core, (2) MEP fit-out including power and cooling, (3) IT infrastructure and cabling. Civil law jurisdiction. Total project budget EUR 800M. The employer is concerned about interface coordination between packages and wants clear milestone alignment across all three contracts. Performance guarantees required for PUE and Tier III availability.",
+      "expected_output": "Multi-trade structure with FIDIC Red Book for shell-and-core (employer-designed) and Yellow Book for MEP and IT packages (design-build). Interface risk allocation matrix between three packages. Coordinated milestone schedule with aligned payment triggers. Delay LDs calculated to reflect genuine pre-estimate of loss (civil law requirement). Performance guarantees split between MEP contractor (PUE, cooling) and overall coordination.",
+      "assertions": [
+        "Red Book recommended for shell-and-core with employer design team rationale",
+        "Yellow Book recommended for MEP and/or IT packages with design-build rationale",
+        "Interface risk allocation between the three trade packages is explicitly addressed",
+        "Milestone coordination mechanism across three contracts is described",
+        "Civil law jurisdiction impact on LD enforceability is discussed with genuine pre-estimate requirement",
+        "Performance guarantees are allocated to specific contractors by scope responsibility"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Structure a contract for a modular data center deployment: 20 factory-built 1MW pods to be manufactured in a US facility and deployed across 5 sites in the Middle East over 24 months. Each pod is a self-contained unit with integrated power, cooling, and IT infrastructure. The contract needs to cover factory acceptance testing, international shipping, site assembly, and commissioning. The employer wants a hybrid contract structure covering both manufacturing and construction. Total value approximately $300M. Civil law jurisdiction (UAE law). Consider both factory and field warranty provisions.",
+      "expected_output": "Hybrid contract structure with Silver Book framework adapted for modular manufacturing + site delivery. Factory milestone schedule separate from site installation milestones. Dual warranty structure: manufacturing warranty for pod components and field warranty for site installation. FAT and SAT procedures defined. Shipping and logistics risk allocation (Incoterms). Multi-site coordination with standardized acceptance criteria.",
+      "assertions": [
+        "Hybrid contract structure addresses both factory manufacturing and site installation phases",
+        "Factory acceptance testing (FAT) requirements and milestone triggers are defined",
+        "Shipping and logistics risk allocation is addressed with Incoterms or equivalent",
+        "Warranty provisions distinguish between factory manufacturing defects and site installation defects",
+        "Multi-site deployment coordination and standardized acceptance criteria are addressed",
+        "Retention and performance bond terms account for the manufacturing-plus-construction hybrid scope"
+      ]
+    }
+  ]
+}

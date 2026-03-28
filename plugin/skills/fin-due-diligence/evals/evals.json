@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-due-diligence",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Conduct due diligence for the acquisition of an operating 20MW colocation data center in Chicago. The facility is 85% occupied with 15 tenants, 3 years of audited financials are available, and the seller has provided a rent roll, Phase I ESA, and building condition report. The largest tenant is 25% of revenue. The facility is 8 years old with original UPS and generators.",
+      "expected_output": "A DD tracker with all 4 workstreams (Technical, Commercial, Legal, Financial) populated. Technical workstream should flag equipment age (8-year-old UPS and generators approaching mid-life). Commercial workstream should assess revenue concentration (25% top tenant is moderate but flagged). Financial workstream should analyze 3 years of audited financials. Items should have Complete/Flagged/Missing status with risk levels assigned.",
+      "assertions": [
+        "All 4 workstreams are present (Technical, Commercial, Legal, Financial)",
+        "Each workstream has checklist items with status (Complete/Flagged/Missing)",
+        "Revenue concentration is assessed (25% top tenant)",
+        "Equipment age and remaining life are evaluated for 8-year-old systems",
+        "3-year historical financials are analyzed",
+        "Summary dashboard shows completion percentage and critical flags count",
+        "Risk levels are assigned (Low/Medium/High/Critical)",
+        "Financial Disclaimer is included"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Conduct due diligence for refinancing a 50MW hyperscale data center in Virginia. The facility has existing debt maturing in 6 months, a single investment-grade tenant on a 10-year contract (7 years remaining), and strong historical EBITDA. The lender requires updated building condition report, environmental assessment, and financial projections.",
+      "expected_output": "A DD tracker with emphasis on the Financial workstream (debt covenant compliance, refinancing terms) and lighter Technical workstream (operating facility, less equipment risk). Revenue concentration should be flagged as Critical for single tenant despite investment-grade credit. Legal workstream should verify lease assignment provisions for new lender.",
+      "assertions": [
+        "Financial workstream is emphasized for refinancing transaction",
+        "Debt covenants and compliance are tested",
+        "Revenue concentration flagged for single-tenant exposure",
+        "Technical workstream is present but scoped for operating facility",
+        "Legal workstream checks lease assignment for new lender",
+        "Items use Complete/Flagged/Missing status tracking",
+        "Summary shows overall risk rating",
+        "Financial Disclaimer is included (no Tax Disclaimer)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Conduct due diligence for JV entry into a development-stage 30MW data center in Dallas. Land has been acquired, zoning is approved, utility interconnection agreement is signed, but construction has not started. No existing revenue. Construction budget is $300M with 24-month timeline. The developer is seeking a capital partner for 65% of equity.",
+      "expected_output": "A DD tracker where Technical workstream focuses on site condition (not equipment -- nothing built yet), Commercial workstream assesses market demand and pre-lease pipeline (not existing contracts), Legal workstream emphasizes permits, zoning, and utility agreements, and Financial workstream evaluates construction budget assumptions rather than historical financials. Development-stage DD has fundamentally different risk profile than operating asset DD.",
+      "assertions": [
+        "Technical workstream focuses on site condition not existing equipment",
+        "Commercial workstream assesses market demand and pre-lease pipeline",
+        "Legal workstream emphasizes permits, zoning, and utility interconnection agreement",
+        "Financial workstream evaluates construction budget not historical financials",
+        "DD scope is adapted for development-stage (pre-construction) asset",
+        "All 4 workstreams are present with status tracking",
+        "Summary dashboard quantifies completion and critical flags",
+        "Financial Disclaimer is included"
+      ]
+    }
+  ]
+}

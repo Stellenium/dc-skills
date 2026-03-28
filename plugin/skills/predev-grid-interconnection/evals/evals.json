@@ -1,0 +1,47 @@
+{
+  "skill_name": "predev-grid-interconnection",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Assess grid interconnection for a 50MW data center in PJM (Dominion Virginia territory, Loudoun County). The site is adjacent to an existing 230kV substation with 30MW of available capacity. The developer has not yet applied to the interconnection queue. Timeline is standard (18-36 months). Willing to fund participant-funded upgrades.",
+      "expected_output": "A grid interconnection assessment showing PJM-specific process (FERC Order 2023 cluster study), queue analysis for Dominion zone with current congestion data, cost allocation under participant-funded model, timeline of 24-48 months given PJM queue depth, and alternative strategies including phased energization (30MW immediate from existing capacity, 20MW after upgrades).",
+      "assertions": [
+        "PJM-specific interconnection process is mapped (not generic ISO process)",
+        "FERC Order 2023 cluster study process is referenced with cohort delay risk",
+        "Queue depth analysis references PJM Dominion zone congestion",
+        "Phased energization strategy is recommended given 30MW existing vs 50MW target",
+        "Cost estimate includes 2x feasibility-to-facilities escalation warning",
+        "Timeline accounts for all study phases (feasibility, system impact, facilities, IA)",
+        "Output includes both markdown report and JSON sidecar with artifact_type: grid-interconnection-assessment"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Evaluate interconnection options for a 200MW hyperscale data center campus in ERCOT (West Texas). The site is on open land 5 miles from the nearest 345kV transmission line. The developer needs first phase power (50MW) within 18 months and full 200MW within 48 months. Willing to fund a dedicated substation.",
+      "expected_output": "An ERCOT-specific assessment noting the 300+ GW queue backlog, load interconnection process (different from generation), dedicated substation requirement for 200MW, phased energization plan with 50MW Phase 1, and strategies to accelerate including co-location with existing generation or behind-the-meter gas turbines for initial capacity.",
+      "assertions": [
+        "ERCOT-specific process is used (not generic PJM/FERC process)",
+        "ERCOT queue depth (300+ GW) and withdrawal rate (80%) are referenced",
+        "Load interconnection is distinguished from generation interconnection",
+        "Dedicated substation at 345kV is recommended for 200MW capacity",
+        "Phased energization plan addresses 50MW Phase 1 within 18 months",
+        "Behind-the-meter generation is evaluated as bridge strategy for initial capacity",
+        "Cost estimate accounts for 5-mile transmission line extension"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "A developer wants to deploy a 8MW edge-adjacent data center in Northern California (PG&E territory, CAISO). The site has existing 12kV distribution service rated at 2MW. The developer wants to avoid the interconnection queue entirely and is considering behind-the-meter natural gas generation. Timeline is critical -- needs power within 12 months.",
+      "expected_output": "An assessment recommending behind-the-meter bypass strategy. The 8MW load is under CAISO's threshold for full interconnection study but upgrading from 2MW to 8MW distribution service would require utility work. Behind-the-meter generation (6MW gas + 2MW grid) avoids queue. Analysis should cover CAISO-specific rules for BTM generation, air quality permits for gas generation in California, and net metering implications.",
+      "assertions": [
+        "Behind-the-meter generation is recommended as primary strategy for 12-month timeline",
+        "CAISO-specific BTM threshold rules are referenced",
+        "Distribution service upgrade from 2MW to 8MW is evaluated as alternative",
+        "California air quality permitting for gas generation is flagged as risk",
+        "ISO queue avoidance is quantified in timeline savings",
+        "Hybrid strategy (BTM generation + grid) is modeled",
+        "Cost comparison between queue path and BTM path is provided"
+      ]
+    }
+  ]
+}

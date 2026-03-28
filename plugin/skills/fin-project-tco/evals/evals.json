@@ -1,0 +1,50 @@
+{
+  "skill_name": "fin-project-tco",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Calculate the 10-year TCO for a 10MW Tier III data center in Virginia. The facility is greenfield, owner-occupied, with PUE 1.35. Virginia offers sales tax exemption on data center equipment (qualifying at $150M+ investment). Use Dominion Energy industrial rate of 6.5 cents/kWh. The project qualifies for 100% bonus depreciation post-OBBBA. No on-site renewables. Discount rate 8%.",
+      "expected_output": "A TCO model showing: CapEx breakdown with total in the $100-130M range for 10MW, annual OpEx projection with power cost as dominant line item (60-70% of OpEx), Virginia sales tax exemption value, bonus depreciation tax savings from cost segregation, 10-year NPV at 8% discount rate, and sensitivity analysis showing power cost as the highest-impact variable. All figures as ranges.",
+      "assertions": [
+        "CapEx is calculated and falls within $100-130M range for a 10MW Tier III facility",
+        "Annual power cost is computed as total facility kW * $0.065/kWh * 8760 hours with escalation",
+        "Virginia sales tax exemption is modeled with $150M investment threshold noted",
+        "Bonus depreciation at 100% is applied to cost-segregated assets (40-60% of CapEx)",
+        "NPV is calculated at 8% discount rate with all costs discounted",
+        "Sensitivity analysis includes power cost, PUE, construction cost, discount rate, and utilization",
+        "Financial and Tax disclaimers are included with 'not investment advice' text"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Build a 20-year TCO comparison for a 50MW hyperscale data center in Texas (ERCOT) with behind-the-meter solar (20MW array, $30M CapEx) qualifying for 30% ITC with prevailing wage. Texas has no state income tax. Power cost 5.5 cents/kWh grid, 3.0 cents/kWh solar PPA. Property tax abatement available for 10 years under JETI program. PUE 1.25 (liquid cooling). Discount rate 9%.",
+      "expected_output": "A 20-year TCO model with: CapEx in the $350-500M range for 50MW hyperscale, blended power cost reflecting grid + solar mix, 30% ITC on $30M solar CapEx ($9M credit), 10-year property tax abatement savings, no state income tax benefit noted, 100% bonus depreciation, and tornado chart showing power cost and construction cost as top NPV drivers over 20 years.",
+      "assertions": [
+        "20-year analysis horizon is used with year-by-year escalation",
+        "ITC is calculated as 30% of $30M qualifying solar CapEx = $9M",
+        "Property tax abatement is modeled for years 1-10, then full property tax years 11-20",
+        "PUE of 1.25 is used reflecting liquid cooling (validated as physically possible)",
+        "Texas ERCOT power rate of 5.5 cents/kWh is validated against POWER-TARIFFS.md",
+        "NPV is calculated at 9% discount rate over 20-year horizon",
+        "Sensitivity tornado chart ranks variables by NPV impact",
+        "Financial and Tax disclaimers are included with 'not investment advice' text",
+        "Sensitivity analyses are presented as illustrations, not probabilistic forecasts"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Calculate 10-year TCO for a 5MW sovereign AI facility in an Opportunity Zone in Ohio. The facility has enhanced security requirements adding a 40% CapEx premium over standard construction ($15M/MW vs $11M/MW). The site qualifies for Ohio's data center sales tax exemption ($100M+ threshold). OZ investment via Qualified Opportunity Fund. No on-site renewables. PUE 1.40 (air-cooled). Discount rate 10%.",
+      "expected_output": "A TCO model reflecting: sovereign premium CapEx ($75M for 5MW at $15M/MW), higher staffing costs (5-8 FTE/MW for sovereign), Ohio sales tax exemption, Opportunity Zone capital gains deferral and basis step-up benefits, higher OpEx ratio (10-15% of CapEx), and sensitivity analysis. All outputs as ranges with confidence qualifiers.",
+      "assertions": [
+        "CapEx reflects sovereign premium at $15M/MW ($75M total for 5MW)",
+        "Staffing model uses higher FTE-per-MW ratio appropriate for sovereign facilities",
+        "Ohio sales tax exemption is modeled with $100M threshold checked against $75M CapEx",
+        "Opportunity Zone benefits are calculated: capital gains deferral, 10%/15% basis step-up, gain exclusion at 10yr",
+        "OpEx-to-CapEx ratio falls in the 10-15% range for sovereign type",
+        "10-year NPV is calculated at 10% discount rate",
+        "Both Financial and Tax disclaimers are present",
+        "Sensitivity analyses are presented as illustrations, not probabilistic forecasts"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "skill_name": "eng-density-upgrade",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Plan a density upgrade for a traditional raised-floor enterprise data center in Dallas, TX. Converting 200 racks from 8 kW/rack to 50 kW/rack for AI training workloads. Current cooling is CRAH units with hot-aisle containment. Raised floor height is 24 inches. Target technology is direct-to-chip liquid cooling. Facility must remain operational during migration with zero downtime. Budget is $8-12M.",
+      "expected_output": "A density upgrade plan using direct-to-chip cooling for 200 racks at 50 kW/rack. CDU sizing should specify approximately 12-25 CDUs in N+1 configuration (each serving 8-16 racks). Piping route should evaluate both underfloor (24-inch raised floor provides adequate clearance) and overhead options, with conflict assessment against existing cable trays. Electrical upgrade scope should specify 2x 40A 208V or 1x 30A 415V circuits per rack. Phased migration plan should convert one zone at a time with explicit rollback procedures. Leak detection should be specified as mandatory for every zone.",
+      "assertions": [
+        "CDU count is calculated based on 200 racks at 50 kW density",
+        "Piping route evaluates underfloor feasibility given 24-inch raised floor",
+        "Electrical upgrade specifies circuit requirements for 50 kW racks",
+        "Phased migration plan maintains N+1 cooling redundancy during transition",
+        "Leak detection is specified as mandatory with zone-based coverage",
+        "Rollback plan is included for each migration phase",
+        "Direct-to-chip technology is correctly applied for 50 kW/rack target"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Plan a density upgrade for a slab-on-grade hyperscale facility in Ashburn, VA (Northern Virginia). Converting 500 racks from 12 kW/rack to 40 kW/rack for inference workloads. Current cooling is in-row cooling with hot-aisle containment. No raised floor. 20ft ceiling height. Target technology is rear-door heat exchangers (RDHx). Maintenance windows available on weekends (8-hour windows). Budget is $15-25M.",
+      "expected_output": "A density upgrade plan using RDHx for 500 racks at 40 kW/rack. RDHx is at the upper limit of its effective range (40 kW) -- the plan should note this and discuss whether supplemental room cooling may be needed. CDU sizing for RDHx (1 per 15-25 racks). Piping must route overhead given slab-on-grade (no underfloor option). Cable tray conflict assessment is essential since overhead space is shared. Electrical upgrade should be moderate (existing circuits may partially suffice for RDHx which handles only 50-70% of heat). Minimal structural changes expected for slab-on-grade. Weekend maintenance windows should be incorporated into migration phases.",
+      "assertions": [
+        "RDHx technology is correctly evaluated for 40 kW/rack target",
+        "Notes that 40 kW is at the upper limit of RDHx effectiveness",
+        "Piping route specifies overhead routing for slab-on-grade facility",
+        "Cable tray conflict assessment is included for overhead piping",
+        "Existing in-row cooling continues as supplemental alongside RDHx",
+        "Migration schedule uses weekend maintenance windows",
+        "CDU sizing accounts for 500-rack deployment"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Plan a density upgrade for a modular/prefab facility in Phoenix, AZ. Converting 80 racks from 6 kW/rack to 100 kW/rack immersion cooling for HPC workloads. Current cooling is packaged DX units. Facility is in an arid climate with severe water restrictions. The facility has 4 modular units of 20 racks each. External mechanical pad space is available. The upstream eng-cooling-design skill recommended immersion cooling due to water constraints and extreme density target. Budget is $5-8M.",
+      "expected_output": "A density upgrade plan using immersion cooling for 80 racks at 100 kW/rack across 4 modular units. Immersion tank sizing (80 tanks replacing standard racks, ~3,000-5,000 lbs each -- floor loading verification critical). CDU count for immersion (1 per 4-8 tanks). External CDU placement on mechanical pad recommended to save indoor space. Heat rejection via dry coolers (no cooling towers due to Phoenix water restrictions). Piping route considerations for modular-to-external CDU connections. Electrical upgrade to 415V for extreme density. Migration should convert one module at a time (4 phases). Should reference upstream eng-cooling-design recommendation and note water conservation alignment.",
+      "assertions": [
+        "Immersion cooling is correctly applied for 100 kW/rack target",
+        "Floor loading verification is flagged for immersion tanks at 3,000-5,000 lbs",
+        "Water constraints in Phoenix drive dry cooler heat rejection recommendation",
+        "External CDU placement on mechanical pad is recommended",
+        "Electrical upgrade to 415V is specified for extreme density",
+        "Modular facility type branching addresses per-module migration",
+        "References upstream eng-cooling-design cooling recommendation"
+      ]
+    }
+  ]
+}

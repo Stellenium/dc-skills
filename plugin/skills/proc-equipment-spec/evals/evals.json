@@ -1,0 +1,44 @@
+{
+  "skill_name": "proc-equipment-spec",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate full equipment specifications for a 20MW Tier III data center in Phoenix, Arizona. Equipment categories: switchgear, UPS (N+1 lithium-ion), PDU/RPP, generators (natural gas), CRAH units, racks/cabinets, and structured cabling. The upstream power-capacity-model shows dual 34.5kV utility feeds with 24MW total facility load (PUE 1.2) and N+1 UPS at 2000kVA per module. The cooling-design-report specifies adiabatic cooling with 15,000kW total capacity. Use performance-based specification format.",
+      "expected_output": "Equipment specification document with per-category specification sheets covering performance requirements, environmental requirements (Phoenix climate), compliance requirements, interface requirements, warranty/support, and testing/acceptance criteria. All specs use vendor-neutral language with 'or approved equal' provisions. JSON sidecar with artifact_type equipment-specifications.",
+      "assertions": [
+        "Output contains specification sheets for all 7 requested equipment categories",
+        "UPS specification references upstream data: 2000kVA per module, N+1 configuration",
+        "Generator specification includes altitude derating note for Phoenix elevation (~1,100ft)",
+        "All specifications use vendor-neutral language without brand names",
+        "CRAH specification includes sensible cooling capacity and SHR requirement",
+        "JSON sidecar includes artifact_type: equipment-specifications and equipment_categories array"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create equipment specifications for a liquid cooling retrofit in an existing 5MW colocation facility. Equipment needed: CDU (coolant distribution units) for direct-to-chip liquid cooling, rear-door heat exchangers for 40kW racks, and secondary chilled water piping components. No upstream artifacts available. Rack density target is 40kW/rack across 120 racks. Facility is at sea level in Northern Virginia.",
+      "expected_output": "Equipment specifications focused on liquid cooling components with CDU capacity sized for 120 racks at 40kW each, rear-door HEX specifications with flow rate and cooling capacity, and piping component specs. Specifications include [TO BE CONFIRMED] placeholders where upstream data is missing.",
+      "assertions": [
+        "CDU specification includes flow rate, supply/return temperature, and pressure requirements",
+        "Rear-door HEX specification matches 40kW per rack cooling requirement",
+        "Specifications include [TO BE CONFIRMED] placeholders for missing upstream data",
+        "Piping specifications include material, pressure rating, and connection standards",
+        "Output addresses brownfield/retrofit constraints (existing infrastructure compatibility)",
+        "Communication protocol requirements include BACnet or Modbus for BMS integration"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Generate generator and UPS specifications for a 10MW Tier IV sovereign data center at 5,000 feet elevation in Colorado Springs, Colorado. The facility requires 2N redundancy with 72 hours fuel storage autonomy. Domestic sourcing is required for all critical power equipment. Security clearance level is CUI (Controlled Unclassified Information). Use prescriptive specification format.",
+      "expected_output": "Generator specifications with altitude derating calculations showing derated capacity at 5,000ft (approximately 14% derating from sea level), 72-hour fuel storage sizing, and 2N configuration. UPS specifications with 2N redundancy and Tier IV fault tolerance requirements. Both specs include domestic sourcing requirements and CUI handling provisions.",
+      "assertions": [
+        "Generator specification includes explicit altitude derating calculation (~14% at 5,000ft)",
+        "72-hour fuel storage requirement is documented with fuel consumption calculation basis",
+        "2N redundancy configuration is specified for both generators and UPS",
+        "Domestic sourcing requirement is stated for all critical power components",
+        "CUI handling requirements are referenced in documentation and access control provisions",
+        "Prescriptive format specifies exact configurations rather than performance outcomes"
+      ]
+    }
+  ]
+}
